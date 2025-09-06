@@ -165,10 +165,12 @@
         }
 
         .btn:hover {
-            background: #dacc89;
-            transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
-        }
+            .btn:hover {
+		    background: #dacc89;
+		    color: white;
+		    transform: translateY(-2px);
+		    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+		}
 
         .btn-secondary {
             background: transparent;
