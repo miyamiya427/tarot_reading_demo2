@@ -452,7 +452,7 @@
                     </div>
                     
                     <!-- はじめるボタン -->
-                    <button class="new-start-btn" onclick="showPage(2)">はじめる</button>
+                    <button class="btn" onclick="showPage(2)">はじめる</button>
                 </div>
             </div>
         </div>
