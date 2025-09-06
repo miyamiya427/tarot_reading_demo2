@@ -12,13 +12,13 @@
         }
 
        body {
-            font-family: 'Hiragino Sans', 'Yu Gothic', sans-serif;
-            background: linear-gradient(135deg, #4a6fa5 0%, #5a7fb5 50%, #6a8fc5 100%);
-            min-height: 100vh;
-            color: white;
-            overflow-x: hidden;
-            position: relative;
-        }
+    font-family: 'Hiragino Sans', 'Yu Gothic', sans-serif;
+    background: #7894ab;
+    min-height: 100vh;
+    color: white;
+    overflow-x: hidden;
+    position: relative;
+}
 
         .container {
             width: 100%;
@@ -119,15 +119,15 @@
 
         /* ホーム画面背景 */
        .home-background {
-            width: 100%;
-            min-height: 100vh;
-            background: linear-gradient(135deg, #4a6fa5 0%, #5a7fb5 50%, #6a8fc5 100%);
-            position: relative;
-            display: flex;
-            align-items: flex-end;
-            justify-content: center;
-            padding-bottom: 80px;
-        }
+    width: 100%;
+    min-height: 100vh;
+    background: #7894ab;
+    position: relative;
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    padding-bottom: 80px;
+}
 
         .home-content {
             text-align: center;
