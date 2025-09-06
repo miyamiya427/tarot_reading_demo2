@@ -7,7 +7,7 @@
 
        body {
             font-family: 'Hiragino Sans', 'Yu Gothic', sans-serif;
-            background: linear-gradient(135deg, #4a6fa5 0%, #5a7fb5 50%, #6a8fc5 100%);
+            background: #7894ab;
             min-height: 100vh;
             color: white;
             overflow-x: hidden;
@@ -115,7 +115,7 @@
        .home-background {
             width: 100%;
             min-height: 100vh;
-            background: linear-gradient(135deg, #4a6fa5 0%, #5a7fb5 50%, #6a8fc5 100%);
+            background: #7894ab;
             position: relative;
             display: flex;
             align-items: flex-end;
