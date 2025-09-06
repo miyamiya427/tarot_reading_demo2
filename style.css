@@ -31,26 +31,12 @@
 
         /* 背景ドットパターン */
         .dots-pattern {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100px;
-            height: 200px;
-            background-image: radial-gradient(circle, white 1px, transparent 1px);
-            background-size: 8px 8px;
-            opacity: 0.3;
-        }
+    display: none;
+}
 
         .dots-pattern-right {
-            position: absolute;
-            bottom: 0;
-            right: 0;
-            width: 120px;
-            height: 150px;
-            background-image: radial-gradient(circle, white 1px, transparent 1px);
-            background-size: 6px 6px;
-            opacity: 0.2;
-        }
+    display: none;
+}
 
         /* リボンヘッダー */
         .ribbon-header {
