@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>森の守護者とタロット占い</title>
+	<link rel="stylesheet" href="style.css">
+	
+</head>
+<body>
+    <div class="container">
+        <div class="dots-pattern"></div>
+        <div class="dots-pattern-right"></div>
+
+        <!-- ページ1: 新デザインホーム画面 -->
+        <div class="page active" id="page1">
+            <div class="new-home-background">
+                <div class="new-home-content">
+                    <!-- リボンヘッダー -->
+                    <div class="title-ribbon">TAROT READING</div>
+                    
+                    <!-- サービス名 -->
+                    <h1 class="service-title">森の守護者と３枚のカード</h1>
+                    
+                    <!-- タロットカードイラスト -->
+                    <div class="tarot-cards-illustration">
+                        <div class="card-illustration">🂠</div>
+                        <div class="card-illustration">🃏</div>
+                        <div class="card-illustration">🂠</div>
+                    </div>
+                    
+                    <!-- サービス説明 -->
+                    <div class="service-description">
+                        あなたの守護者タイプを診断後、<br>
+                        タロットで今のあなたの状況を占います。<br>
+                        あなたのタイプに合わせた<br>
+                        アドバイスをお届けします。
+                    </div>
+                    
+                    <!-- はじめるボタン -->
+                    <button class="new-start-btn" onclick="showPage(2)">はじめる</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- ページ2: メニュー画面 -->
+        <div class="page" id="page2">
+            <div class="ribbon-header">
+                <div class="ribbon">TAROT READING</div>
+            </div>
+
+            <div class="animal-icons">
+                <div class="animal-icon">🦊</div>
+                <div class="animal-icon">🦅</div>
+                <div class="animal-icon">🐺</div>
+                <div class="animal-icon">🦌</div>
+                <div class="animal-icon">🐻</div>
+                <div class="animal-icon">🦋</div>
+            </div>
+
+            <!-- 既存の守護神表示エリア -->
+            <div id="existing-guardian" style="display: none; text-align: center; margin: 20px 0; padding: 20px; background: rgba(255, 255, 255, 0.9); border-radius: 15px; color: #4a6fa5;">
+                <div style="font-size: 14px; margin-bottom: 10px;">あなたの守護神</div>
+                <div style="font-size: 24px;" id="current-guardian-emoji">🦊</div>
+                <div style="font-size: 16px; font-weight: bold;" id="current-guardian-name">紅玉の狐</div>
+                <div style="font-size: 12px; margin-top: 5px; color: #6c757d;" id="current-guardian-date">2024年1月1日に診断</div>
+            </div>
+
+            <div style="text-align: center; margin: 40px 0 80px 0;">
+                
+                <div style="margin-bottom: 20px; font-size: 14px; opacity: 0.9;">
+                    ＼ 性格タイプを登録 ／
+                </div>
+                <button class="btn" onclick="showPage(3)">守護神を確認する</button>
+                
+                <div style="margin: 30px 0 20px 0; font-size: 14px; opacity: 0.9;">
+                    ＼ あなたの直感が重要 ／
+                </div>
+               <button class="btn btn-secondary" onclick="showPage(9)">スリーカードで占う</button>
+            </div>
+        </div>
+
+        <!-- ページ3: 性格診断画面（10問） -->
+        <div class="page" id="page3">
+            <div class="ribbon-header">
+                <div class="ribbon">TAROT READING</div>
+            </div>
+
+            <div class="diagnosis-container">
+                <div class="progress-info">
+                    性格診断（10問）
+                </div>
+
+                <div id="questions-container">
+                    <!-- 質問はJavaScriptで動的に生成 -->
+                </div>
+
+                <div class="btn-group">
+                    <button class="btn" onclick="completeDiagnosis(false)">一旦これだけで診断</button>
+                    <button class="btn btn-secondary" onclick="showPage(4)">次へ（詳細診断）</button>
+                </div>
+            </div>
+
+            <button class="btn btn-secondary" onclick="showPage(2)">戻る</button>
+        </div>
+
+        <!-- ページ4: 詳細診断画面（11-20問） -->
+        <div class="page" id="page4">
+            <div class="ribbon-header">
+                <div class="ribbon">TAROT READING</div>
+            </div>
+
+            <div class="diagnosis-container">
+                <div class="progress-info">
+                    詳細診断（11-20問目）
+                </div>
+
+                <div id="questions-container-detailed1">
+                    <!-- 質問はJavaScriptで動的に生成 -->
+                </div>
+
+                <div class="btn-group">
+                    <button class="btn" onclick="showPage(5)">次へ（21-30問目）</button>
+                </div>
+            </div>
+
+            <button class="btn btn-secondary" onclick="showPage(3)">戻る</button>
+        </div>
+
+        <!-- ページ5: 詳細診断画面（21-30問） -->
+        <div class="page" id="page5">
+            <div class="ribbon-header">
+                <div class="ribbon">TAROT READING</div>
+            </div>
+
+            <div class="diagnosis-container">
+                <div class="progress-info">
+                    詳細診断（21-30問目）
+                </div>
+
+                <div id="questions-container-detailed2">
+                    <!-- 質問はJavaScriptで動的に生成 -->
+                </div>
+
+                <div class="btn-group">
+                    <button class="btn" onclick="showPage(6)">次へ（31-40問目）</button>
+                </div>
+            </div>
+
+            <button class="btn btn-secondary" onclick="showPage(4)">戻る</button>
+        </div>
+
+        <!-- ページ6: 詳細診断画面（31-40問） -->
+        <div class="page" id="page6">
+            <div class="ribbon-header">
+                <div class="ribbon">TAROT READING</div>
+            </div>
+
+            <div class="diagnosis-container">
+                <div class="progress-info">
+                    詳細診断（31-40問目）
+                </div>
+
+                <div id="questions-container-detailed3">
+                    <!-- 質問はJavaScriptで動的に生成 -->
+                </div>
+
+                <div class="btn-group">
+                    <button class="btn" onclick="showPage(7)">次へ（41-50問目）</button>
+                </div>
+            </div>
+
+            <button class="btn btn-secondary" onclick="showPage(5)">戻る</button>
+        </div>
+
+        <!-- ページ7: 詳細診断画面（41-50問） -->
+        <div class="page" id="page7">
+            <div class="ribbon-header">
+                <div class="ribbon">TAROT READING</div>
+            </div>
+
+            <div class="diagnosis-container">
+                <div class="progress-info">
+                    詳細診断（41-50問目）
+                </div>
+
+                <div id="questions-container-detailed4">
+                    <!-- 質問はJavaScriptで動的に生成 -->
+                </div>
+
+                <div class="btn-group">
+                    <button class="btn" onclick="completeDiagnosis(true)">診断完了</button>
+                </div>
+            </div>
+
+            <button class="btn btn-secondary" onclick="showPage(6)">戻る</button>
+        </div>
+
+
+       <!-- ページ8: 診断結果画面 -->
+        <div class="page" id="page8">
+            <div class="ribbon-header">
+                <div class="ribbon">TAROT READING</div>
+            </div>
+
+            <div class="diagnosis-container">
+                <div class="result-header">
+                    <h2>あなたの守護者</h2>
+                </div>
+
+                <div class="result-content">
+                    <div class="guardian-display">
+                        <div class="guardian-emoji" id="result-emoji">🦊</div>
+                        <div class="guardian-name" id="result-name">紅玉の狐</div>
+                        <div class="guardian-traits" id="result-traits">直感・変化・機敏さ</div>
+                    </div>
+
+                    <div class="guardian-description" id="result-description">
+                        変化を恐れず直感で進む自由な魂
+                    </div>
+
+                    <div class="tarot-interpretation" id="result-interpretation">
+                        カードの示す変化を前向きに受け入れ、直感を信じて行動することで道が開ける
+                    </div>
+                </div>
+
+                <div class="btn-group">
+                    <button class="btn" onclick="shareResult()">結果をシェア</button>
+                    <button class="btn btn-secondary" onclick="showPage(2)">メニューに戻る</button>
+                </div>
+            </div>
+        </div>
+
+        
+   <!-- ページ9: ジャンル選択画面 -->
+        <div class="page" id="page9">
+            <div class="ribbon-header">
+                <div class="ribbon">TAROT READING</div>
+            </div>
+
+            <div class="diagnosis-container">
+                <div class="result-header">
+                    <h2>占いジャンル選択</h2>
+                </div>
+
+                <div style="text-align: center; margin: 60px 0 40px 0;">
+                    <div style="margin-bottom: 30px; font-size: 14px; color: #6c757d;">
+                        占いたい内容を選択してください
+                    </div>
+                    
+                    <button class="btn" onclick="startTarotReading('today_fortune')">今日の運勢</button>
+                    
+                    <div style="margin-top: 20px; font-size: 12px; color: #6c757d;">
+                        ※他のジャンルは順次追加予定
+                    </div>
+                </div>
+
+                <div style="text-align: center;">
+                    <button class="btn btn-secondary" onclick="showPage(2)">戻る</button>
+                </div>
+            </div>
+     </div>
+            <!-- ページ10: カードシャッフル画面 -->
+        <div class="page" id="page10">
+            <div class="ribbon-header">
+                <div class="ribbon">CARD SHUFFLE</div>
+            </div>
+
+            <div class="diagnosis-container">
+                <div class="result-header">
+                    <h2>カードをシャッフルしています</h2>
+                </div>
+
+                <div style="text-align: center; margin: 60px 0;">
+                    <div id="shuffle-animation" style="font-size: 80px; margin: 40px 0;">
+                        🃏🃏🃏
+                    </div>
+                    
+                    <div style="font-size: 14px; color: #6c757d; margin: 20px 0;">
+                        心を落ち着けて、直感でタイミングを感じてください
+                    </div>
+                    
+                    <button class="btn" id="shuffle-stop-btn" onclick="stopShuffle()">
+                        ストップ
+                    </button>
+                </div>
+            </div>
+
+            <button class="btn btn-secondary" onclick="showPage(9)">戻る</button>
+        </div>
+
+        <!-- ページ11: カード選択画面 -->
+        <div class="page" id="page11">
+            <div class="ribbon-header">
+                <div class="ribbon">CARD SELECTION</div>
+            </div>
+
+            <div class="diagnosis-container">
+                <div class="result-header">
+                    <h2 id="card-selection-title">１．＜今日の状況＞を占います。<br>直感でカードを一枚選んでください。</h2>
+                </div>
+
+                <div style="text-align: center; margin: 40px 0;">
+                    
+                    <!-- テキスト削除 -->
+                    
+                    <div id="cards-container" style="position: relative; display: flex; justify-content: center; align-items: center; height: 150px; margin: 30px 0; overflow-x: visible;">
+                        <!-- カードはJavaScriptで生成 -->
+                    </div>
+                </div>
+
+                <div style="text-align: center; margin: 20px 0;">
+                   <!-- プログレス表示完全削除 -->
+                </div>
+            </div>
+
+            <div style="margin-top: 40px;">
+    <button class="btn btn-secondary" onclick="showPage(10)">戻る</button>
+            </div>
+            
+        </div>
+
+        <!-- ページ12: 占い結果画面 -->
+        <div class="page" id="page12">
+            <div class="ribbon-header">
+                <div class="ribbon">TAROT RESULT</div>
+            </div>
+
+            <div class="diagnosis-container">
+                <div class="result-header">
+                    <h2>今日の運勢</h2>
+                </div>
+
+                <!-- 選択されたカード表示 -->
+                <div class="selected-cards-display">
+                    <div class="card-row">
+                        <div class="selected-card" id="card-1">
+                            <div class="card-emoji">🂠</div>
+                            <div class="card-name">カード1</div>
+                            <div class="card-position">今日の状況</div>
+                        </div>
+                        <div class="selected-card" id="card-2">
+                            <div class="card-emoji">🂠</div>
+                            <div class="card-name">カード2</div>
+                            <div class="card-position">今日の展開</div>
+                        </div>
+                        <div class="selected-card" id="card-3">
+                            <div class="card-emoji">🂠</div>
+                            <div class="card-name">カード3</div>
+                            <div class="card-position">今日のアドバイス</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 占い結果 -->
+                <div class="tarot-result-content">
+                    <div class="guardian-integration">
+                        <h3>あなたの守護神からのメッセージ</h3>
+                        <div id="guardian-message" class="guardian-message">
+                            守護神の特性を活かした今日のアドバイス
+                        </div>
+                    </div>
+
+                    <div class="daily-interpretation">
+                        <h3>今日の運勢</h3>
+                        <div id="daily-fortune" class="daily-fortune">
+                            選択されたカードからの総合的な運勢
+                        </div>
+                    </div>
+                </div>
+
+                <div class="btn-group">
+                    <button class="btn" onclick="shareResult()">結果をシェア</button>
+                    <button class="btn btn-secondary" onclick="showPage(2)">メニューに戻る</button>
+                </div>
+            </div>
+        </div>
+
+<script src="script.js"></script>
+</body>
+</html>
