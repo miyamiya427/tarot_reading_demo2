@@ -128,8 +128,8 @@
         }
 
         .home-btn {
-            background: rgba(255, 255, 255, 0.95);
-            color: #4a6fa5;
+            background: #e8ecee;
+			color: #7894ab;
             border: none;
             padding: 15px 60px;
             border-radius: 25px;
@@ -142,15 +142,15 @@
         }
 
         .home-btn:hover {
-            background: rgba(255, 255, 255, 1);
+            background: #dacc89;
             transform: translateY(-2px);
             box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
         }
 
         /* ボタンスタイル */
         .btn {
-            background: rgba(255, 255, 255, 0.9);
-            color: #4a6fa5;
+            background: #e8ecee;
+			color: #7894ab;
             border: none;
             padding: 15px 60px;
             border-radius: 25px;
@@ -165,7 +165,7 @@
         }
 
         .btn:hover {
-            background: rgba(255, 255, 255, 1);
+            background: #dacc89;
             transform: translateY(-2px);
             box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
         }
