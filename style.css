@@ -171,16 +171,16 @@
         }
 
         .btn-secondary {
-            background: rgba(255, 255, 255, 0.9);
-            border: 2px solid rgba(255, 255, 255, 0.8);
-            color: #4a6fa5;
+            background: transparent;
+			border: 2px solid #e8ecee;
+			color: #e8ecee;
             margin: 10px auto;
         }
 
         .btn-secondary:hover {
-            background: rgba(255, 255, 255, 1);
-            border-color: white;
-            color: #4a6fa5;
+           background: #e8ecee;
+		   border-color: #e8ecee;
+		   color: #7894ab;
         }
 
         /* ページ切り替え */
