@@ -134,24 +134,25 @@
         }
 
         .home-btn {
-            background: rgba(255, 255, 255, 0.95);
-            color: #4a6fa5;
-            border: none;
-            padding: 15px 60px;
-            border-radius: 25px;
-            font-size: 16px;
-            font-weight: bold;
-            cursor: pointer;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
-            transition: all 0.3s ease;
-            min-width: 200px;
-        }
+    background: #e8ecee;
+    color: #7894ab;
+    border: none;
+    padding: 15px 60px;
+    border-radius: 25px;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    transition: all 0.3s ease;
+    min-width: 200px;
+}
 
-        .home-btn:hover {
-            background: rgba(255, 255, 255, 1);
-            transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
-        }
+.home-btn:hover {
+    background: #dacc89;
+    color: white;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+}
 
         /* ボタンスタイル */
         .btn {
@@ -178,17 +179,17 @@
 }
 
         .btn-secondary {
-            background: rgba(255, 255, 255, 0.9);
-            border: 2px solid rgba(255, 255, 255, 0.8);
-            color: #4a6fa5;
-            margin: 10px auto;
-        }
+    background: #e8ecee;
+    border: 2px solid #e8ecee;
+    color: #7894ab;
+    margin: 10px auto;
+}
 
-        .btn-secondary:hover {
-            background: rgba(255, 255, 255, 1);
-            border-color: white;
-            color: #4a6fa5;
-        }
+.btn-secondary:hover {
+    background: #dacc89;
+    border-color: #dacc89;
+    color: white;
+}
 
         /* ページ切り替え */
         .page {
@@ -247,15 +248,15 @@
         }
 
         .option-label:hover {
-            background: #e3f2fd;
-            border-color: #4a6fa5;
-        }
+    background: #e3f2fd;
+    border-color: #7894ab;
+}
 
         .option-label.selected {
-            background: #4a6fa5;
-            color: white;
-            border-color: #4a6fa5;
-        }
+    background: #7894ab;
+    color: white;
+    border-color: #7894ab;
+}
 
         .option-label input[type="radio"] {
             display: none;
