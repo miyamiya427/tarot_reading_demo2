@@ -674,66 +674,13 @@
         }
 
        function startTarotReading(genre) {
-    console.log('startTarotReading called with:', genre);
     currentGenre = genre;
     selectedTarotCards = [];
     shuffleStartTime = Date.now();
     coordinateSeed = 0;
     totalHesitationTime = 0;
     
-    console.log('About to call showPage(10)');
     showPage(10);
-    
-    window.scrollTo(0, 0);
-    console.log('Scrolled to top');
-}
-    alert('ボタンが押されました: ' + genre);
-    alert('showPage(10)を実行します');
-    
-    document.querySelectorAll('.page').forEach(page => {
-        page.classList.remove('active');
-    });
-    
-    const targetPage = document.getElementById('page10');
-    if (targetPage) {
-        targetPage.classList.add('active');
-        alert('ページ10が見つかりました');
-    } else {
-        alert('ページ10が見つかりません！');
-    }
-    
-    window.scrollTo(0, 0);
-}
-    // 即座にスクロールを上に移動
-    window.scrollTo(0, 0);
-    document.body.scrollTop = 0;
-    document.documentElement.scrollTop = 0;
-    
-    currentGenre = genre;
-    selectedTarotCards = [];
-    shuffleStartTime = Date.now();
-    coordinateSeed = 0;
-    totalHesitationTime = 0;
-    
-    // シャッフル画面に移行
-    showPage(10); // ページ10（シャッフル画面）へ
-    
-    // 複数回強制スクロール
-    setTimeout(() => {
-        window.scrollTo(0, 0);
-        document.body.scrollTop = 0;
-        document.documentElement.scrollTop = 0;
-    }, 10);
-    
-    setTimeout(() => {
-        window.scrollTo(0, 0);
-        document.body.scrollTop = 0;
-        document.documentElement.scrollTop = 0;
-    }, 100);
-    
-    setTimeout(() => {
-        window.scrollTo(0, 0);
-    }, 200);
 }
 
        function stopShuffle() {
