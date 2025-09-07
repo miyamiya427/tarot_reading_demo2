@@ -673,7 +673,12 @@
             return [card1, card2, card3];
         }
 
-        function startTarotReading(genre) {
+       function startTarotReading(genre) {
+    // 即座にスクロールを上に移動
+    window.scrollTo(0, 0);
+    document.body.scrollTop = 0;
+    document.documentElement.scrollTop = 0;
+    
     currentGenre = genre;
     selectedTarotCards = [];
     shuffleStartTime = Date.now();
@@ -683,12 +688,22 @@
     // シャッフル画面に移行
     showPage(10); // ページ10（シャッフル画面）へ
     
-    // 強制的にページ上部にスクロール
+    // 複数回強制スクロール
     setTimeout(() => {
         window.scrollTo(0, 0);
         document.body.scrollTop = 0;
         document.documentElement.scrollTop = 0;
-    }, 50);
+    }, 10);
+    
+    setTimeout(() => {
+        window.scrollTo(0, 0);
+        document.body.scrollTop = 0;
+        document.documentElement.scrollTop = 0;
+    }, 100);
+    
+    setTimeout(() => {
+        window.scrollTo(0, 0);
+    }, 200);
 }
 
        function stopShuffle() {
