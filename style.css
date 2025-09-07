@@ -419,6 +419,43 @@
                 font-size: 20px;
             }
         }
+        
+        .ribbon1 { 
+    display: inline-block; 
+    position: relative; 
+    height: 50px;
+    line-height: 50px;
+    text-align: center; 
+    padding: 0 30px;
+    font-size: 18px;
+    background: #e8ecee;
+    color: #7894ab;
+    box-sizing: border-box; 
+} 
+
+.ribbon1:before, .ribbon1:after { 
+    position: absolute; 
+    content: ''; 
+    width: 0px; 
+    height: 0px; 
+    z-index: 1; 
+} 
+
+.ribbon1:before { 
+    top: 0; 
+    left: 0; 
+    border-width: 25px 0px 25px 15px; 
+    border-color: transparent transparent transparent #7894ab; 
+    border-style: solid; 
+} 
+
+.ribbon1:after { 
+    top: 0; 
+    right: 0; 
+    border-width: 25px 15px 25px 0px; 
+    border-color: transparent #7894ab transparent transparent; 
+    border-style: solid; 
+}
     </style>
 </head>
 <body>
