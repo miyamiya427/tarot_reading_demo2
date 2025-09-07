@@ -21,13 +21,12 @@
 }
 
         .container {
-            width: 100%;
-            max-width: 375px;
-            margin: 0 auto;
-            min-height: 100vh;
-            position: relative;
-            padding: 20px;
-        }
+    width: 100%;
+    max-width: 375px;
+    margin: 0 auto;
+    position: relative;
+    padding: 20px;
+}
 
         /* 背景ドットパターン */
         .dots-pattern {
