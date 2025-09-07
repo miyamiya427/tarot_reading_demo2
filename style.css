@@ -12,7 +12,8 @@
         }
 
        body {
-    font-family: 'Hiragino Sans', 'Yu Gothic', sans-serif;
+    body {
+    font-family: 'Zen Maru Gothic', 'Hiragino Sans', 'Yu Gothic', sans-serif;
     background: #7894ab;
     min-height: 100vh;
     color: white;
