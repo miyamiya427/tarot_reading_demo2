@@ -1112,25 +1112,31 @@ function startShuffleAnimation() {
         // 初期化
         // 保存された守護神をチェック
         function checkExistingGuardian() {
-            const savedResult = localStorage.getItem('guardianResult');
-            if (savedResult) {
-                const guardianData = JSON.parse(savedResult);
-                
-                // 守護神表示エリアを表示
-                document.getElementById('existing-guardian').style.display = 'block';
-                document.getElementById('current-guardian-emoji').textContent = guardianData.emoji;
-                document.getElementById('current-guardian-name').textContent = guardianData.name;
-                
-                // 日付をフォーマット
-                const date = new Date(guardianData.timestamp);
-                const dateString = `${date.getFullYear()}年${date.getMonth() + 1}月${date.getDate()}日に診断`;
-                document.getElementById('current-guardian-date').textContent = dateString;
-                
-                // ボタンのテキストを変更
-                const guardianButton = document.querySelector('button[onclick="showPage(3)"]');
-                guardianButton.textContent = '守護神を再診断する';
-            }
+    const savedResult = localStorage.getItem('guardianResult');
+    if (savedResult) {
+        const guardianData = JSON.parse(savedResult);
+        
+        // 守護神表示エリアを表示
+        document.getElementById('existing-guardian').style.display = 'block';
+        document.getElementById('current-guardian-emoji').textContent = guardianData.emoji;
+        document.getElementById('current-guardian-name').textContent = guardianData.name;
+        
+        // 日付をフォーマット
+        const date = new Date(guardianData.timestamp);
+        const dateString = `${date.getFullYear()}年${date.getMonth() + 1}月${date.getDate()}日に診断`;
+        document.getElementById('current-guardian-date').textContent = dateString;
+        
+        // ボタンのテキストを変更
+        const guardianButton = document.querySelector('button[onclick="showPage(3)"]');
+        guardianButton.textContent = '守護神を再診断する';
+        
+        // 動物絵文字を非表示にする
+        const animalIcons = document.querySelector('.animal-icons');
+        if (animalIcons) {
+            animalIcons.style.display = 'none';
         }
+    }
+}
 
         // タロット占い関連の変数
         let selectedCards = [];
