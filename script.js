@@ -417,6 +417,11 @@
 
         // ページ切り替え
         function showPage(pageNumber) {
+    // 即座にスクロールリセット
+    window.scrollTo({ top: 0, behavior: 'instant' });
+    document.body.scrollTop = 0;
+    document.documentElement.scrollTop = 0;
+    
     console.log('Attempting to show page:', pageNumber);
     
     document.querySelectorAll('.page').forEach(page => {
@@ -433,8 +438,8 @@
         console.error('Page element not found for page:', pageNumber);
     }
     
-    // ページ最上部にスクロール（強制的に）
-    window.scrollTo(0, 0);
+    // 追加のスクロールリセット
+    window.scrollTo({ top: 0, behavior: 'instant' });
     document.body.scrollTop = 0;
     document.documentElement.scrollTop = 0;
     
