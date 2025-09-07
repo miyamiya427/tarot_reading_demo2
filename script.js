@@ -682,6 +682,13 @@
     
     // シャッフル画面に移行
     showPage(10); // ページ10（シャッフル画面）へ
+    
+    // 強制的にページ上部にスクロール
+    setTimeout(() => {
+        window.scrollTo(0, 0);
+        document.body.scrollTop = 0;
+        document.documentElement.scrollTop = 0;
+    }, 50);
 }
 
        function stopShuffle() {
