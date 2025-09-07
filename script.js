@@ -674,6 +674,19 @@
         }
 
        function startTarotReading(genre) {
+    console.log('startTarotReading called with:', genre);
+    currentGenre = genre;
+    selectedTarotCards = [];
+    shuffleStartTime = Date.now();
+    coordinateSeed = 0;
+    totalHesitationTime = 0;
+    
+    console.log('About to call showPage(10)');
+    showPage(10);
+    
+    window.scrollTo(0, 0);
+    console.log('Scrolled to top');
+}
     alert('ボタンが押されました: ' + genre);
     alert('showPage(10)を実行します');
     
