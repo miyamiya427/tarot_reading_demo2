@@ -674,6 +674,23 @@
         }
 
        function startTarotReading(genre) {
+    alert('ボタンが押されました: ' + genre);
+    alert('showPage(10)を実行します');
+    
+    document.querySelectorAll('.page').forEach(page => {
+        page.classList.remove('active');
+    });
+    
+    const targetPage = document.getElementById('page10');
+    if (targetPage) {
+        targetPage.classList.add('active');
+        alert('ページ10が見つかりました');
+    } else {
+        alert('ページ10が見つかりません！');
+    }
+    
+    window.scrollTo(0, 0);
+}
     // 即座にスクロールを上に移動
     window.scrollTo(0, 0);
     document.body.scrollTop = 0;
