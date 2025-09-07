@@ -456,6 +456,45 @@
     border-color: transparent #7894ab transparent transparent; 
     border-style: solid; 
 }
+
+
+	.ribbon2 {
+    position: relative;
+    display: inline-block;
+    height: 50px;
+    line-height: 50px;
+    padding: 0 2rem;
+    border-top: 3px solid #dacc89;
+    border-bottom: 3px solid #dacc89;
+    background-color: #e8ecee;
+    color: #7894ab;
+    font-size: 18px;
+    font-weight: bold;
+    text-align: center;
+}
+
+.ribbon2::before,
+.ribbon2::after {
+    position: absolute;
+    content: '';
+    top: 0;
+    width: 0px;
+    height: 0px;
+    border-color: transparent #7894ab;
+    border-style: solid;
+}
+
+.ribbon2::before {
+    left: 0;
+    border-width: 25px 0px 25px 10px;
+}
+
+.ribbon2::after {
+    right: 0;
+    border-width: 25px 10px 25px 0px;
+}
+
+
     </style>
 </head>
 <body>
