@@ -1100,7 +1100,7 @@ function generateDailyFortune(cards) {
 function startShuffleAnimation() {
     const shuffleImage = document.getElementById('shuffle-image');
     if (shuffleImage) {
-        let shuffleFrames = ['images/shuffle1.png', 'images/shuffle2.png', 'images/shuffle3.png'];
+        let shuffleFrames = ['shuffle1.png', 'shuffle2.png', 'shuffle3.png'];
         let currentFrame = 0;
         
         const interval = setInterval(() => {
