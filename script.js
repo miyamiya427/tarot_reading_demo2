@@ -1098,15 +1098,15 @@ function generateDailyFortune(cards) {
                                                                                                             
 // ページ10表示時にシャッフルアニメーションを開始
 function startShuffleAnimation() {
-    const shuffleElement = document.getElementById('shuffle-animation');
-    if (shuffleElement) {
-        let animationFrames = ['🃏🃏🃏', '🎴🎴🎴', '🃏🎴🃏', '🎴🃏🎴'];
+    const shuffleImage = document.getElementById('shuffle-image');
+    if (shuffleImage) {
+        let shuffleFrames = ['shuffle1.png', 'shuffle2.png', 'shuffle3.png'];
         let currentFrame = 0;
         
         const interval = setInterval(() => {
-            shuffleElement.textContent = animationFrames[currentFrame];
-            currentFrame = (currentFrame + 1) % animationFrames.length;
-        }, 300);
+            shuffleImage.src = shuffleFrames[currentFrame];
+            currentFrame = (currentFrame + 1) % shuffleFrames.length;
+        }, 500);
         
         // アニメーション停止のためにintervalを保存
         window.shuffleInterval = interval;
