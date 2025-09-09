@@ -888,17 +888,28 @@ justify-content: center;
     });
     
     cardsGrid.appendChild(topRow);
-    cardsGrid.appendChild(bottomRow);
-    container.appendChild(cardsGrid);
-    
-    // スクロール位置を中央に設定
-    setTimeout(() => {
-        const maxScroll = cardsGrid.scrollWidth - cardsGrid.clientWidth;
-        cardsGrid.scrollLeft = maxScroll / 2 - 20; // 中央より20px左
-    }, 100);
-    
-    // 次へボタン
-    const nextButton = document.createElement('button');
+cardsGrid.appendChild(bottomRow);
+
+// カードグリッドを包むコンテナを作成
+const cardContainer = document.createElement('div');
+cardContainer.style.cssText = `
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+`;
+
+cardContainer.appendChild(cardsGrid);
+container.appendChild(cardContainer);
+
+// スクロール位置を中央に設定
+setTimeout(() => {
+    const maxScroll = cardsGrid.scrollWidth - cardsGrid.clientWidth;
+    cardsGrid.scrollLeft = maxScroll / 2 - 20; // 中央より20px左
+}, 100);
+
+// 次へボタン
+const nextButton = document.createElement('button');
     nextButton.textContent = '次へ';
     nextButton.id = 'next-button';
     nextButton.style.cssText = `
@@ -922,7 +933,7 @@ justify-content: center;
         width: 100px;
     `;
     nextButton.onclick = () => confirmCardSelection();
-    container.appendChild(nextButton);
+    cardContainer.appendChild(nextButton);
 }
         
 function selectTopCard() {
