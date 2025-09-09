@@ -26,6 +26,7 @@
     margin: 0 auto;
     position: relative;
     padding: 20px;
+    box-sizing: border-box;
 }
 
         /* 背景ドットパターン */
