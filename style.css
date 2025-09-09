@@ -401,6 +401,18 @@
         }
         
         @media (max-width: 375px) {
+    .container {
+        padding: 15px;
+        margin: 0;
+        width: 100vw;
+    }
+    
+    .diagnosis-container {
+        margin: 10px 0;
+        padding: 20px 15px;
+    }
+}
+
             /* タロット占い用のCSS */
         .shuffle-container {
             /* シャッフル用スタイル */
