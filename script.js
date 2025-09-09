@@ -863,20 +863,20 @@ function displayCards() {
         card.onclick = () => selectCard(cardIndex);
         
         // ホバー効果
-        card.onmouseover = () => {
-            if (selectedCardForCurrentStep !== cardIndex) {
-                card.style.transform = 'scale(1.1)';
-                card.style.borderColor = 'white';
-                card.style.zIndex = '10';
-            }
-        };
-        card.onmouseout = () => {
-            if (selectedCardForCurrentStep !== cardIndex) {
-                card.style.transform = 'scale(1)';
-                card.style.borderColor = 'transparent';
-                card.style.zIndex = '1';
-            }
-        };
+        // card.onmouseover = () => {
+//     if (selectedCardForCurrentStep !== cardIndex) {
+//         card.style.transform = 'scale(1.1)';
+//         card.style.borderColor = 'white';
+//         card.style.zIndex = '10';
+//     }
+// };
+// card.onmouseout = () => {
+//     if (selectedCardForCurrentStep !== cardIndex) {
+//         card.style.transform = 'scale(1)';
+//         card.style.borderColor = 'transparent';
+//         card.style.zIndex = '1';
+//     }
+// };
         
         // 偶数番目は上列、奇数番目は下列
         if (i % 2 === 0) {
