@@ -815,8 +815,8 @@ function displayCards() {
         border-radius: 10px;
         scroll-snap-type: x mandatory;
         -webkit-overflow-scrolling: touch;
-        margin: 30px -45px 30px 15px;
-        justify-content: flex-start;
+        margin: 30px auto;
+justify-content: center;
     `;
     
     // 上列のカードコンテナ
@@ -911,7 +911,7 @@ function displayCards() {
         font-weight: bold;
         cursor: pointer;
         transition: all 0.3s ease;
-        margin: 300px auto 0 auto;
+        margin: 40px auto 20px auto;
         display: block;
         white-space: nowrap;
         opacity: 0.5;
@@ -920,7 +920,6 @@ function displayCards() {
         z-index: 1;
         text-align: center;
         width: 100px;
-        transform: translateX(-100px);
     `;
     nextButton.onclick = () => confirmCardSelection();
     container.appendChild(nextButton);
