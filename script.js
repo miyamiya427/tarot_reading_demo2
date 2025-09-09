@@ -846,22 +846,18 @@ function displayCards() {
         const card = document.createElement('div');
         card.className = 'tarot-card';
         card.style.cssText = `
-            width: 55px;
-            height: 70px;
-            background: linear-gradient(135deg, #4a6fa5, #6a8fc5);
-            border-radius: 8px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            font-size: 22px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            border: 2px solid transparent;
-            flex-shrink: 0;
-            min-width: 55px;
-        `;
-        card.textContent = '🂠';
+    width: 55px;
+    height: 70px;
+    background-image: url('images/card-back.png');
+    background-size: cover;
+    background-position: center;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    border: 2px solid transparent;
+    flex-shrink: 0;
+    min-width: 55px;
+`;
         card.setAttribute('data-card-index', cardIndex);
         card.onclick = () => selectCard(cardIndex);
         
@@ -919,7 +915,7 @@ const nextButton = document.createElement('button');
     nextButton.textContent = '次へ';
     nextButton.id = 'next-button';
     nextButton.style.cssText = `
-        background: #4a6fa5;
+        background: #7894ab;
         color: white;
         border: none;
         padding: 12px 30px;
