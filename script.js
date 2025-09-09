@@ -851,6 +851,7 @@ function displayCards() {
     background-image: url('images/card-back.png');
     background-size: cover;
     background-position: center;
+    background-color: transparent;
     border-radius: 8px;
     cursor: pointer;
     transition: all 0.3s ease;
