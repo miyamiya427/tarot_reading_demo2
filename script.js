@@ -804,20 +804,22 @@ function displayCards() {
     // 3. カードグリッドコンテナ（縦2列の横スクロール）
     const cardsGrid = document.createElement('div');
     cardsGrid.style.cssText = `
-        display: flex;
-        flex-direction: column;
-        gap: 12px;
-        height: 200px;
-        overflow-x: auto;
-        overflow-y: hidden;
-        padding: 25px 20px;
-        background: rgba(255, 255, 255, 0.1);
-        border-radius: 10px;
-        scroll-snap-type: x mandatory;
-        -webkit-overflow-scrolling: touch;
-        margin: 30px auto;
-justify-content: center;
-    `;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    height: 200px;
+    overflow-x: auto;
+    overflow-y: hidden;
+    padding: 25px 20px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 10px;
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+    margin: 20px auto;
+    justify-content: center;
+    max-width: 100%;
+    box-sizing: border-box;
+`;
     
     // 上列のカードコンテナ
     const topRow = document.createElement('div');
@@ -897,6 +899,10 @@ cardContainer.style.cssText = `
     flex-direction: column;
     align-items: center;
     width: 100%;
+    max-width: 100%;
+    overflow: hidden;
+    padding: 0 10px;
+    box-sizing: border-box;
 `;
 
 cardContainer.appendChild(cardsGrid);
