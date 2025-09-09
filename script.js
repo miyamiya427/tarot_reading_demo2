@@ -815,7 +815,7 @@ function displayCards() {
     border-radius: 10px;
     scroll-snap-type: x mandatory;
     -webkit-overflow-scrolling: touch;
-    margin: 20px auto;
+    margin: 60px auto 20px auto;
     justify-content: center;
     max-width: 100%;
     box-sizing: border-box;
