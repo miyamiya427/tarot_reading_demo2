@@ -928,7 +928,7 @@ const nextButton = document.createElement('button');
         font-weight: bold;
         cursor: pointer;
         transition: all 0.3s ease;
-        margin: -20px auto 20px auto;
+        margin: 0px auto 20px auto;
         display: block;
         white-space: nowrap;
         opacity: 0.5;
