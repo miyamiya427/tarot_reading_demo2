@@ -849,9 +849,12 @@ function displayCards() {
     width: 55px;
     height: 70px;
     background-image: url('images/card-back.png');
-    background-size: cover;
-    background-position: center;
-    background-color: transparent;
+    background-size: contain;
+background-repeat: no-repeat;
+background-position: center;
+background-color: transparent;
+image-rendering: -webkit-optimize-contrast;
+image-rendering: crisp-edges;
     border-radius: 8px;
     cursor: pointer;
     transition: all 0.3s ease;
