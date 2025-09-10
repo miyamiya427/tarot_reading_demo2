@@ -104,7 +104,6 @@
 
         // 質問を読み込み
         function loadQuestions(questions, containerId) {
-        function loadQuestions(questions, containerId) {
     // データが空の場合は待機
     if (!questions || questions.length === 0) {
         setTimeout(() => loadQuestions(questions, containerId), 1000);
