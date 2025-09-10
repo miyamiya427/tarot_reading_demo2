@@ -104,6 +104,13 @@
 
         // 質問を読み込み
         function loadQuestions(questions, containerId) {
+        function loadQuestions(questions, containerId) {
+    // データが空の場合は待機
+    if (!questions || questions.length === 0) {
+        setTimeout(() => loadQuestions(questions, containerId), 1000);
+        return;
+    }
+    
             const container = document.getElementById(containerId);
             container.innerHTML = '';
             
@@ -881,6 +888,10 @@ async function loadDataFromSheet() {
             // 基本質問データを更新
             updateBasicQuestions(data.basicQuestions);
             console.log('データの読み込みが完了しました');
+            // ページ3がアクティブな場合は質問を再読み込み
+if (document.getElementById('page3').classList.contains('active')) {
+    loadQuestions(basicQuestions, 'questions-container');
+}
         }
     } catch (error) {
         console.error('データ読み込みエラー:', error);
