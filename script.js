@@ -1267,10 +1267,57 @@ const tarotCards = [
 
      
         
+        // スプレッドシートからデータを読み込む関数
+async function loadDataFromSheet() {
+    try {
+        const response = await fetch('https://script.google.com/macros/s/AKfycbxHLOOmtITeLWnuIGpwcPCNMk1a4eoPEhwcjSqchDGg1B1cEt1dAVwiWH5hak4qo8un/exec');
+        const data = await response.json();
+        
+        if (data.guardians && data.basicQuestions) {
+            // 守護者データを更新
+            updateGuardianTypes(data.guardians);
+            // 基本質問データを更新
+            updateBasicQuestions(data.basicQuestions);
+            console.log('データの読み込みが完了しました');
+        }
+    } catch (error) {
+        console.error('データ読み込みエラー:', error);
+    }
+}
+
+function updateGuardianTypes(guardianData) {
+    // 既存のguardianTypesを更新
+    guardianData.forEach(guardian => {
+        guardianTypes[guardian.ID] = {
+            name: guardian.名前,
+            emoji: guardian.絵文字,
+            traits: [guardian.特性1, guardian.特性2, guardian.特性3],
+            description: guardian.説明,
+            interpretation: guardian['タロット解釈']
+        };
+    });
+}
+
+function updateBasicQuestions(questionsData) {
+    // 基本質問データを更新
+    basicQuestions.length = 0; // 配列をクリア
+    questionsData.forEach(q => {
+        basicQuestions.push({
+            question: q.質問内容,
+            optionA: q.選択肢A,
+            scoreA: q.得点A,
+            optionB: q.選択肢B,
+            scoreB: q.得点B
+        });
+    });
+}
+        
         // 初期化
         document.addEventListener('DOMContentLoaded', function() {
             console.log('森の守護者とタロット占いアプリが読み込まれました');
             checkExistingGuardian();
+            // スプレッドシートからデータを取得
+           loadDataFromSheet();
 
             // タロット占い関数群
         function generateTarotSeed() {
