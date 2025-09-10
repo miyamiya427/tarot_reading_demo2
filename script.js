@@ -883,16 +883,23 @@ async function loadDataFromSheet() {
         const data = await response.json();
         
         if (data.guardians && data.basicQuestions) {
-            // 守護者データを更新
-            updateGuardianTypes(data.guardians);
-            // 基本質問データを更新
-            updateBasicQuestions(data.basicQuestions);
-            console.log('データの読み込みが完了しました');
-            // ページ3がアクティブな場合は質問を再読み込み
-if (document.getElementById('page3').classList.contains('active')) {
-    loadQuestions(basicQuestions, 'questions-container');
+    // 守護者データを更新
+    updateGuardianTypes(data.guardians);
+    // 基本質問データを更新
+    updateBasicQuestions(data.basicQuestions);
+    // 詳細質問データを更新
+    updateDetailedQuestions(
+        data.detailedQuestions1,
+        data.detailedQuestions2, 
+        data.detailedQuestions3,
+        data.detailedQuestions4
+    );
+    console.log('データの読み込みが完了しました');
+    // ページ3がアクティブな場合は質問を再読み込み
+    if (document.getElementById('page3').classList.contains('active')) {
+        loadQuestions(basicQuestions, 'questions-container');
+    }
 }
-        }
     } catch (error) {
         console.error('データ読み込みエラー:', error);
     }
@@ -923,6 +930,61 @@ function updateBasicQuestions(questionsData) {
             scoreB: q.得点B
         });
     });
+}
+
+function updateDetailedQuestions(questionsData1, questionsData2, questionsData3, questionsData4) {
+    // 詳細質問データを更新
+    if (questionsData1) {
+        detailedQuestions1.length = 0;
+        questionsData1.forEach(q => {
+            detailedQuestions1.push({
+                question: q.質問内容,
+                optionA: q.選択肢A,
+                scoreA: q.得点A,
+                optionB: q.選択肢B,
+                scoreB: q.得点B
+            });
+        });
+    }
+    
+    if (questionsData2) {
+        detailedQuestions2.length = 0;
+        questionsData2.forEach(q => {
+            detailedQuestions2.push({
+                question: q.質問内容,
+                optionA: q.選択肢A,
+                scoreA: q.得点A,
+                optionB: q.選択肢B,
+                scoreB: q.得点B
+            });
+        });
+    }
+    
+    if (questionsData3) {
+        detailedQuestions3.length = 0;
+        questionsData3.forEach(q => {
+            detailedQuestions3.push({
+                question: q.質問内容,
+                optionA: q.選択肢A,
+                scoreA: q.得点A,
+                optionB: q.選択肢B,
+                scoreB: q.得点B
+            });
+        });
+    }
+    
+    if (questionsData4) {
+        detailedQuestions4.length = 0;
+        questionsData4.forEach(q => {
+            detailedQuestions4.push({
+                question: q.質問内容,
+                optionA: q.選択肢A,
+                scoreA: q.得点A,
+                optionB: q.選択肢B,
+                scoreB: q.得点B
+            });
+        });
+    }
 }
         
         // 初期化
