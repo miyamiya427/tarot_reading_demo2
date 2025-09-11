@@ -66,13 +66,38 @@
             if (pageNumber === 3) {
         loadQuestions(basicQuestions, 'questions-container');
     } else if (pageNumber === 4) {
+    // データ読み込み完了を待ってから質問を表示
+    if (detailedQuestions1.length === 0) {
+        setTimeout(() => {
+            loadQuestions(detailedQuestions1, 'questions-container-detailed1');
+        }, 1000);
+    } else {
         loadQuestions(detailedQuestions1, 'questions-container-detailed1');
+    }
     } else if (pageNumber === 5) {
-                loadQuestions(detailedQuestions2, 'questions-container-detailed2');
+    if (detailedQuestions2.length === 0) {
+        setTimeout(() => {
+            loadQuestions(detailedQuestions2, 'questions-container-detailed2');
+        }, 1000);
+    } else {
+        loadQuestions(detailedQuestions2, 'questions-container-detailed2');
+    }
             } else if (pageNumber === 6) {
-                loadQuestions(detailedQuestions3, 'questions-container-detailed3');
+    if (detailedQuestions3.length === 0) {
+        setTimeout(() => {
+            loadQuestions(detailedQuestions3, 'questions-container-detailed3');
+        }, 1000);
+    } else {
+        loadQuestions(detailedQuestions3, 'questions-container-detailed3');
+    }
            } else if (pageNumber === 7) {
-                loadQuestions(detailedQuestions4, 'questions-container-detailed4');
+    if (detailedQuestions4.length === 0) {
+        setTimeout(() => {
+            loadQuestions(detailedQuestions4, 'questions-container-detailed4');
+        }, 1000);
+    } else {
+        loadQuestions(detailedQuestions4, 'questions-container-detailed4');
+    }
             } else if (pageNumber === 9) {
                 
                 // ジャンル選択画面の初期化処理
