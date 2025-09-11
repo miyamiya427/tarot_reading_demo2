@@ -201,10 +201,46 @@
                 });
             }
             
-            // 最高スコアの守護者を決定
-            const maxScore = Math.max(...Object.values(scores));
-            const resultType = Object.keys(scores).find(key => scores[key] === maxScore);
-            const guardian = guardianTypes[resultType];
+            // スコアを降順でソート
+            const sortedScores = Object.entries(scores).sort((a, b) => b[1] - a[1]);
+            const firstType = sortedScores[0][0];
+            const firstScore = sortedScores[0][1];
+            const secondType = sortedScores[1] ? sortedScores[1][0] : null;
+            const secondScore = sortedScores[1] ? sortedScores[1][1] : 0;
+
+            // 1位と2位のスコア差で12タイプ判定
+            const scoreDifference = firstScore - secondScore;
+            let finalType = firstType;
+
+            if (secondType && scoreDifference <= 3) {
+                // 差が3以下なら細分化（12タイプ）
+                finalType = determineSubtype(firstType, secondType);
+            }
+
+            const guardian = guardianTypes[finalType];
+            
+            // 12タイプ判定関数
+            function determineSubtype(firstType, secondType) {
+                const subtypeMap = {
+                    'ruby_fox': {
+                        'sapphire_hawk': 'dawn_ruby_fox',    // 理想×直感 = 暁
+                        'silver_wolf': 'dusk_ruby_fox',      // 絆×直感 = 宵
+                        'emerald_deer': 'dusk_ruby_fox',     // 癒し×直感 = 宵
+                        'gold_bear': 'dawn_ruby_fox',        // 安定×直感 = 暁
+                        'rainbow_butterfly': 'dusk_ruby_fox' // 美×直感 = 宵
+                    },
+                    'sapphire_hawk': {
+                        'ruby_fox': 'dawn_sapphire_hawk',       // 直感×理想 = 昇
+                        'silver_wolf': 'dusk_sapphire_hawk',    // 絆×理想 = 翔
+                        'emerald_deer': 'dusk_sapphire_hawk',   // 癒し×理想 = 翔
+                        'gold_bear': 'dawn_sapphire_hawk',      // 安定×理想 = 昇
+                        'rainbow_butterfly': 'dusk_sapphire_hawk' // 美×理想 = 翔
+                    }
+                    // 他のタイプも同様に定義
+                };
+                
+                return subtypeMap[firstType]?.[secondType] || firstType;
+            }
             
             // 結果画面に表示
             showResult(guardian);
@@ -224,7 +260,12 @@
             localStorage.setItem('guardianResult', JSON.stringify(guardianData));
             
             document.getElementById('result-emoji').textContent = guardian.emoji;
-            document.getElementById('result-name').textContent = guardian.name;
+            
+             document.getElementById('result-name').innerHTML = `
+             ${guardian.name}<br>
+             <span class="furigana">${guardian.furigana}</span>
+         `;
+
             document.getElementById('result-traits').textContent = guardian.traits.join('・');
             document.getElementById('result-description').textContent = guardian.description;
             document.getElementById('result-interpretation').textContent = guardian.interpretation;

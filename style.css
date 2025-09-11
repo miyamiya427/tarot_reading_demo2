@@ -307,11 +307,19 @@
         }
 
         .guardian-name {
-            font-size: 24px;
-            font-weight: bold;
-            color: #4a6fa5;
-            margin-bottom: 0px;
-        }
+         font-size: 24px;
+         font-weight: bold;
+         color: #4a6fa5;
+         margin-bottom: 0px;
+     }
+
+     .furigana {
+         font-size: 0.7em;
+         color: #7894ab;
+         font-weight: normal;
+         letter-spacing: 0.1em;
+         margin-top: 5px;
+     }
 
         .guardian-traits {
             font-size: 14px;
