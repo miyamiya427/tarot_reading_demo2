@@ -944,7 +944,7 @@ const tarotCards = [
         // スプレッドシートからデータを読み込む関数
 async function loadDataFromSheet() {
     try {
-        const response = await fetch('https://script.google.com/macros/s/AKfycbxHLOOmtITeLWnuIGpwcPCNMk1a4eoPEhwcjSqchDGg1B1cEt1dAVwiWH5hak4qo8un/exec');
+        const response = await fetch('https://script.google.com/macros/s/AKfycbyxlFT1QJndFT-oMmY-t0JByl7yObct_mlrEB9MKLyewG3UeapH3FHbnDUKJsZNPblB/exec');
         const data = await response.json();
         
         if (data.guardians && data.basicQuestions) {
