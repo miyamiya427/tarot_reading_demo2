@@ -134,15 +134,6 @@ const guardianTypes12 = {
     }
 };
 
-// 配点設定の整理
-const questionScoring = {};
-diagnosisQuestions.forEach(q => {
-    questionScoring[q.id] = {
-        A: q.options.A.scores,
-        B: q.options.B.scores,
-        C: q.options.C.scores
-    };
-});
 
 // タイブレイク用の優先順位
 const tieBreakOrder = ['ruby_fox', 'sapphire_hawk', 'silver_wolf', 'emerald_deer', 'gold_bear', 'rainbow_butterfly'];
