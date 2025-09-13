@@ -693,10 +693,10 @@ function generateGuardianSpecificMessage(guardianType, card, isReversed) {
             upright: `あなたの守護者が創造性を輝かせる時だと示しています。「${card.name}」は美しい変化の時です。`,
             reversed: `あなたの守護者が内なる美しさに気づくよう促しています。「${card.name}」の逆位置は内面充実の時です。`
         }
-    };
+};
 
-    const guardianMessages = messages[baseType] || messages.ruby_fox;
-    return isReversed ? guardianMessages.reversed : guardianMessages.upright;
+const guardianMessages = messages[baseType] || messages.ruby_fox;
+return isReversed ? guardianMessages.reversed : guardianMessages.upright;
 }
 
 // 今日の運勢を生成
