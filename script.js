@@ -108,18 +108,22 @@
                 }
                 
                 questionDiv.innerHTML = `
-                    <div class="question-text">${questionNumber}. ${q.question}</div>
-                    <div class="answer-options">
-                        <label class="option-label" onclick="selectOption(this, '${containerId}_${index}', 'A', '${q.scoreA}')">
-                            <input type="radio" name="${containerId}_q${index}" value="A" data-score="${q.scoreA}">
-                            ${q.optionA}
-                        </label>
-                        <label class="option-label" onclick="selectOption(this, '${containerId}_${index}', 'B', '${q.scoreB}')">
-                            <input type="radio" name="${containerId}_q${index}" value="B" data-score="${q.scoreB}">
-                            ${q.optionB}
-                        </label>
-                    </div>
-                `;
+    <div class="question-text">${questionNumber}. ${q.text}</div>
+    <div class="answer-options">
+        <label class="option-label" onclick="selectOption(this, '${containerId}_${index}', 'A', '${q.options.A.scores.join(",")}')">
+            <input type="radio" name="${containerId}_q${index}" value="A" data-score="${q.options.A.scores.join(",")}">
+            ${q.options.A.text}
+        </label>
+        <label class="option-label" onclick="selectOption(this, '${containerId}_${index}', 'B', '${q.options.B.scores.join(",")}')">
+            <input type="radio" name="${containerId}_q${index}" value="B" data-score="${q.options.B.scores.join(",")}">
+            ${q.options.B.text}
+        </label>
+        <label class="option-label" onclick="selectOption(this, '${containerId}_${index}', 'C', '${q.options.C.scores.join(",")}')">
+            <input type="radio" name="${containerId}_q${index}" value="C" data-score="${q.options.C.scores.join(",")}">
+            ${q.options.C.text}
+        </label>
+    </div>
+`;
                 container.appendChild(questionDiv);
             });
         }
@@ -155,10 +159,10 @@
             const basicForm = document.getElementById('questions-container');
             const basicRadios = basicForm.querySelectorAll('input[type="radio"]:checked');
             
-            if (basicRadios.length < 10) {
-                alert('基本診断の全ての質問にお答えください。');
-                return;
-            }
+            if (basicRadios.length < 3) {
+    alert('全ての質問にお答えください。');
+    return;
+}
             
             basicRadios.forEach(radio => {
                 const score = radio.dataset.score;
