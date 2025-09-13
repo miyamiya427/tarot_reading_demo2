@@ -1,0 +1,214 @@
+/* ページ別スタイル */
+.ribbon-header {
+    text-align: center;
+    margin: 40px 0 30px 0;
+    position: relative;
+}
+
+.diagnosis-container {
+    background: rgba(255, 255, 255, 0.95);
+    border-radius: 20px;
+    padding: 25px;
+    margin: 20px 0;
+    padding-bottom: 80px;
+    color: #333;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+}
+
+.question-item {
+    margin-bottom: 20px;
+    padding: 15px;
+    background: #f8f9fa;
+    border-radius: 10px;
+}
+
+.question-text {
+    font-weight: bold;
+    margin-bottom: 12px;
+    color: #2c3e50;
+    font-size: 14px;
+}
+
+.answer-options {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.option-label {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    font-size: 13px;
+    color: #495057;
+    padding: 12px 15px;
+    border-radius: 8px;
+    background: white;
+    border: 2px solid #e9ecef;
+    transition: all 0.2s ease;
+    width: 100%;
+    justify-content: center;
+    text-align: center;
+}
+
+.option-label:hover {
+    background: #e3f2fd;
+    border-color: #7894ab;
+}
+
+.option-label.selected {
+    background: #7894ab;
+    color: white;
+    border-color: #7894ab;
+}
+
+.option-label input[type="radio"] {
+    display: none;
+}
+
+/* 診断結果画面スタイル */
+.result-header {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.result-header h2 {
+    color: #4a6fa5;
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.guardian-display {
+    background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+    border-radius: 20px;
+    padding: 30px 20px;
+    margin: 20px 0;
+    border: 3px solid #4a6fa5;
+}
+
+.guardian-emoji {
+    font-size: 80px;
+    margin-bottom: 15px;
+}
+
+.guardian-name {
+    font-size: 24px;
+    font-weight: bold;
+    color: #4a6fa5;
+    margin-bottom: 0px;
+}
+
+.furigana {
+    font-size: 0.7em;
+    color: #7894ab;
+    font-weight: normal;
+    letter-spacing: 0.1em;
+    margin-top: 5px;
+}
+
+.guardian-traits {
+    font-size: 14px;
+    color: #6c757d;
+    margin-bottom: 15px;
+}
+
+.guardian-description {
+    background: #e3f2fd;
+    border-radius: 15px;
+    padding: 20px;
+    margin: 20px 0;
+    font-size: 16px;
+    color: #2c3e50;
+    line-height: 1.6;
+}
+
+.tarot-interpretation {
+    background: linear-gradient(135deg, #4a6fa5 0%, #5a7fb5 100%);
+    color: white;
+    border-radius: 15px;
+    padding: 20px;
+    margin: 20px 0;
+    font-size: 14px;
+    line-height: 1.8;
+}
+
+/* タロット結果画面スタイル */
+.selected-cards-display {
+    margin: 30px 0;
+}
+
+.card-row {
+    display: flex;
+    justify-content: space-around;
+    gap: 10px;
+    margin: 20px 0;
+}
+
+.selected-card {
+    text-align: center;
+    flex: 1;
+    background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+    border-radius: 10px;
+    padding: 15px 5px;
+    border: 2px solid #4a6fa5;
+}
+
+.card-emoji {
+    font-size: 40px;
+    margin-bottom: 8px;
+}
+
+.card-name {
+    font-size: 12px;
+    font-weight: bold;
+    color: #4a6fa5;
+    margin-bottom: 5px;
+}
+
+.card-position {
+    font-size: 10px;
+    color: #6c757d;
+}
+
+.tarot-result-content {
+    margin: 30px 0;
+}
+
+.guardian-integration, .daily-interpretation {
+    margin: 20px 0;
+    padding: 20px;
+    background: #e3f2fd;
+    border-radius: 15px;
+}
+
+.guardian-integration h3, .daily-interpretation h3 {
+    color: #4a6fa5;
+    font-size: 16px;
+    margin-bottom: 15px;
+}
+
+.guardian-message, .daily-fortune {
+    font-size: 14px;
+    color: #2c3e50;
+    line-height: 1.6;
+}
+
+/* レスポンシブ */
+@media (max-width: 375px) {
+    .container {
+        padding: 15px;
+        margin: 0;
+        width: 100vw;
+    }
+    
+    .diagnosis-container {
+        margin: 10px 0;
+        padding: 20px 15px;
+    }
+    
+    .animal-icon {
+        width: 50px;
+        height: 50px;
+        font-size: 20px;
+    }
+}

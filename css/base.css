@@ -1,0 +1,32 @@
+/* ベーススタイル */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Zen Maru Gothic', 'Hiragino Sans', 'Yu Gothic', sans-serif;
+    background: #7894ab;
+    min-height: 100vh;
+    color: white;
+    overflow-x: hidden;
+    position: relative;
+}
+
+.container {
+    width: 100%;
+    max-width: 375px;
+    margin: 0 auto;
+    position: relative;
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+.page {
+    display: none;
+}
+
+.page.active {
+    display: block;
+}
