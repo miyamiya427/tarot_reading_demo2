@@ -1,13 +1,7 @@
 // 12タイプ診断の判定ロジック
 
 // 30問の配点設定（各問題の選択肢とスコア配分）
-const questionScoring = {
-    // 各問題のA/B/C選択肢に対応するタイプを設定
-    1: { A: ['ruby_fox', 'sapphire_hawk'], B: ['silver_wolf', 'emerald_deer'], C: ['gold_bear', 'rainbow_butterfly'] },
-    2: { A: ['ruby_fox', 'sapphire_hawk'], B: ['silver_wolf', 'emerald_deer'], C: ['gold_bear', 'rainbow_butterfly'] },
-    3: { A: ['ruby_fox', 'sapphire_hawk'], B: ['silver_wolf', 'emerald_deer'], C: ['gold_bear', 'rainbow_butterfly'] },
-    // ... 30問分続く（実際の実装時に全30問設定）
-};
+
 
 // 基本6タイプから12タイプへの変換マップ
 const typeMapping = {
@@ -575,6 +569,29 @@ function analyzeTypeBalance() {
 
 export { questions30, questionScoring };
 
+
+// 30問3択診断データ
+const diagnosisQuestions = [
+    {
+        id: 1,
+        text: "朝起きた時の気分は？",
+        options: {
+            A: { text: "今日は何しよう？ワクワクする！", scores: ['ruby_fox', 'sapphire_hawk'] },
+            B: { text: "今日もいい一日にしよう♪", scores: ['silver_wolf', 'emerald_deer'] },
+            C: { text: "とりあえず二度寝したい...", scores: ['gold_bear', 'rainbow_butterfly'] }
+        }
+    },
+    {
+        id: 2,
+        text: "友達と過ごす理想の時間は？",
+        options: {
+            A: { text: "みんなでワイワイ盛り上がる！", scores: ['ruby_fox', 'silver_wolf'] },
+            B: { text: "少人数でまったりおしゃべり", scores: ['emerald_deer', 'gold_bear'] },
+            C: { text: "一緒にいるけど各自好きなことしてる", scores: ['sapphire_hawk', 'rainbow_butterfly'] }
+        }
+    }
+    // 残り28問を同様の形式で追加してください
+];
 
 // 使用例
 /*
