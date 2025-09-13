@@ -1,33 +1,5 @@
 
 
-// 診断質問データ（2択）
-const diagnosisQuestions = [
-    {
-        id: 1,
-        question: "朝起きた時の気分は？",
-        optionA: "今日は何をしようかワクワクする",
-        scoreA: "ruby_fox",
-        optionB: "今日一日を大切に過ごそうと思う", 
-        scoreB: "emerald_deer"
-    },
-    {
-        id: 2,
-        question: "友達と過ごす理想の時間は？",
-        optionA: "みんなでワイワイ盛り上がる",
-        scoreA: "silver_wolf",
-        optionB: "少人数で深く話し合う",
-        scoreB: "sapphire_hawk"
-    },
-    {
-        id: 3,
-        question: "新しい環境での過ごし方は？",
-        optionA: "積極的に話しかけて友達を作る",
-        scoreA: "ruby_fox",
-        optionB: "自分のペースで必要な人とだけ関わる",
-        scoreB: "gold_bear"
-    }
-];
-
 
         // 詳細診断の回答を保存する変数
         let detailedAnswers = {};
@@ -189,15 +161,18 @@ const diagnosisQuestions = [
             const basicForm = document.getElementById('questions-container');
             const basicRadios = basicForm.querySelectorAll('input[type="radio"]:checked');
             
-            if (basicRadios.length < 3) {
+            if (basicRadios.length < diagnosisQuestions.length) {
     alert('全ての質問にお答えください。');
     return;
 }
             
             basicRadios.forEach(radio => {
-                const score = radio.dataset.score;
-                scores[score] = (scores[score] || 0) + 1;
-            });
+    const scoreString = radio.dataset.score;
+    const scoreArray = scoreString.split(',');
+    scoreArray.forEach(score => {
+        scores[score] = (scores[score] || 0) + 1;
+    });
+});
             
             if (isDetailed) {
                 // 詳細診断の回答をスコアに追加
