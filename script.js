@@ -155,120 +155,48 @@
 
         // 診断完了
         function completeDiagnosis(isDetailed) {
-            const scores = {};
-            
-            // 基本診断の10問のスコア
-            const basicForm = document.getElementById('questions-container');
-            const basicRadios = basicForm.querySelectorAll('input[type="radio"]:checked');
-            
-            if (basicRadios.length < diagnosisQuestions.length) {
-    alert('全ての質問にお答えください。');
-    return;
-}
-            
-            basicRadios.forEach(radio => {
-    const scoreString = radio.dataset.score;
-    const scoreArray = scoreString.split(',');
-    scoreArray.forEach(score => {
-        scores[score] = (scores[score] || 0) + 1;
+    // 回答を収集
+    const answers = {};
+    const basicForm = document.getElementById('questions-container');
+    const basicRadios = basicForm.querySelectorAll('input[type="radio"]:checked');
+    
+    if (basicRadios.length < diagnosisQuestions.length) {
+        alert('全ての質問にお答えください。');
+        return;
+    }
+    
+    // 回答をanswersオブジェクトに格納
+    basicRadios.forEach((radio, index) => {
+        answers[index + 1] = radio.value; // A, B, C
     });
-});
-            
-            if (isDetailed) {
-                // 詳細診断の回答をスコアに追加
-                const detailedCount = Object.keys(detailedAnswers).length;
-                if (detailedCount < 40) { // 詳細診断は40問
-                    alert('詳細診断の全ての質問にお答えください。');
-                    return;
-                }
-                
-                Object.values(detailedAnswers).forEach(answer => {
-                    const score = answer.score;
-                    scores[score] = (scores[score] || 0) + 1;
-                });
-            }
-            
-            // スコアを降順でソート
-            const sortedScores = Object.entries(scores).sort((a, b) => b[1] - a[1]);
-            const firstType = sortedScores[0][0];
-            const firstScore = sortedScores[0][1];
-            const secondType = sortedScores[1] ? sortedScores[1][0] : null;
-            const secondScore = sortedScores[1] ? sortedScores[1][1] : 0;
-
-            // 1位と2位のスコア差で12タイプ判定
-            const scoreDifference = firstScore - secondScore;
-            let finalType = firstType;
-
-            if (secondType && scoreDifference <= 3) {
-                // 差が3以下なら細分化（12タイプ）
-                finalType = determineSubtype(firstType, secondType);
-            }
-
-            console.log('finalType:', finalType);
-            console.log('guardianTypes keys:', Object.keys(guardianTypes));
-            console.log('guardian found:', guardianTypes[finalType]);
-
-            const guardian = guardianTypes[finalType];
-
-            // guardianが見つからない場合のフォールバック
-            if (!guardian) {
-                alert('診断結果の取得に失敗しました。デバッグ情報をコンソールで確認してください。');
-                return;
-            }
-            
-            // 12タイプ判定関数
-            function determineSubtype(firstType, secondType) {
-                const subtypeMap = {
-                    'ruby_fox': {
-                        'sapphire_hawk': 'dawn_ruby_fox',    // 理想×直感 = 暁
-                        'silver_wolf': 'dusk_ruby_fox',      // 絆×直感 = 宵
-                        'emerald_deer': 'dusk_ruby_fox',     // 癒し×直感 = 宵
-                        'gold_bear': 'dawn_ruby_fox',        // 安定×直感 = 暁
-                        'rainbow_butterfly': 'dusk_ruby_fox' // 美×直感 = 宵
-                    },
-                    'sapphire_hawk': {
-                        'ruby_fox': 'dawn_sapphire_hawk',       // 直感×理想 = 昇
-                        'silver_wolf': 'dusk_sapphire_hawk',    // 絆×理想 = 翔
-                        'emerald_deer': 'dusk_sapphire_hawk',   // 癒し×理想 = 翔
-                        'gold_bear': 'dawn_sapphire_hawk',      // 安定×理想 = 昇
-                        'rainbow_butterfly': 'dusk_sapphire_hawk' // 美×理想 = 翔
-                    }
-                    // 他のタイプも同様に定義
-                };
-                
-                return subtypeMap[firstType]?.[secondType] || firstType;
-            }
-            
-            // 結果画面に表示
-            showResult(guardian);
-        }
+    
+    try {
+        // 新しい判定ロジックを使用
+        const result = diagnose12Types(answers);
+        const displayData = formatDiagnosisResult(result);
+        saveDiagnosisResult(result);
+        
+        // 結果を表示
+        showResult(displayData);
+        
+    } catch (error) {
+        console.error('診断エラー:', error);
+        alert('診断処理でエラーが発生しました。');
+    }
+}
 
         // 結果を表示
-        function showResult(guardian) {
-            // 診断結果をlocalStorageに保存
-            const guardianData = {
-                name: guardian.name,
-                emoji: guardian.emoji,
-                traits: guardian.traits,
-                description: guardian.description,
-                interpretation: guardian.interpretation,
-                timestamp: new Date().toISOString()
-            };
-            localStorage.setItem('guardianResult', JSON.stringify(guardianData));
-            
-            document.getElementById('result-emoji').textContent = guardian.emoji;
-            
-             document.getElementById('result-name').innerHTML = `
-             ${guardian.name}<br>
-             <span class="furigana">${guardian.furigana}</span>
-         `;
-
-            document.getElementById('result-traits').textContent = guardian.traits.join('・');
-            document.getElementById('result-description').textContent = guardian.description;
-            document.getElementById('result-interpretation').textContent = guardian.interpretation;
-            
-            showPage(8); // 結果ページを表示
-        }
+        function showResult(displayData) {
+    // 診断結果は既にsaveDiagnosisResult()で保存済み
+    
+    document.getElementById('result-emoji').textContent = displayData.emoji;
+    document.getElementById('result-name').textContent = displayData.name;
+    document.getElementById('result-traits').textContent = displayData.traits.join('・');
+    document.getElementById('result-description').textContent = displayData.description;
+    document.getElementById('result-interpretation').textContent = displayData.advice;
+    
+    showPage(8); // 結果ページを表示
+}
 
         // 結果をシェア
         function shareResult() {
