@@ -561,7 +561,7 @@ function analyzeTypeBalance() {
         rainbow_butterfly: 0
     };
     
-    questions30.forEach(q => {
+    diagnosisQuestions.forEach(q => {
         Object.values(q.options).forEach(option => {
             option.scores.forEach(type => {
                 typeCount[type]++;
