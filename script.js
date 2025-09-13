@@ -1,3 +1,77 @@
+// 守護者タイプ情報（6タイプ）
+const guardianTypes = {
+    ruby_fox: {
+        name: "紅玉の狐",
+        emoji: "🦊",
+        traits: ["直感", "変化", "機敏さ"],
+        description: "変化を恐れず直感で進む自由な魂",
+        interpretation: "カードの示す変化を前向きに受け入れ、直感を信じて行動することで道が開けるでしょう。"
+    },
+    sapphire_hawk: {
+        name: "蒼天の鷹",
+        emoji: "🦅", 
+        traits: ["理想", "俯瞰", "高い目標"],
+        description: "全体を見渡し高い理想を追求する賢者",
+        interpretation: "物事を俯瞰的に捉え、高い理想に向かって着実に歩むことで成功を掴めるでしょう。"
+    },
+    silver_wolf: {
+        name: "銀月の狼",
+        emoji: "🐺",
+        traits: ["絆", "協調", "忠誠心"],
+        description: "人とのつながりを大切にする仲間思い",
+        interpretation: "人間関係や協力関係を重視し、信頼できる仲間と共に困難を乗り越えることができるでしょう。"
+    },
+    emerald_deer: {
+        name: "翠林の鹿",
+        emoji: "🦌",
+        traits: ["癒し", "成長", "穏やかさ"],
+        description: "自然体で着実な成長を重視する優しい魂",
+        interpretation: "焦らず自分のペースで成長し、周囲に癒しと安らぎをもたらす存在となるでしょう。"
+    },
+    gold_bear: {
+        name: "金剛の熊",
+        emoji: "🐻",
+        traits: ["安定", "保護", "堅実さ"],
+        description: "安定と安全を基盤に行動する守護者",
+        interpretation: "慎重で堅実なアプローチを取り、安定した基盤を築くことで長期的な成功を得られるでしょう。"
+    },
+    rainbow_butterfly: {
+        name: "虹彩の蝶",
+        emoji: "🦋",
+        traits: ["変容", "美", "自由"],
+        description: "美しい変化と自由を愛する芸術的な魂",
+        interpretation: "創造性と美的感覚を活かし、自由な発想で新たな可能性を見出すことができるでしょう。"
+    }
+};
+
+// 診断質問データ（2択）
+const diagnosisQuestions = [
+    {
+        id: 1,
+        question: "朝起きた時の気分は？",
+        optionA: "今日は何をしようかワクワクする",
+        scoreA: "ruby_fox",
+        optionB: "今日一日を大切に過ごそうと思う", 
+        scoreB: "emerald_deer"
+    },
+    {
+        id: 2,
+        question: "友達と過ごす理想の時間は？",
+        optionA: "みんなでワイワイ盛り上がる",
+        scoreA: "silver_wolf",
+        optionB: "少人数で深く話し合う",
+        scoreB: "sapphire_hawk"
+    },
+    {
+        id: 3,
+        question: "新しい環境での過ごし方は？",
+        optionA: "積極的に話しかけて友達を作る",
+        scoreA: "ruby_fox",
+        optionB: "自分のペースで必要な人とだけ関わる",
+        scoreB: "gold_bear"
+    }
+];
+
 
         // 詳細診断の回答を保存する変数
         let detailedAnswers = {};
