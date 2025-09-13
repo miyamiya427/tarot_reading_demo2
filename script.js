@@ -680,9 +680,8 @@ const messages = {
     // 他のタイプも同様に簡潔なメッセージ
 };
 
-const guardianMessages = messages[baseType] || messages.ruby_fox;
+return (isReversed ? guardianMessages.reversed : guardianMessages.upright) || "守護神からのメッセージ";
     
-    const guardianMessages = messages[guardianType] || messages.ruby_fox;
     return isReversed ? guardianMessages.reversed : guardianMessages.upright;
 }
 
