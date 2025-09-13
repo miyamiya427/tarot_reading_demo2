@@ -199,7 +199,17 @@
                 finalType = determineSubtype(firstType, secondType);
             }
 
+            console.log('finalType:', finalType);
+            console.log('guardianTypes keys:', Object.keys(guardianTypes));
+            console.log('guardian found:', guardianTypes[finalType]);
+
             const guardian = guardianTypes[finalType];
+
+            // guardianが見つからない場合のフォールバック
+            if (!guardian) {
+                alert('診断結果の取得に失敗しました。デバッグ情報をコンソールで確認してください。');
+                return;
+            }
             
             // 12タイプ判定関数
             function determineSubtype(firstType, secondType) {
