@@ -154,7 +154,7 @@
         }
 
         // 診断完了
-        function completeDiagnosis(isDetailed) {
+        function completeDiagnosis() {
     // 回答を収集
     const answers = {};
     const basicForm = document.getElementById('questions-container');
