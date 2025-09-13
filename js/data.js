@@ -134,36 +134,6 @@ const guardianTypes12 = {
     }
 };
 
-// 30問3択診断データ  
-const diagnosisQuestions = [
-    {
-        id: 1,
-        text: "朝起きた時の気分は？",
-        options: {
-            A: { text: "今日は何しよう？ワクワクする！", scores: ['ruby_fox', 'sapphire_hawk'] },
-            B: { text: "今日もいい一日にしよう♪", scores: ['silver_wolf', 'emerald_deer'] },
-            C: { text: "とりあえず二度寝したい...", scores: ['gold_bear', 'rainbow_butterfly'] }
-        }
-    },
-    {
-        id: 2,
-        text: "友達と過ごす理想の時間は？",
-        options: {
-            A: { text: "みんなでワイワイ盛り上がる！", scores: ['ruby_fox', 'silver_wolf'] },
-            B: { text: "少人数でまったりおしゃべり", scores: ['emerald_deer', 'gold_bear'] },
-            C: { text: "一緒にいるけど各自好きなことしてる", scores: ['sapphire_hawk', 'rainbow_butterfly'] }
-        }
-    },
-    {
-        id: 3,
-        text: "新しい環境（クラス・職場・サークル）では？",
-        options: {
-            A: { text: "積極的に「よろしく！」って話しかける", scores: ['ruby_fox', 'silver_wolf'] },
-            B: { text: "様子見つつ、徐々に仲良くなっていく", scores: ['emerald_deer', 'sapphire_hawk'] },
-            C: { text: "必要最小限の人とだけ関わればOK", scores: ['gold_bear', 'rainbow_butterfly'] }
-        }
-    }
-];
 
 // タイブレイク用の優先順位
 const tieBreakOrder = ['ruby_fox', 'sapphire_hawk', 'silver_wolf', 'emerald_deer', 'gold_bear', 'rainbow_butterfly'];
@@ -598,29 +568,6 @@ function analyzeTypeBalance() {
 // バランスチェック実行
 // analyzeTypeBalance();
 
-
-// 30問3択診断データ
-const diagnosisQuestions = [
-    {
-        id: 1,
-        text: "朝起きた時の気分は？",
-        options: {
-            A: { text: "今日は何しよう？ワクワクする！", scores: ['ruby_fox', 'sapphire_hawk'] },
-            B: { text: "今日もいい一日にしよう♪", scores: ['silver_wolf', 'emerald_deer'] },
-            C: { text: "とりあえず二度寝したい...", scores: ['gold_bear', 'rainbow_butterfly'] }
-        }
-    },
-    {
-        id: 2,
-        text: "友達と過ごす理想の時間は？",
-        options: {
-            A: { text: "みんなでワイワイ盛り上がる！", scores: ['ruby_fox', 'silver_wolf'] },
-            B: { text: "少人数でまったりおしゃべり", scores: ['emerald_deer', 'gold_bear'] },
-            C: { text: "一緒にいるけど各自好きなことしてる", scores: ['sapphire_hawk', 'rainbow_butterfly'] }
-        }
-    }
-    // 残り28問を同様の形式で追加してください
-];
 
 // 使用例
 /*
