@@ -657,31 +657,45 @@ if (guardianType) {
 
 // 守護神タイプ別の専用メッセージ
 function generateGuardianSpecificMessage(guardianType, card, isReversed) {
-    // 12タイプから基本タイプに変換してメッセージを生成
-let baseType = null;
-if (guardianType) {
-    if (guardianType.includes('ruby_fox')) baseType = 'ruby_fox';
-    else if (guardianType.includes('sapphire_hawk')) baseType = 'sapphire_hawk';
-    else if (guardianType.includes('silver_wolf')) baseType = 'silver_wolf';
-    else if (guardianType.includes('emerald_deer')) baseType = 'emerald_deer';
-    else if (guardianType.includes('gold_bear')) baseType = 'gold_bear';
-    else if (guardianType.includes('rainbow_butterfly')) baseType = 'rainbow_butterfly';
-}
+    // 12タイプから基本タイプに変換
+    let baseType = null;
+    if (guardianType) {
+        if (guardianType.includes('ruby_fox')) baseType = 'ruby_fox';
+        else if (guardianType.includes('sapphire_hawk')) baseType = 'sapphire_hawk';
+        else if (guardianType.includes('silver_wolf')) baseType = 'silver_wolf';
+        else if (guardianType.includes('emerald_deer')) baseType = 'emerald_deer';
+        else if (guardianType.includes('gold_bear')) baseType = 'gold_bear';
+        else if (guardianType.includes('rainbow_butterfly')) baseType = 'rainbow_butterfly';
+    }
 
-const messages = {
-    ruby_fox: {
-        upright: `あなたの守護者が新しい冒険への扉を開く合図を示しています。直感を信じて、変化を恐れずに進んでください。`,
-        reversed: `守護者が慎重さを促しています。一度立ち止まって状況を見極める時です。`
-    },
-    sapphire_hawk: {
-        upright: `あなたの守護者が高い視点から物事を捉える大切さを示しています。長期的な目標に向かって歩んでください。`,
-        reversed: `守護者が方向性の見直しを提案しています。理想と現実のバランスを取る時期です。`
-    },
-    // 他のタイプも同様に簡潔なメッセージ
-};
+    const messages = {
+        ruby_fox: {
+            upright: `あなたの守護者が新しい冒険への扉を開く合図を示しています。「${card.name}」は変化を恐れずに進む時です。`,
+            reversed: `あなたの守護者が慎重さを促しています。「${card.name}」の逆位置は立ち止まって考える時です。`
+        },
+        sapphire_hawk: {
+            upright: `あなたの守護者が高い視点から物事を捉える大切さを示しています。「${card.name}」は長期的な目標に向かう時です。`,
+            reversed: `あなたの守護者が方向性の見直しを提案しています。「${card.name}」の逆位置は理想と現実のバランスを取る時です。`
+        },
+        silver_wolf: {
+            upright: `あなたの守護者が仲間との協力の大切さを示しています。「${card.name}」は信頼関係を深める時です。`,
+            reversed: `あなたの守護者が独立の重要さを伝えています。「${card.name}」の逆位置は自分と向き合う時です。`
+        },
+        emerald_deer: {
+            upright: `あなたの守護者が癒しと成長の力を示しています。「${card.name}」は自分らしいペースで進む時です。`,
+            reversed: `あなたの守護者が休息の必要性を示しています。「${card.name}」の逆位置は無理をせず労る時です。`
+        },
+        gold_bear: {
+            upright: `あなたの守護者が安定した基盤の大切さを示しています。「${card.name}」は慎重に歩みを進める時です。`,
+            reversed: `あなたの守護者が柔軟性の大切さを教えています。「${card.name}」の逆位置は新しいアプローチの時です。`
+        },
+        rainbow_butterfly: {
+            upright: `あなたの守護者が創造性を輝かせる時だと示しています。「${card.name}」は美しい変化の時です。`,
+            reversed: `あなたの守護者が内なる美しさに気づくよう促しています。「${card.name}」の逆位置は内面充実の時です。`
+        }
+    };
 
-return (isReversed ? guardianMessages.reversed : guardianMessages.upright) || "守護神からのメッセージ";
-    
+    const guardianMessages = messages[baseType] || messages.ruby_fox;
     return isReversed ? guardianMessages.reversed : guardianMessages.upright;
 }
 
