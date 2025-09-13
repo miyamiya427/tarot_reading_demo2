@@ -360,11 +360,32 @@ function initializeCardSelection() {
 }
 
 function updateCardSelectionTitle() {
-    const titles = [
+    let titles;
+if (currentGenre === 'love_single') {
+    titles = [
+        "１．＜気になる人の気持ち＞を占います。<br>直感でカードを一枚選んでください。",
+        "２．＜今後の展開＞を占います。<br>直感でカードを一枚選んでください。", 
+        "３．＜あなたへのアドバイス＞を占います。<br>直感でカードを一枚選んでください。"
+    ];
+} else if (currentGenre === 'love_couple') {
+    titles = [
+        "１．＜二人の関係性＞を占います。<br>直感でカードを一枚選んでください。",
+        "２．＜関係の発展＞を占います。<br>直感でカードを一枚選んでください。", 
+        "３．＜関係改善のヒント＞を占います。<br>直感でカードを一枚選んでください。"
+    ];
+} else if (currentGenre === 'love_reconciliation') {
+    titles = [
+        "１．＜相手の現在の気持ち＞を占います。<br>直感でカードを一枚選んでください。",
+        "２．＜復縁の可能性＞を占います。<br>直感でカードを一枚選んでください。", 
+        "３．＜復縁に向けたアドバイス＞を占います。<br>直感でカードを一枚選んでください。"
+    ];
+} else {
+    titles = [
         "１．＜今日の状況＞を占います。<br>直感でカードを一枚選んでください。",
         "２．＜今日の展開＞を占います。<br>直感でカードを一枚選んでください。", 
         "３．＜今日のアドバイス＞を占います。<br>直感でカードを一枚選んでください。"
     ];
+}
     
     document.getElementById('card-selection-title').innerHTML = titles[currentCardStep - 1];
 }
