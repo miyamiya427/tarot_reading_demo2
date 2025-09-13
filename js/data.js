@@ -134,6 +134,15 @@ const guardianTypes12 = {
     }
 };
 
+// 配点設定の整理
+const questionScoring = {};
+diagnosisQuestions.forEach(q => {
+    questionScoring[q.id] = {
+        A: q.options.A.scores,
+        B: q.options.B.scores,
+        C: q.options.C.scores
+    };
+});
 
 // タイブレイク用の優先順位
 const tieBreakOrder = ['ruby_fox', 'sapphire_hawk', 'silver_wolf', 'emerald_deer', 'gold_bear', 'rainbow_butterfly'];
@@ -258,7 +267,7 @@ function saveDiagnosisResult(result) {
 
 // 30問3択診断：質問データと配点設定
 
-const questions30 = [
+const diagnosisQuestions = [
     {
         id: 1,
         text: "朝起きた時の気分は？",
@@ -533,7 +542,7 @@ const questions30 = [
 
 // 配点設定の整理（実装時に使用）
 const questionScoring = {};
-questions30.forEach(q => {
+diagnosisQuestions.forEach(q => {
     questionScoring[q.id] = {
         A: q.options.A.scores,
         B: q.options.B.scores,
