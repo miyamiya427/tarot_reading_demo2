@@ -376,6 +376,32 @@ function displayCards() {
 }
 
 function showTarotResult() {
+    // ジャンル別のタイトルを設定
+    const titleMap = {
+        'today_fortune': '今日の運勢',
+        'love_single': '恋愛運（片思い）',
+        'love_couple': '恋愛運（カップル）',
+        'love_reunion': '恋愛運（復縁）',
+        'work_fortune': '仕事運',
+        'relationship': '人間関係運'
+    };
+    
+    const title = titleMap[currentGenre] || '今日の運勢';
+    document.getElementById('result-title').textContent = title;
+    
+    // 選択されたカードの情報を表示
+    displaySelectedCards();
+    
+    // 守護神との統合メッセージを生成
+    generateIntegratedReading();
+    
+    // データをスプレッドシートに送信
+    sendDataToSheet();
+    
+    // 結果画面に移行
+    showPage(12);
+}
+
     // 選択されたカードの情報を表示
     displaySelectedCards();
     
@@ -422,7 +448,8 @@ function getCardInterpretation(card, isReversed) {
 }
 
 // 守護神とタロットカードを統合した読み解きを生成
-function generateIntegratedReading() {
+// 守護神とタロットカードを統合した読み解きを生成
+async function generateIntegratedReading() {
     // 保存された守護神情報を取得
     const savedGuardian = localStorage.getItem('guardianResult');
     let guardianData = null;
@@ -434,13 +461,38 @@ function generateIntegratedReading() {
     // 選択されたカードの基本情報
     const selectedCards = selectedCardIds.map(id => tarotCards[id]);
     
-    // 守護神メッセージを生成
-    const guardianMessage = generateGuardianMessage(guardianData, selectedCards);
-    document.getElementById('guardian-message').textContent = guardianMessage;
+    // Loading表示
+    document.getElementById('guardian-message').textContent = '占い結果を生成中...';
+    document.getElementById('daily-fortune').textContent = 'AIが分析中です。しばらくお待ちください...';
     
-    // 今日の運勢を生成
-    const dailyFortune = generateDailyFortune(selectedCards, guardianData);
-    document.getElementById('daily-fortune').textContent = dailyFortune;
+    try {
+        // Gemini APIで占い結果を生成
+        console.log('AI生成開始...', { guardianData, selectedCards, currentGenre });
+        const result = await generateAITarotReading(guardianData, selectedCards, currentGenre);
+        console.log('AI生成完了:', result);
+        
+        // 結果を表示
+        document.getElementById('guardian-message').textContent = result.guardianMessage;
+        document.getElementById('daily-fortune').textContent = result.fortune;
+        
+    } catch (error) {
+        console.error('AI生成エラー:', error);
+        
+        // エラー時はフォールバック（既存の固定メッセージ）
+        console.log('フォールバック処理開始...');
+        const guardianMessage = generateGuardianMessage(guardianData, selectedCards);
+        document.getElementById('guardian-message').textContent = guardianMessage;
+        
+        const dailyFortune = generateDailyFortune(selectedCards, guardianData);
+        document.getElementById('daily-fortune').textContent = dailyFortune;
+        
+        // ユーザーにエラーを通知（オプション）
+        setTimeout(() => {
+            const currentMessage = document.getElementById('guardian-message').textContent;
+            document.getElementById('guardian-message').textContent = 
+                currentMessage + ' ※一時的にAI機能が利用できないため、基本メッセージを表示しています。';
+        }, 1000);
+    }
 }
 
 // 守護神からのメッセージを生成
