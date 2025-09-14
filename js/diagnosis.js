@@ -116,5 +116,52 @@ function showResult(displayData) {
     document.getElementById('result-description').textContent = displayData.description;
     document.getElementById('result-interpretation').textContent = displayData.advice;
     
+    // 診断結果データを送信
+    sendDiagnosisDataToSheet(displayData);
+    
     showPage(8); // 結果ページを表示
+}
+
+// 診断結果をスプレッドシートに送信
+async function sendDiagnosisDataToSheet(displayData) {
+    try {
+        // スコア情報を取得（実装されている場合）
+        const scores = {
+            rubyFoxScore: 0,
+            sapphireHawkScore: 0,
+            silverWolfScore: 0,
+            emeraldDeerScore: 0,
+            goldBearScore: 0,
+            rainbowButterflyScore: 0
+        };
+        
+        // 送信データを作成
+        const data = {
+            dataType: 'diagnosis',
+            guardianType: displayData.type || 'unknown',
+            guardianName: displayData.name || 'unknown',
+            rubyFoxScore: scores.rubyFoxScore,
+            sapphireHawkScore: scores.sapphireHawkScore,
+            silverWolfScore: scores.silverWolfScore,
+            emeraldDeerScore: scores.emeraldDeerScore,
+            goldBearScore: scores.goldBearScore,
+            rainbowButterflyScore: scores.rainbowButterflyScore,
+            userAgent: navigator.userAgent,
+            memo: ''
+        };
+        
+        // Google Apps Scriptに送信
+        const response = await fetch('https://script.google.com/macros/s/AKfycbxTTfzDOm_-QB4MvFJN1BfPf-RR9Fasq8mZl7SKwIs2jPQ--sJmQsp9AWTshrRfDeQAuQ/exec', {
+            method: 'POST',
+            mode: 'no-cors',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(data)
+        });
+        
+        console.log('診断データ送信完了:', data);
+    } catch (error) {
+        console.log('診断データ送信エラー:', error);
+    }
 }

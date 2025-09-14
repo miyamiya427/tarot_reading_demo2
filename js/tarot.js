@@ -555,6 +555,7 @@ async function sendDataToSheet() {
         
         // 送信データを作成
         const data = {
+            dataType: 'tarot',
             guardianType: guardianData ? guardianData.type || 'unknown' : 'no_diagnosis',
             guardianName: guardianData ? guardianData.name || '未診断' : '未診断',
             genre: currentGenre || 'unknown',
