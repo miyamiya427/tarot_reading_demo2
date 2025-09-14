@@ -244,9 +244,7 @@ function updateCardSelectionTitle() {
     const titles = titleSets[currentGenre] || titleSets['today_fortune'];
     document.getElementById('card-selection-title').innerHTML = titles[currentCardStep - 1];
 }
-    
-    document.getElementById('card-selection-title').innerHTML = titles[currentCardStep - 1];
-}
+
 
 function displayCards() {
     const container = document.getElementById('cards-container');
