@@ -66,25 +66,25 @@ function buildTarotPrompt(guardianData, selectedCards, genre) {
     // ジャンル別の位置説明
     const positionTexts = getPositionTexts(genre);
     
-    // 守護者情報
+    // 守護者情報と性格特性
     const guardianInfo = guardianData ? 
-        `守護者タイプ: ${guardianData.name}\n特性: ${guardianData.traits ? guardianData.traits.join('、') : ''}` : 
+        `守護者タイプ: ${guardianData.name}\n性格特性: ${guardianData.traits ? guardianData.traits.join('、') : ''}\n性格の説明: ${guardianData.description || ''}` : 
         '守護者タイプ: 未診断';
     
-    // カード情報
+    // カード情報（カード名は表示しない）
     const cardInfo = selectedCards.map((card, index) => 
-        `${index + 1}枚目「${positionTexts[index]}」: ${card.name} - ${card.meaning}`
+        `${index + 1}枚目「${positionTexts[index]}」のカード: ${card.meaning}（${card.upright}）`
     ).join('\n');
     
     // ジャンル別のメッセージ調整
     const genreText = getGenreText(genre);
     
-    return `あなたは経験豊富なタロットリーダーです。以下の情報を基に、温かく希望に満ちたメッセージを生成してください。
+    return `あなたは親しみやすく優しいタロットリーダーです。相談者の性格タイプを理解し、その人に寄り添ったアドバイスを提供してください。
 
-【相談者情報】
+【相談者の性格】
 ${guardianInfo}
 
-【選択されたカード】
+【選択されたカード（参考情報）】
 ${cardInfo}
 
 【占いテーマ】
@@ -92,15 +92,35 @@ ${genreText}
 
 以下の形式で回答してください：
 ---
-守護者メッセージ: あなたの守護者からの具体的なメッセージ（80-120文字）
-総合運勢: 3枚のカードから読み取れる総合的な運勢とアドバイス（150-200文字）
+守護者メッセージ: 
+総合運勢: 
 ---
 
-注意点：
-- 具体的で実用的なアドバイスを含める
-- 前向きで希望を与える内容にする
-- 守護者の特性を活かしたメッセージにする
-- 日本語で自然な文体で書く`;
+【重要な指示】
+1. 性格特性を必ず考慮したアドバイスにする
+   - 内向的な人には「少しずつ」「自分のペースで」
+   - 外向的な人には「積極的に」「チャレンジして」
+   - 慎重な人には「無理をしないで」
+   - 行動的な人には「思い切って」
+
+2. 文体は親しみやすく
+   - 「〜かもしれません」→「〜かも」
+   - 「〜してください」→「〜してみて」
+   - 「〜ではないでしょうか」→「〜なのでは？」
+   - 適度にですます調も混ぜる
+
+3. 内容は具体的すぎず汎用的に
+   - 「今日は新しい出会いがある」→「素敵な出会いがありそう」
+   - 「上司と対立する」→「人間関係で少し気を使う場面があるかも」
+
+4. カード名は絶対に出力しない
+   - ペンタクルの8、ソードの3などの表記は一切使わない
+
+5. 文字数制限
+   - 守護者メッセージ: 60-90文字
+   - 総合運勢: 120-160文字
+
+6. 前向きで希望を与える内容にする`;
 }
 
 /**
