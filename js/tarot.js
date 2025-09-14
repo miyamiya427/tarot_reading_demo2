@@ -569,6 +569,7 @@ async function sendDataToSheet() {
         // Google Apps Scriptに送信
         const response = await fetch('https://script.google.com/macros/s/AKfycbxTTfzDOm_-QB4MvFJN1BfPf-RR9Fasq8mZl7SKwIs2jPQ--sJmQsp9AWTshrRfDeQAuQ/exec', {
             method: 'POST',
+            mode: 'no-cors',
             headers: {
                 'Content-Type': 'application/json',
             },
