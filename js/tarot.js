@@ -382,6 +382,9 @@ function showTarotResult() {
     // 守護神との統合メッセージを生成
     generateIntegratedReading();
     
+    // データをスプレッドシートに送信
+    sendDataToSheet();
+    
     // 結果画面に移行
     showPage(12);
 }
@@ -534,5 +537,46 @@ function startShuffleAnimation() {
         
         // アニメーション停止のためにintervalを保存
         window.shuffleInterval = interval;
+    }
+}
+
+// スプレッドシートにデータを送信
+async function sendDataToSheet() {
+    try {
+        // 守護神情報を取得
+        const savedGuardian = localStorage.getItem('guardianResult');
+        let guardianData = null;
+        if (savedGuardian) {
+            guardianData = JSON.parse(savedGuardian);
+        }
+        
+        // 選択されたカード情報
+        const selectedCards = selectedCardIds.map(id => tarotCards[id]);
+        
+        // 送信データを作成
+        const data = {
+            guardianType: guardianData ? guardianData.type || 'unknown' : 'no_diagnosis',
+            guardianName: guardianData ? guardianData.name || '未診断' : '未診断',
+            genre: currentGenre || 'unknown',
+            card1: selectedCards[0] ? selectedCards[0].name : '',
+            card2: selectedCards[1] ? selectedCards[1].name : '',
+            card3: selectedCards[2] ? selectedCards[2].name : '',
+            userAgent: navigator.userAgent,
+            ip: 'クライアント側',
+            memo: ''
+        };
+        
+        // Google Apps Scriptに送信
+        const response = await fetch('https://script.google.com/macros/s/AKfycbxTTfzDOm_-QB4MvFJN1BfPf-RR9Fasq8mZl7SKwIs2jPQ--sJmQsp9AWTshrRfDeQAuQ/exec', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(data)
+        });
+        
+        console.log('データ送信完了:', data);
+    } catch (error) {
+        console.log('データ送信エラー:', error);
     }
 }
