@@ -411,19 +411,6 @@ function showTarotResult() {
     showPage(12);
 }
 
-    // 選択されたカードの情報を表示
-    displaySelectedCards();
-    
-    // 守護神との統合メッセージを生成
-    generateIntegratedReading();
-    
-    // データをスプレッドシートに送信
-    sendDataToSheet();
-    
-    // 結果画面に移行
-    showPage(12);
-}
-
 // 選択されたカードを表示する関数
 function displaySelectedCards() {
     const cardPositions = ['今日の状況', '今日の展開', '今日のアドバイス'];
