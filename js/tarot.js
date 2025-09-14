@@ -1,4 +1,13 @@
 // タロット占い機能
+function startTarotReading(genre) {
+    currentGenre = genre;
+    selectedTarotCards = [];
+    shuffleStartTime = Date.now();
+    coordinateSeed = 0;
+    totalHesitationTime = 0;
+    
+    showPage(10);
+}
 
 // タロット占い用の変数
 let shuffleStartTime = 0;
