@@ -101,7 +101,6 @@
     object-fit: cover;
     border: 3px solid #4a6fa5;
 }
-}
 
 .guardian-name {
     font-size: 24px;
@@ -223,4 +222,5 @@
         height: 50px;
         font-size: 20px;
     }
+
 }
