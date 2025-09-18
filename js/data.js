@@ -22,6 +22,22 @@ const typeMapping = {
     'rainbow_butterfly_evening': 'dreaming_butterfly'
 };
 
+// 守護者画像マッピング
+const guardianImages = {
+    'dawn_ruby_fox': 'images/guardians/dawn_fox.png',
+    'dusk_ruby_fox': 'images/guardians/dusk_fox.png',
+    'ascending_hawk': 'images/guardians/ascend_hawk.png',
+    'soaring_hawk': 'images/guardians/moon_hawk.png',
+    'pack_wolf': 'images/guardians/pack_wolf.png',
+    'lone_wolf': 'images/guardians/lone_wolf.png',
+    'young_deer': 'images/guardians/young_deer.png',
+    'deep_deer': 'images/guardians/deep_deer.png',
+    'guardian_bear': 'images/guardians/guard_bear.png',
+    'resting_bear': 'images/guardians/rest_bear.png',
+    'dancing_butterfly': 'images/guardians/dance_butterfly.png',
+    'dreaming_butterfly': 'images/guardians/dream_butterfly.png'
+};
+
 // 12タイプの詳細情報
 const guardianTypes12 = {
     'dawn_ruby_fox': {

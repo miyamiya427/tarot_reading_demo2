@@ -110,7 +110,14 @@ function completeDiagnosis() {
 function showResult(displayData) {
     // 診断結果は既にsaveDiagnosisResult()で保存済み
     
-    document.getElementById('result-emoji').textContent = displayData.emoji;
+    const resultEmojiElement = document.getElementById('result-emoji');
+    const guardianImage = guardianImages[displayData.type];
+
+    if (guardianImage) {
+        resultEmojiElement.innerHTML = `<img src="${guardianImage}" alt="${displayData.name}" style="width: 120px; height: 120px; border-radius: 50%; object-fit: cover;">`;
+    } else {
+        resultEmojiElement.textContent = displayData.emoji;
+    }
     document.getElementById('result-name').textContent = displayData.name;
     document.getElementById('result-traits').textContent = displayData.traits.join('・');
     document.getElementById('result-description').textContent = displayData.description;
