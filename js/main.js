@@ -89,7 +89,14 @@ function checkExistingGuardian() {
         
         // 守護神表示エリアを表示
         document.getElementById('existing-guardian').style.display = 'block';
-        document.getElementById('current-guardian-emoji').textContent = guardianData.emoji;
+        const currentEmojiElement = document.getElementById('current-guardian-emoji');
+        const guardianImage = guardianImages[guardianData.type];
+
+        if (guardianImage) {
+            currentEmojiElement.innerHTML = `<img src="${guardianImage}" alt="${guardianData.name}">`;
+        } else {
+            currentEmojiElement.textContent = guardianData.emoji;
+        }
         document.getElementById('current-guardian-name').textContent = guardianData.name;
         
         // 日付をフォーマット
