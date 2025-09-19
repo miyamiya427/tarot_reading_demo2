@@ -97,7 +97,7 @@
 .guardian-emoji img {
     width: 120px;
     height: 120px;
-    border-radius: 20%; /* 円形度を下げる */
+    border-radius: 0%; /* 円形度を下げる */
     object-fit: contain;
     border: none;
 }
