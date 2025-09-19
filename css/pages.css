@@ -98,8 +98,10 @@
     width: 120px;
     height: 120px;
     border-radius: 50%;
-    object-fit: contain;
-    border: none;
+    object-fit: contain; /* ← coverから変更 */
+    border: 0px solid transparent !important;
+    outline: none !important;
+    box-shadow: none !important;
 }
 
 
