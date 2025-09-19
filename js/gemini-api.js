@@ -186,22 +186,7 @@ function parseGeminiResponse(responseText) {
             }
         }
         
-        // フォールバック: 見つからない場合は全体テキストを分割
-        if (!guardianMessage || !fortune) {
-            const parts = responseText.split('---');
-            if (parts.length >= 2) {
-                const content = parts[1] || parts[0];
-                const contentLines = content.split('\n').filter(line => line.trim());
                 
-                guardianMessage = contentLines[0]?.replace(/^[^:]*:/, '').trim() || responseText.substring(0, 100);
-                fortune = contentLines[1]?.replace(/^[^:]*:/, '').trim() || responseText.substring(100, 300);
-            } else {
-                // 最終フォールバック
-                guardianMessage = responseText.substring(0, 120);
-                fortune = responseText.substring(120, 300);
-            }
-        }
-        
         return {
     personalizedFortune: personalizedFortune || '今日もあなたらしく過ごしてくださいね。'
 };
