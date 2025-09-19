@@ -209,8 +209,7 @@ function parseGeminiResponse(responseText) {
     } catch (error) {
         console.error('Response parsing error:', error);
         return {
-            guardianMessage: '今日もあなたらしく過ごしてくださいね。',
-            fortune: '今日は新しい発見がありそうです。前向きに過ごしましょう。'
-        };
+    personalizedFortune: personalizedFortune || '今日もあなたらしく過ごしてくださいね。'
+};
     }
 }
