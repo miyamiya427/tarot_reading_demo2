@@ -45,7 +45,10 @@ async function generateAITarotReading(guardianData, selectedCards, genre) {
         
         // レスポンスから結果を抽出
         const generatedText = data.candidates[0].content.parts[0].text;
-        
+
+        // デバッグ: 実際のレスポンスを確認
+        console.log('Gemini生成テキスト:', generatedText);
+
         // 結果をパース
         return parseGeminiResponse(generatedText);
         
@@ -160,15 +163,27 @@ function getGenreText(genre) {
  */
 function parseGeminiResponse(responseText) {
     try {
-        // レスポンステキストから守護者メッセージと総合運勢を抽出
-        const lines = responseText.split('\n');
-        let guardianMessage = '';
-        let fortune = '';
+        console.log('解析対象テキスト:', responseText);
         
-        for (const line of lines) {
-            if (line.includes('個別鑑定結果:')) {
-    personalizedFortune = line.split(':')[1]?.trim() || '';
-}
+        // 複数のパターンで検索
+        let personalizedFortune = '';
+        
+        // パターン1: 「個別鑑定結果:」で検索
+        const match1 = responseText.match(/個別鑑定結果[：:]\s*(.+)/);
+        if (match1) {
+            personalizedFortune = match1[1].trim();
+        }
+        
+        // パターン2: 見つからない場合は全文を使用
+        if (!personalizedFortune) {
+            // ---で区切られている場合
+            const parts = responseText.split('---');
+            if (parts.length >= 2) {
+                personalizedFortune = parts[1].replace(/個別鑑定結果[：:]/g, '').trim();
+            } else {
+                // 最後の手段：全文の最初の部分を使用
+                personalizedFortune = responseText.trim();
+            }
         }
         
         // フォールバック: 見つからない場合は全体テキストを分割
