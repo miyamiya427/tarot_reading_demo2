@@ -97,6 +97,29 @@ ${genreText}
 
 【重要な指示】
 1. 性格特性を必ず考慮した寄り添い型メッセージ
+2. 文体は親しみやすく温かく
+3. 内容は励ましと理解を込めて
+4. カード名は絶対に出力しない
+5. 文字数制限: 個別鑑定結果 250-350文字
+6. 必ず守護者タイプ名を冒頭で言及`;
+}
+
+【相談者の性格】
+${guardianInfo}
+
+【選択されたカード（参考情報）】
+${cardInfo}
+
+【占いテーマ】
+${genreText}
+
+以下の形式で回答してください：
+---
+個別鑑定結果: 
+---
+
+【重要な指示】
+1. 性格特性を必ず考慮した寄り添い型メッセージ
    - 「あなたの○○な性格から、こう感じてしまうかもしれませんが...」
    - 「普段○○なところがあるあなたですが...」
    - 「○○を大切にするあなたらしい考え方で...」
@@ -242,9 +265,8 @@ function parseGeminiResponse(responseText) {
         }
         
         return {
-            guardianMessage: guardianMessage || '今日もあなたらしく過ごしてくださいね。',
-            fortune: fortune || '今日は新しい発見がありそうです。前向きに過ごしましょう。'
-        };
+    personalizedFortune: personalizedFortune || '今日もあなたらしく過ごしてくださいね。'
+};
         
     } catch (error) {
         console.error('Response parsing error:', error);
