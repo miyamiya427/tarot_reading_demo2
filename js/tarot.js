@@ -458,8 +458,8 @@ async function generateIntegratedReading() {
     const selectedCards = selectedCardIds.map(id => tarotCards[id]);
     
     // Loading表示
-    document.getElementById('guardian-message').textContent = '占い結果を生成中...';
-    document.getElementById('daily-fortune').textContent = 'AIが分析中です。しばらくお待ちください...';
+document.getElementById('personalized-title').textContent = '占い結果を生成中...';
+document.getElementById('personalized-fortune').textContent = 'AIが分析中です。しばらくお待ちください...';
     
     try {
         // Gemini APIで占い結果を生成
@@ -479,15 +479,12 @@ document.getElementById('personalized-fortune').textContent = result.personalize
         // エラー時はフォールバック（既存の固定メッセージ）
         console.log('フォールバック処理開始...');
         const guardianMessage = generateGuardianMessage(guardianData, selectedCards);
-        document.getElementById('guardian-message').textContent = guardianMessage;
-        
-        const dailyFortune = generateDailyFortune(selectedCards, guardianData);
-        document.getElementById('daily-fortune').textContent = dailyFortune;
+        document.getElementById('personalized-fortune').textContent = guardianMessage;
         
         // ユーザーにエラーを通知（オプション）
         setTimeout(() => {
-            const currentMessage = document.getElementById('guardian-message').textContent;
-            document.getElementById('guardian-message').textContent = 
+            const currentMessage = document.getElementById('personalized-fortune').textContent;
+            document.getElementById('personalized-fortune').textContent = 
                 currentMessage + ' ※一時的にAI機能が利用できないため、基本メッセージを表示しています。';
         }, 1000);
     }
