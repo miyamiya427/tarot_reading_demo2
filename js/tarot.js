@@ -467,9 +467,11 @@ async function generateIntegratedReading() {
         const result = await generateAITarotReading(guardianData, selectedCards, currentGenre);
         console.log('AI生成完了:', result);
         
-        // 結果を表示
-        document.getElementById('guardian-message').textContent = result.guardianMessage;
-        document.getElementById('daily-fortune').textContent = result.fortune;
+        // タイトル設定
+document.getElementById('personalized-title').textContent = `${guardianData?.name || '未診断'}を守護者にもつあなたへのメッセージ`;
+
+// 結果を表示
+document.getElementById('personalized-fortune').textContent = result.personalizedFortune;
         
     } catch (error) {
         console.error('AI生成エラー:', error);
