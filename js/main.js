@@ -97,7 +97,10 @@ function checkExistingGuardian() {
         } else {
             currentEmojiElement.textContent = guardianData.emoji;
         }
-        document.getElementById('current-guardian-name').textContent = guardianData.name;
+        document.getElementById('current-guardian-name').innerHTML = `
+    <div class="furigana" style="font-size: 12px; font-weight: normal;">${guardianData.furigana}</div>
+    ${guardianData.name}
+`;
         
         // 日付をフォーマット
         const date = new Date(guardianData.timestamp);

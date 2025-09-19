@@ -118,7 +118,11 @@ function showResult(displayData) {
     } else {
         resultEmojiElement.textContent = displayData.emoji;
     }
-    document.getElementById('result-name').textContent = displayData.name;
+    
+    document.getElementById('result-name').innerHTML = `
+    <div class="furigana">${displayData.furigana}</div>
+    ${displayData.name}
+`;
     document.getElementById('result-traits').textContent = displayData.traits.join('・');
     document.getElementById('result-description').textContent = displayData.description;
     document.getElementById('result-interpretation').textContent = displayData.advice;
