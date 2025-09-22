@@ -126,7 +126,12 @@ ${genreText}
    - 具体的なアドバイス (100-150文字)
    - 励ましのメッセージ (50-80文字)
 
-8. 総文字数: 400-500文字程度`;
+8. 総文字数: 400-500文字程度
+
+9. 読みやすさの配慮
+   - 2-3文ごとに必ず改行する
+   - 段落の間は空行を入れる
+   - 長い文章は避けて短文にする`;
 }
 
 /**
@@ -201,9 +206,18 @@ if (!personalizedFortune) {
     }
 }
         
-        return {
-            personalizedFortune: personalizedFortune || '今日もあなたらしく過ごしてくださいね。'
-        };
+        // 読みやすくするために改行を追加
+const formattedFortune = personalizedFortune
+    .replace(/。  /g, '。<br><br>')      // 文末の後に改行
+    .replace(/。([あ-ん])/g, '。<br>$1')  // ひらがなの前で改行
+    .replace(/ね。/g, 'ね。<br><br>')     // 「ね。」の後に改行
+    .replace(/よ。/g, 'よ。<br><br>')     // 「よ。」の後に改行
+    .replace(/です。/g, 'です。<br><br>') // 「です。」の後に改行
+    || '今日もあなたらしく過ごしてくださいね。';
+
+return {
+    personalizedFortune: formattedFortune
+};
         
     } catch (error) {
         console.error('Response parsing error:', error);
