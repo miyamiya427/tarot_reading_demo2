@@ -48,6 +48,7 @@ async function generateAITarotReading(guardianData, selectedCards, genre) {
 
         // デバッグ: 実際のレスポンスを確認
         console.log('Gemini生成テキスト:', generatedText);
+　　　　 console.log('API Response Full:', data);
 
         // 結果をパース
         return parseGeminiResponse(generatedText);
@@ -197,3 +198,4 @@ function parseGeminiResponse(responseText) {
         };
     }
 }
+
