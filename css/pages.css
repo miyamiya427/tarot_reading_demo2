@@ -187,6 +187,29 @@
     margin: 30px 0;
 }
 
+.personality-based-reading {
+    background: #f8f9fa;
+    border-radius: 15px;
+    padding: 20px;
+    margin: 20px 0;
+    border-left: 4px solid #dacc89;
+}
+
+.personality-based-reading h3 {
+    color: #4a6fa5;
+    font-size: 16px;
+    margin-bottom: 15px;
+}
+
+.personalized-fortune {
+    line-height: 1.8;
+    margin: 15px 0;
+    padding: 0;
+    word-break: break-word;
+    font-size: 14px;
+    color: #2c3e50;
+}
+
 .guardian-integration, .daily-interpretation {
     margin: 20px 0;
     padding: 20px;
