@@ -177,23 +177,29 @@ function parseGeminiResponse(responseText) {
         // 複数のパターンで検索
         let personalizedFortune = '';
         
-        // パターン1: 「個別鑑定結果:」で検索
-        const match1 = responseText.match(/個別鑑定結果[：:]\s*(.+)/);
-        if (match1) {
-            personalizedFortune = match1[1].trim();
-        }
+        // パターン1: 「個別鑑定結果:」で検索 - 複数行対応
+const match1 = responseText.match(/個別鑑定結果[：:]\s*\n---([\s\S]*?)(?=\n---|$)/);
+if (match1) {
+    personalizedFortune = match1[1].trim();
+} else {
+    // フォールバック: ---の後の内容を全て取得
+    const parts = responseText.split('---');
+    if (parts.length >= 3) {
+        personalizedFortune = parts[2].trim();
+    }
+}
         
         // パターン2: 見つからない場合は全文を使用
-        if (!personalizedFortune) {
-            // ---で区切られている場合
-            const parts = responseText.split('---');
-            if (parts.length >= 2) {
-                personalizedFortune = parts[1].replace(/個別鑑定結果[：:]/g, '').trim();
-            } else {
-                // 最後の手段：全文の最初の部分を使用
-                personalizedFortune = responseText.trim();
-            }
-        }
+if (!personalizedFortune) {
+    // ---で区切られている場合
+    const parts = responseText.split('---');
+    if (parts.length >= 3) {
+        personalizedFortune = parts[2].replace(/個別鑑定結果[：:]/g, '').trim();
+    } else {
+        // 最後の手段：全文の最初の部分を使用
+        personalizedFortune = responseText.trim();
+    }
+}
         
         return {
             personalizedFortune: personalizedFortune || '今日もあなたらしく過ごしてくださいね。'
@@ -206,5 +212,6 @@ function parseGeminiResponse(responseText) {
         };
     }
 }
+
 
 
