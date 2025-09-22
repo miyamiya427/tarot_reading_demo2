@@ -45,10 +45,7 @@ async function generateAITarotReading(guardianData, selectedCards, genre) {
         
         // レスポンスから結果を抽出
         const generatedText = data.candidates[0].content.parts[0].text;
-
-        // デバッグ: 実際のレスポンスを確認
-        console.log('Gemini生成テキスト:', generatedText);
-
+        
         // 結果をパース
         return parseGeminiResponse(generatedText);
         
@@ -100,31 +97,12 @@ ${genreText}
 
 【重要な指示】
 1. 性格特性を必ず考慮した寄り添い型メッセージ
-   - 「あなたの○○な性格から、こう感じてしまうかもしれませんが...」
-   - 「普段○○なところがあるあなたですが...」
-   - 「○○を大切にするあなたらしい考え方で...」
-
-2. 性格別のアプローチ
-   - 内向的な人：「一人の時間も大切にしながら...」「自分のペースで...」
-   - 外向的な人：「いつものように積極的に...」「周りの人と一緒に...」
-   - 慎重な人：「無理をせず着実に...」「よく考えてから行動することで...」
-   - 行動的な人：「思い切って新しいことに...」「直感を信じて...」
-
-3. 文体は親しみやすく温かく
-   - 「〜かもしれません」→「〜かも」
-   - 「〜してください」→「〜してみて」
-   - 「〜ではないでしょうか」→「〜なのでは？」
-
-4. 内容は励ましと理解を込めて
-   - 性格の特徴を肯定的に捉える
-   - 弱みも「それがあなたの優しさ」的に表現
-   - 具体的すぎず、幅広い状況に当てはまる表現
-
-5. カード名は絶対に出力しない
-   - タロットカード名は一切使わない
-
-6. 文字数制限
-   -}
+2. 文体は親しみやすく温かく
+3. 内容は励ましと理解を込めて
+4. カード名は絶対に出力しない
+5. 文字数制限: 個別鑑定結果 250-350文字
+6. 必ず守護者タイプ名を冒頭で言及`;
+}
 
 
 /**
@@ -170,30 +148,33 @@ function getGenreText(genre) {
  */
 function parseGeminiResponse(responseText) {
     try {
-        console.log('解析対象テキスト:', responseText);
+        // レスポンステキストから守護者メッセージと総合運勢を抽出
+        const lines = responseText.split('\n');
+        let guardianMessage = '';
+        let fortune = '';
         
-        // 複数のパターンで検索
-        let personalizedFortune = '';
-        
-        // パターン1: 「個別鑑定結果:」で検索
-        const match1 = responseText.match(/個別鑑定結果[：:]\s*(.+)/);
-        if (match1) {
-            personalizedFortune = match1[1].trim();
+        for (const line of lines) {
+            if (line.includes('個別鑑定結果:')) {
+    personalizedFortune = line.split(':')[1]?.trim() || '';
+}
         }
         
-        // パターン2: 見つからない場合は全文を使用
-        if (!personalizedFortune) {
-            // ---で区切られている場合
+        // フォールバック: 見つからない場合は全体テキストを分割
+        if (!guardianMessage || !fortune) {
             const parts = responseText.split('---');
             if (parts.length >= 2) {
-                personalizedFortune = parts[1].replace(/個別鑑定結果[：:]/g, '').trim();
+                const content = parts[1] || parts[0];
+                const contentLines = content.split('\n').filter(line => line.trim());
+                
+                guardianMessage = contentLines[0]?.replace(/^[^:]*:/, '').trim() || responseText.substring(0, 100);
+                fortune = contentLines[1]?.replace(/^[^:]*:/, '').trim() || responseText.substring(100, 300);
             } else {
-                // 最後の手段：全文の最初の部分を使用
-                personalizedFortune = responseText.trim();
+                // 最終フォールバック
+                guardianMessage = responseText.substring(0, 120);
+                fortune = responseText.substring(120, 300);
             }
         }
         
-                
         return {
     personalizedFortune: personalizedFortune || '今日もあなたらしく過ごしてくださいね。'
 };
@@ -201,7 +182,8 @@ function parseGeminiResponse(responseText) {
     } catch (error) {
         console.error('Response parsing error:', error);
         return {
-    personalizedFortune: personalizedFortune || '今日もあなたらしく過ごしてくださいね。'
-};
+            guardianMessage: '今日もあなたらしく過ごしてくださいね。',
+            fortune: '今日は新しい発見がありそうです。前向きに過ごしましょう。'
+        };
     }
 }
