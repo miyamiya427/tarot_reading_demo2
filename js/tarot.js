@@ -471,7 +471,7 @@ document.getElementById('personalized-fortune').textContent = 'AIが分析中で
 document.getElementById('personalized-title').textContent = `${guardianData?.name || '未診断'}を守護者にもつあなたへのメッセージ`;
 
 // 結果を表示
-document.getElementById('personalized-fortune').textContent = result.personalizedFortune;
+document.getElementById('personalized-fortune').innerHTML = result.personalizedFortune;
         
     } catch (error) {
         console.error('AI生成エラー:', error);
