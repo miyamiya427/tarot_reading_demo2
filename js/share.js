@@ -126,14 +126,63 @@ async function drawGuardianSection(ctx, guardianData) {
         }
     } else {
         // guardianImagesが使えない場合は絵文字
-        drawEmojiAsImage(ctx, guardianData, sectionWidth);
+       // 守護者画像
+    if (guardianData.type && typeof guardianImages !== 'undefined') {
+        try {
+            const guardianImage = guardianImages[guardianData.type];
+            if (guardianImage) {
+                const img = new Image();
+                img.onload = function() {
+                    // 画像を円形にクリップ
+                    ctx.save();
+                    ctx.beginPath();
+                    ctx.arc(sectionWidth / 2, 130, 60, 0, 2 * Math.PI);
+                    ctx.clip();
+                    
+                    // 画像を描画（正方形に調整）
+                    ctx.drawImage(img, sectionWidth / 2 - 60, 70, 120, 120);
+                    ctx.restore();
+                };
+                img.onerror = function() {
+                    // エラー時は絵文字
+                    ctx.font = '80px serif';
+                    ctx.textAlign = 'center';
+                    ctx.fillStyle = 'white';
+                    ctx.fillText(guardianData.emoji || '🌟', sectionWidth / 2, 150);
+                };
+                img.src = guardianImage;
+                
+                // 画像読み込みを待つ
+                await new Promise(resolve => {
+                    if (img.complete) {
+                        resolve();
+                    } else {
+                        img.onload = () => resolve();
+                        img.onerror = () => resolve();
+                    }
+                });
+            } else {
+                // フォールバック：絵文字
+                ctx.font = '80px serif';
+                ctx.textAlign = 'center';
+                ctx.fillStyle = 'white';
+                ctx.fillText(guardianData.emoji || '🌟', sectionWidth / 2, 150);
+            }
+        } catch (error) {
+            console.log('画像読み込みエラー:', error);
+            // フォールバック：絵文字
+            ctx.font = '80px serif';
+            ctx.textAlign = 'center';
+            ctx.fillStyle = 'white';
+            ctx.fillText(guardianData.emoji || '🌟', sectionWidth / 2, 150);
+        }
+    } else {
+        // フォールバック：絵文字
+        ctx.font = '80px serif';
+        ctx.textAlign = 'center';
+        ctx.fillStyle = 'white';
+        ctx.fillText(guardianData.emoji || '🌟', sectionWidth / 2, 150);
     }
-}
-
-/**
- * 絵文字を画像として描画するヘルパー関数
- */
-function drawEmojiAsImage(ctx, guardianData, sectionWidth) {
     ctx.font = '80px serif';
     ctx.textAlign = 'center';
     ctx.fillStyle = 'white';
@@ -370,4 +419,5 @@ function shareTextOnly() {
     }
 
 }
+
 
