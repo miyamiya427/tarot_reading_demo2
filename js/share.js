@@ -90,9 +90,54 @@ async function drawGuardianSection(ctx, guardianData) {
     ctx.fillRect(0, 0, sectionWidth, sectionHeight);
     
     // 守護者画像
-    if (guardianData.type) {
+    if (guardianData.type && typeof guardianImages !== 'undefined') {
         try {
             const guardianImage = guardianImages[guardianData.type];
+            if (guardianImage) {
+                await new Promise((resolve) => {
+                    const img = new Image();
+                    img.onload = function() {
+                        // 画像を円形にクリップ
+                        ctx.save();
+                        ctx.beginPath();
+                        ctx.arc(sectionWidth / 2, 130, 60, 0, 2 * Math.PI);
+                        ctx.clip();
+                        
+                        // 画像を描画（正方形に調整）
+                        ctx.drawImage(img, sectionWidth / 2 - 60, 70, 120, 120);
+                        ctx.restore();
+                        resolve();
+                    };
+                    img.onerror = () => {
+                        // エラー時は絵文字にフォールバック
+                        drawEmojiAsImage(ctx, guardianData, sectionWidth);
+                        resolve();
+                    };
+                    img.src = guardianImage;
+                });
+            } else {
+                // guardianImageが見つからない場合は絵文字
+                drawEmojiAsImage(ctx, guardianData, sectionWidth);
+            }
+        } catch (error) {
+            console.log('画像読み込みエラー:', error);
+            // エラー時は絵文字にフォールバック
+            drawEmojiAsImage(ctx, guardianData, sectionWidth);
+        }
+    } else {
+        // guardianImagesが使えない場合は絵文字
+        drawEmojiAsImage(ctx, guardianData, sectionWidth);
+    }
+}
+
+/**
+ * 絵文字を画像として描画するヘルパー関数
+ */
+function drawEmojiAsImage(ctx, guardianData, sectionWidth) {
+    ctx.font = '80px serif';
+    ctx.textAlign = 'center';
+    ctx.fillStyle = 'white';
+    ctx.fillText(guardianData.emoji || '🌟', sectionWidth / 2, 150);
             if (guardianImage) {
                 const img = new Image();
                 img.onload = function() {
@@ -325,3 +370,4 @@ function shareTextOnly() {
     }
 
 }
+
