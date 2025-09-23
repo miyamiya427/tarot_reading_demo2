@@ -89,12 +89,49 @@ async function drawGuardianSection(ctx, guardianData) {
     ctx.fillStyle = 'rgba(255, 255, 255, 0.2)';
     ctx.fillRect(0, 0, sectionWidth, sectionHeight);
     
-    // 守護者画像/絵文字
-    if (guardianData.emoji) {
-        ctx.font = '80px serif';
-        ctx.textAlign = 'center';
-        ctx.fillStyle = 'white';
-        ctx.fillText(guardianData.emoji, sectionWidth / 2, 150);
+    // 守護者画像
+    if (guardianData.type) {
+        try {
+            const guardianImage = guardianImages[guardianData.type];
+            if (guardianImage) {
+                const img = new Image();
+                img.onload = function() {
+                    // 画像を円形にクリップ
+                    ctx.save();
+                    ctx.beginPath();
+                    ctx.arc(sectionWidth / 2, 130, 60, 0, 2 * Math.PI);
+                    ctx.clip();
+                    
+                    // 画像を描画（正方形に調整）
+                    ctx.drawImage(img, sectionWidth / 2 - 60, 70, 120, 120);
+                    ctx.restore();
+                };
+                img.src = guardianImage;
+                
+                // 画像読み込みを待つためにPromiseを使用
+                await new Promise(resolve => {
+                    if (img.complete) {
+                        resolve();
+                    } else {
+                        img.onload = () => resolve();
+                        img.onerror = () => resolve();
+                    }
+                });
+            } else {
+                // フォールバック：絵文字
+                ctx.font = '80px serif';
+                ctx.textAlign = 'center';
+                ctx.fillStyle = 'white';
+                ctx.fillText(guardianData.emoji || '🌟', sectionWidth / 2, 150);
+            }
+        } catch (error) {
+            console.log('画像読み込みエラー:', error);
+            // フォールバック：絵文字
+            ctx.font = '80px serif';
+            ctx.textAlign = 'center';
+            ctx.fillStyle = 'white';
+            ctx.fillText(guardianData.emoji || '🌟', sectionWidth / 2, 150);
+        }
     }
     
     // 守護者名
@@ -286,4 +323,5 @@ function shareTextOnly() {
             alert('シェア機能に対応していません');
         }
     }
+
 }
