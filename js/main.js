@@ -121,21 +121,5 @@ function checkExistingGuardian() {
 
 // 結果をシェア
 function shareResult() {
-    const guardianName = document.getElementById('result-name').textContent;
-    const guardianEmoji = document.getElementById('result-emoji').textContent;
-    const shareText = `私の守護者は「${guardianEmoji} ${guardianName}」でした！\n\n森の守護者とタロット占いで診断してみてね✨`;
-    
-    if (navigator.share) {
-        navigator.share({
-            title: '森の守護者診断結果',
-            text: shareText,
-        });
-    } else {
-        // フォールバック：クリップボードにコピー
-        navigator.clipboard.writeText(shareText).then(() => {
-            alert('結果をクリップボードにコピーしました！');
-        }).catch(() => {
-            alert('シェア機能に対応していません');
-        });
-    }
+    shareResultWithImage();
 }
