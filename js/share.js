@@ -25,10 +25,6 @@ async function shareResultWithImage() {
 
 /**
  * Canvas APIで占い結果の画像を生成
- * @param {Object} guardianData - 守護者データ
- * @param {string} genre - 占いジャンル
- * @param {string} resultText - 占い結果テキスト
- * @returns {Promise<Blob>} - 生成された画像のBlob
  */
 async function generateShareImage(guardianData, genre, resultText) {
     const canvas = document.createElement('canvas');
@@ -58,15 +54,12 @@ async function generateShareImage(guardianData, genre, resultText) {
 
 /**
  * 背景を描画
- * @param {CanvasRenderingContext2D} ctx - Canvasコンテキスト
- * @param {number} width - キャンバス幅
- * @param {number} height - キャンバス高さ
  */
 function drawBackground(ctx, width, height) {
     // グラデーション背景
     const gradient = ctx.createLinearGradient(0, 0, width, height);
-    gradient.addColorStop(0, '#7894ab');  // メインカラー
-    gradient.addColorStop(1, '#5a7fb5');  // 少し濃いバリエーション
+    gradient.addColorStop(0, '#7894ab');
+    gradient.addColorStop(1, '#5a7fb5');
     
     ctx.fillStyle = gradient;
     ctx.fillRect(0, 0, width, height);
@@ -78,8 +71,6 @@ function drawBackground(ctx, width, height) {
 
 /**
  * 守護者セクションを描画（左側）
- * @param {CanvasRenderingContext2D} ctx - Canvasコンテキスト
- * @param {Object} guardianData - 守護者データ
  */
 async function drawGuardianSection(ctx, guardianData) {
     const sectionWidth = 250;
@@ -89,143 +80,16 @@ async function drawGuardianSection(ctx, guardianData) {
     ctx.fillStyle = 'rgba(255, 255, 255, 0.2)';
     ctx.fillRect(0, 0, sectionWidth, sectionHeight);
     
-    // 守護者画像
-    if (guardianData.type && typeof guardianImages !== 'undefined') {
+    // 守護者画像または絵文字を描画
+    if (guardianData.type && typeof guardianImages !== 'undefined' && guardianImages[guardianData.type]) {
         try {
-            const guardianImage = guardianImages[guardianData.type];
-            if (guardianImage) {
-                await new Promise((resolve) => {
-                    const img = new Image();
-                    img.onload = function() {
-                        // 画像を円形にクリップ
-                        ctx.save();
-                        ctx.beginPath();
-                        ctx.arc(sectionWidth / 2, 130, 60, 0, 2 * Math.PI);
-                        ctx.clip();
-                        
-                        // 画像を描画（正方形に調整）
-                        ctx.drawImage(img, sectionWidth / 2 - 60, 70, 120, 120);
-                        ctx.restore();
-                        resolve();
-                    };
-                    img.onerror = () => {
-                        // エラー時は絵文字にフォールバック
-                        drawEmojiAsImage(ctx, guardianData, sectionWidth);
-                        resolve();
-                    };
-                    img.src = guardianImage;
-                });
-            } else {
-                // guardianImageが見つからない場合は絵文字
-                drawEmojiAsImage(ctx, guardianData, sectionWidth);
-            }
+            await drawGuardianImage(ctx, guardianImages[guardianData.type], sectionWidth);
         } catch (error) {
             console.log('画像読み込みエラー:', error);
-            // エラー時は絵文字にフォールバック
-            drawEmojiAsImage(ctx, guardianData, sectionWidth);
+            drawGuardianEmoji(ctx, guardianData, sectionWidth);
         }
     } else {
-        // guardianImagesが使えない場合は絵文字
-       // 守護者画像
-    if (guardianData.type && typeof guardianImages !== 'undefined') {
-        try {
-            const guardianImage = guardianImages[guardianData.type];
-            if (guardianImage) {
-                const img = new Image();
-                img.onload = function() {
-                    // 画像を円形にクリップ
-                    ctx.save();
-                    ctx.beginPath();
-                    ctx.arc(sectionWidth / 2, 130, 60, 0, 2 * Math.PI);
-                    ctx.clip();
-                    
-                    // 画像を描画（正方形に調整）
-                    ctx.drawImage(img, sectionWidth / 2 - 60, 70, 120, 120);
-                    ctx.restore();
-                };
-                img.onerror = function() {
-                    // エラー時は絵文字
-                    ctx.font = '80px serif';
-                    ctx.textAlign = 'center';
-                    ctx.fillStyle = 'white';
-                    ctx.fillText(guardianData.emoji || '🌟', sectionWidth / 2, 150);
-                };
-                img.src = guardianImage;
-                
-                // 画像読み込みを待つ
-                await new Promise(resolve => {
-                    if (img.complete) {
-                        resolve();
-                    } else {
-                        img.onload = () => resolve();
-                        img.onerror = () => resolve();
-                    }
-                });
-            } else {
-                // フォールバック：絵文字
-                ctx.font = '80px serif';
-                ctx.textAlign = 'center';
-                ctx.fillStyle = 'white';
-                ctx.fillText(guardianData.emoji || '🌟', sectionWidth / 2, 150);
-            }
-        } catch (error) {
-            console.log('画像読み込みエラー:', error);
-            // フォールバック：絵文字
-            ctx.font = '80px serif';
-            ctx.textAlign = 'center';
-            ctx.fillStyle = 'white';
-            ctx.fillText(guardianData.emoji || '🌟', sectionWidth / 2, 150);
-        }
-    } else {
-        // フォールバック：絵文字
-        ctx.font = '80px serif';
-        ctx.textAlign = 'center';
-        ctx.fillStyle = 'white';
-        ctx.fillText(guardianData.emoji || '🌟', sectionWidth / 2, 150);
-    }
-    ctx.font = '80px serif';
-    ctx.textAlign = 'center';
-    ctx.fillStyle = 'white';
-    ctx.fillText(guardianData.emoji || '🌟', sectionWidth / 2, 150);
-            if (guardianImage) {
-                const img = new Image();
-                img.onload = function() {
-                    // 画像を円形にクリップ
-                    ctx.save();
-                    ctx.beginPath();
-                    ctx.arc(sectionWidth / 2, 130, 60, 0, 2 * Math.PI);
-                    ctx.clip();
-                    
-                    // 画像を描画（正方形に調整）
-                    ctx.drawImage(img, sectionWidth / 2 - 60, 70, 120, 120);
-                    ctx.restore();
-                };
-                img.src = guardianImage;
-                
-                // 画像読み込みを待つためにPromiseを使用
-                await new Promise(resolve => {
-                    if (img.complete) {
-                        resolve();
-                    } else {
-                        img.onload = () => resolve();
-                        img.onerror = () => resolve();
-                    }
-                });
-            } else {
-                // フォールバック：絵文字
-                ctx.font = '80px serif';
-                ctx.textAlign = 'center';
-                ctx.fillStyle = 'white';
-                ctx.fillText(guardianData.emoji || '🌟', sectionWidth / 2, 150);
-            }
-        } catch (error) {
-            console.log('画像読み込みエラー:', error);
-            // フォールバック：絵文字
-            ctx.font = '80px serif';
-            ctx.textAlign = 'center';
-            ctx.fillStyle = 'white';
-            ctx.fillText(guardianData.emoji || '🌟', sectionWidth / 2, 150);
-        }
+        drawGuardianEmoji(ctx, guardianData, sectionWidth);
     }
     
     // 守護者名
@@ -245,11 +109,42 @@ async function drawGuardianSection(ctx, guardianData) {
 }
 
 /**
+ * 守護者画像を描画
+ */
+function drawGuardianImage(ctx, imageSrc, sectionWidth) {
+    return new Promise((resolve) => {
+        const img = new Image();
+        img.onload = function() {
+            // 画像を円形にクリップ
+            ctx.save();
+            ctx.beginPath();
+            ctx.arc(sectionWidth / 2, 130, 60, 0, 2 * Math.PI);
+            ctx.clip();
+            
+            // 画像を描画
+            ctx.drawImage(img, sectionWidth / 2 - 60, 70, 120, 120);
+            ctx.restore();
+            resolve();
+        };
+        img.onerror = function() {
+            resolve();
+        };
+        img.src = imageSrc;
+    });
+}
+
+/**
+ * 守護者絵文字を描画
+ */
+function drawGuardianEmoji(ctx, guardianData, sectionWidth) {
+    ctx.font = '80px serif';
+    ctx.textAlign = 'center';
+    ctx.fillStyle = 'white';
+    ctx.fillText(guardianData.emoji || '🌟', sectionWidth / 2, 150);
+}
+
+/**
  * テキストセクションを描画（右側）
- * @param {CanvasRenderingContext2D} ctx - Canvasコンテキスト
- * @param {Object} guardianData - 守護者データ
- * @param {string} genre - 占いジャンル
- * @param {string} resultText - 占い結果
  */
 function drawTextSection(ctx, guardianData, genre, resultText) {
     const startX = 270;
@@ -258,7 +153,7 @@ function drawTextSection(ctx, guardianData, genre, resultText) {
     // ジャンルタイトル
     ctx.font = 'bold 24px sans-serif';
     ctx.textAlign = 'left';
-    ctx.fillStyle = '#dacc89'; // ポイントカラー
+    ctx.fillStyle = '#dacc89';
     ctx.fillText(`${genre}を占ったよ！`, startX, 60);
     
     // 占い結果テキストを要約・整形
@@ -272,8 +167,6 @@ function drawTextSection(ctx, guardianData, genre, resultText) {
 
 /**
  * 占い結果テキストを要約
- * @param {string} text - 元のテキスト
- * @returns {string} - 要約されたテキスト
  */
 function summarizeResultText(text) {
     // HTMLタグを除去
@@ -289,12 +182,6 @@ function summarizeResultText(text) {
 
 /**
  * 複数行テキストを描画
- * @param {CanvasRenderingContext2D} ctx - Canvasコンテキスト
- * @param {string} text - テキスト
- * @param {number} x - 開始X座標
- * @param {number} y - 開始Y座標
- * @param {number} maxWidth - 最大幅
- * @param {number} lineHeight - 行の高さ
  */
 function drawMultilineText(ctx, text, x, y, maxWidth, lineHeight) {
     const words = text.split('');
@@ -327,9 +214,6 @@ function drawMultilineText(ctx, text, x, y, maxWidth, lineHeight) {
 
 /**
  * ロゴ・クレジットを描画
- * @param {CanvasRenderingContext2D} ctx - Canvasコンテキスト
- * @param {number} width - キャンバス幅
- * @param {number} height - キャンバス高さ
  */
 function drawLogo(ctx, width, height) {
     ctx.font = '14px sans-serif';
@@ -340,9 +224,6 @@ function drawLogo(ctx, width, height) {
 
 /**
  * 生成した画像をシェア
- * @param {Blob} imageBlob - 画像データ
- * @param {Object} guardianData - 守護者データ
- * @param {string} genre - 占いジャンル
  */
 async function shareImage(imageBlob, guardianData, genre) {
     const shareText = `私の守護者は「${guardianData.name || '???'}」！\n${genre}を占ってもらいました✨\n\n森の守護者とタロット占い`;
@@ -371,8 +252,6 @@ async function shareImage(imageBlob, guardianData, genre) {
 
 /**
  * フォールバック：画像ダウンロード + クリップボード
- * @param {Blob} imageBlob - 画像データ
- * @param {string} shareText - シェアテキスト
  */
 function fallbackShare(imageBlob, shareText) {
     // 画像をダウンロード
@@ -417,7 +296,4 @@ function shareTextOnly() {
             alert('シェア機能に対応していません');
         }
     }
-
 }
-
-
