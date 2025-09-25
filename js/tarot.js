@@ -123,6 +123,23 @@ function startTarotReading(genre) {
     coordinateSeed = 0;
     totalHesitationTime = 0;
     
+    // 診断結果が存在しない場合はダミーデータをセット
+    const savedResult = localStorage.getItem('guardianResult');
+    if (!savedResult) {
+        const dummyGuardian = {
+            name: '未診断',
+            furigana: 'みしんだん',
+            emoji: '🌟',
+            type: 'no_diagnosis',
+            traits: ['直感', '探求心', '可能性'],
+            description: 'まだ診断を受けていない未知の可能性を秘めた状態',
+            advice: 'あなたの本当の守護者を見つけるために、まず性格診断を受けてみることをおすすめします。',
+            timestamp: new Date().toISOString()
+        };
+        
+        localStorage.setItem('guardianResult', JSON.stringify(dummyGuardian));
+    }
+    
     showPage(10);
 }
 
@@ -639,3 +656,4 @@ async function sendDataToSheet() {
     }
 
 }
+
