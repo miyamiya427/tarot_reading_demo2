@@ -113,18 +113,18 @@ async function drawGuardianSection(ctx, guardianData) {
 /**
  * 守護者画像を描画
  */
-function drawGuardianImage(ctx, imageSrc, sectionWidth) {
+function drawGuardianImage(ctx, imageSrc, sectionWidth, centerY) {
     return new Promise((resolve) => {
         const img = new Image();
         img.onload = function() {
             // 画像を円形にクリップ
             ctx.save();
             ctx.beginPath();
-            ctx.arc(sectionWidth / 2, 130, 60, 0, 2 * Math.PI);
+            ctx.arc(sectionWidth / 2, centerY, 60, 0, 2 * Math.PI);
             ctx.clip();
             
             // 画像を描画
-            ctx.drawImage(img, sectionWidth / 2 - 60, 70, 120, 120);
+            ctx.drawImage(img, sectionWidth / 2 - 60, centerY - 60, 120, 120);
             ctx.restore();
             resolve();
         };
@@ -138,11 +138,11 @@ function drawGuardianImage(ctx, imageSrc, sectionWidth) {
 /**
  * 守護者絵文字を描画
  */
-function drawGuardianEmoji(ctx, guardianData, sectionWidth) {
+function drawGuardianEmoji(ctx, guardianData, sectionWidth, centerY) {
     ctx.font = '80px serif';
     ctx.textAlign = 'center';
     ctx.fillStyle = 'white';
-    ctx.fillText(guardianData.emoji || '🌟', sectionWidth / 2, 150);
+    ctx.fillText(guardianData.emoji || '🌟', sectionWidth / 2, centerY);
 }
 
 /**
@@ -161,10 +161,10 @@ function drawTextSection(ctx, guardianData, genre, resultText) {
     // 占い結果テキストを要約・整形
     const summaryText = summarizeResultText(resultText);
     
-    // テキストを複数行で描画
+    // テキストを複数行で描画（中央配置）
     ctx.font = '16px sans-serif';
     ctx.fillStyle = 'white';
-    drawMultilineText(ctx, summaryText, startX, 100, maxWidth, 22);
+    drawMultilineText(ctx, summaryText, startX, 150, maxWidth, 22);
 }
 
 /**
@@ -299,4 +299,5 @@ function shareTextOnly() {
         }
     }
 }
+
 
