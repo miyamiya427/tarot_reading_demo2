@@ -48,7 +48,7 @@ async function generateAITarotReading(guardianData, selectedCards, genre) {
 
         // デバッグ: 実際のレスポンスを確認
         console.log('Gemini生成テキスト:', generatedText);
-　　　　 console.log('API Response Full:', data);
+        console.log('API Response Full:', data);
 
         // 結果をパース
         return parseGeminiResponse(generatedText);
@@ -122,7 +122,7 @@ ${genreText}
 
 6. 守護者タイプに応じたメッセージ
    - 診断済み：「○○を守護者にもつあなたは...」から始める
-   - 未診断：「まだ守護者が判明していないあなたですが...」から始める`;
+   - 未診断：「まだ守護者が判明していないあなたですが...」から始める
 
 7. 以下の要素を含む詳細な鑑定結果
    - 現在の状況分析 (50-80文字)
@@ -230,6 +230,7 @@ return {
         };
     }
 }
+
 
 
 
