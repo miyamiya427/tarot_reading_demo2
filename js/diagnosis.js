@@ -97,6 +97,15 @@ function completeDiagnosis() {
         const displayData = formatDiagnosisResult(result);
         saveDiagnosisResult(result);
         
+        // デバッグ用ログ出力
+        console.log('=== 診断結果詳細 ===');
+        console.log('各タイプのスコア:', result.scores);
+        console.log('最終タイプ:', result.type);
+        console.log('スコア差:', result.scoreDifference);
+        console.log('夜タイプ判定:', result.isEveningType);
+        console.log('デバッグ情報:', result.debugInfo);
+        console.log('====================');
+        
         // 結果を表示
         showResult(displayData);
         
@@ -175,4 +184,5 @@ async function sendDiagnosisDataToSheet(displayData) {
     } catch (error) {
         console.log('診断データ送信エラー:', error);
     }
+
 }
