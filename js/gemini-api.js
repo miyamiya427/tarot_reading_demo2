@@ -71,9 +71,12 @@ function buildTarotPrompt(guardianData, selectedCards, genre) {
     const positionTexts = getPositionTexts(genre);
     
     // 守護者情報と性格特性
-    const guardianInfo = guardianData ? 
-        `守護者タイプ: ${guardianData.name}\n性格特性: ${guardianData.traits ? guardianData.traits.join('、') : ''}\n性格の説明: ${guardianData.description || ''}` : 
-        '守護者タイプ: 未診断';
+    let guardianInfo;
+    if (!guardianData || guardianData.type === 'no_diagnosis') {
+        guardianInfo = '守護者タイプ: 未診断\n性格特性: まだ判明していない未知の可能性';
+    } else {
+        guardianInfo = `守護者タイプ: ${guardianData.name}\n性格特性: ${guardianData.traits ? guardianData.traits.join('、') : ''}\n性格の説明: ${guardianData.description || ''}`;
+    }
     
     // カード情報（カード名は表示しない）
     const cardInfo = selectedCards.map((card, index) => 
@@ -117,8 +120,9 @@ ${genreText}
 
 5. 文字数制限: 個別鑑定結果 250-350文字
 
-6. 必ず守護者タイプ名を冒頭で言及
-   - 「○○を守護者にもつあなたは...」から始める
+6. 守護者タイプに応じたメッセージ
+   - 診断済み：「○○を守護者にもつあなたは...」から始める
+   - 未診断：「まだ守護者が判明していないあなたですが...」から始める`;
 
 7. 以下の要素を含む詳細な鑑定結果
    - 現在の状況分析 (50-80文字)
@@ -226,6 +230,7 @@ return {
         };
     }
 }
+
 
 
 
