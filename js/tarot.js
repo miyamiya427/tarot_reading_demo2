@@ -485,7 +485,11 @@ document.getElementById('personalized-fortune').textContent = 'AIが分析中で
         console.log('AI生成完了:', result);
         
         // タイトル設定
-document.getElementById('personalized-title').textContent = `${guardianData?.name || '未診断'}を守護者にもつあなたへのメッセージ`;
+if (guardianData?.type === 'no_diagnosis' || guardianData?.name === '未診断') {
+    document.getElementById('personalized-title').textContent = 'あなたへのメッセージ';
+} else {
+    document.getElementById('personalized-title').textContent = `${guardianData?.name || '未診断'}を守護者にもつあなたへのメッセージ`;
+}
 
 // 結果を表示
 document.getElementById('personalized-fortune').innerHTML = result.personalizedFortune;
@@ -656,4 +660,5 @@ async function sendDataToSheet() {
     }
 
 }
+
 
