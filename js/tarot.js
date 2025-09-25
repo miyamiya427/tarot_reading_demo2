@@ -497,26 +497,11 @@ document.getElementById('personalized-fortune').innerHTML = result.personalizedF
     } catch (error) {
         console.error('AI生成エラー:', error);
         
-        // ユーザーにわかりやすいメッセージを表示
-        let errorMessage = 'AI占い機能が一時的に利用できません。しばらく待ってから再試行してください。';
+        // エラー時はシンプルなメッセージのみ表示
+        const simpleErrorMessage = 'エラーのため占い結果を生成できませんでした。<br><br>申し訳ございませんが、もう一度最初からお試しください。';
         
-        if (error.message.includes('503')) {
-            errorMessage = 'サーバーが混雑しています。少し時間をおいてから再試行してください。';
-        } else if (error.message.includes('429')) {
-            errorMessage = 'リクエスト制限に達しました。しばらく待ってから再試行してください。';
-        }
-        
-        // エラー時はフォールバック（既存の固定メッセージ）
-        console.log('フォールバック処理開始...');
-        const guardianMessage = generateGuardianMessage(guardianData, selectedCards);
-        document.getElementById('personalized-fortune').innerHTML = guardianMessage + '<br><br><small style="color: #999;">' + errorMessage + '</small>';
-        
-        // ユーザーにエラーを通知（オプション）
-        setTimeout(() => {
-            const currentMessage = document.getElementById('personalized-fortune').textContent;
-            document.getElementById('personalized-fortune').textContent = 
-                currentMessage + ' ※一時的にAI機能が利用できないため、基本メッセージを表示しています。';
-        }, 1000);
+        document.getElementById('personalized-title').textContent = 'エラーが発生しました';
+        document.getElementById('personalized-fortune').innerHTML = simpleErrorMessage;
     }
 }
 
@@ -660,5 +645,6 @@ async function sendDataToSheet() {
     }
 
 }
+
 
 
