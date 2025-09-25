@@ -80,30 +80,32 @@ async function drawGuardianSection(ctx, guardianData) {
     ctx.fillStyle = 'rgba(255, 255, 255, 0.2)';
     ctx.fillRect(0, 0, sectionWidth, sectionHeight);
     
-    // 守護者画像または絵文字を描画
+    // 守護者画像または絵文字を描画（中央配置）
+    const centerY = sectionHeight / 2; // 200px（中央）
+    
     if (guardianData.type && typeof guardianImages !== 'undefined' && guardianImages[guardianData.type]) {
         try {
-            await drawGuardianImage(ctx, guardianImages[guardianData.type], sectionWidth);
+            await drawGuardianImage(ctx, guardianImages[guardianData.type], sectionWidth, centerY - 60);
         } catch (error) {
             console.log('画像読み込みエラー:', error);
-            drawGuardianEmoji(ctx, guardianData, sectionWidth);
+            drawGuardianEmoji(ctx, guardianData, sectionWidth, centerY - 30);
         }
     } else {
-        drawGuardianEmoji(ctx, guardianData, sectionWidth);
+        drawGuardianEmoji(ctx, guardianData, sectionWidth, centerY - 30);
     }
     
-    // 守護者名
+    // 守護者名（画像の下に配置）
     if (guardianData.name) {
         ctx.font = 'bold 18px sans-serif';
         ctx.textAlign = 'center';
         ctx.fillStyle = 'white';
-        ctx.fillText(`守護者：${guardianData.name}`, sectionWidth / 2, 200);
+        ctx.fillText(`守護者：${guardianData.name}`, sectionWidth / 2, centerY + 80);
         
         // ふりがな
         if (guardianData.furigana) {
             ctx.font = '12px sans-serif';
             ctx.fillStyle = 'rgba(255, 255, 255, 0.8)';
-            ctx.fillText(`(${guardianData.furigana})`, sectionWidth / 2, 220);
+            ctx.fillText(`(${guardianData.furigana})`, sectionWidth / 2, centerY + 100);
         }
     }
 }
@@ -297,3 +299,4 @@ function shareTextOnly() {
         }
     }
 }
+
