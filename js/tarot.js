@@ -438,7 +438,7 @@ function displaySelectedCards() {
         const isReversed = determineCardOrientation(index);
         
         if (cardElement && card) {
-            cardElement.querySelector('.card-emoji').textContent = card.emoji;
+            cardElement.querySelector('.card-emoji').textContent = ''; // 絵文字削除
             cardElement.querySelector('.card-name').textContent = card.name + (isReversed ? ' (逆位置)' : '');
             cardElement.querySelector('.card-position').textContent = cardPositions[index];
         }
@@ -645,6 +645,7 @@ async function sendDataToSheet() {
     }
 
 }
+
 
 
 
