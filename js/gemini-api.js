@@ -1,7 +1,7 @@
 // Google Gemini API連携
 
 // APIキーを設定（本番環境では環境変数を使用推奨）
-const GEMINI_API_KEY = 'AIzaSyDwFhTWxJk9Mv8SjNEi7fkiIbzbYp3VJ8s';
+const GEMINI_API_KEY = 'AIzaSyAO5RadalZrXKVjHNHftHDHiRjk1nGxMUk';
 const GEMINI_API_URL = 'https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent';
 
 /**
@@ -217,6 +217,7 @@ return {
         };
     }
 }
+
 
 
 
