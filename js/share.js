@@ -117,14 +117,14 @@ function drawGuardianImage(ctx, imageSrc, sectionWidth, centerY) {
     return new Promise((resolve) => {
         const img = new Image();
         img.onload = function() {
-            // 画像を円形にクリップ
+            // 画像を円形にクリップ（サイズ拡大：60→80）
             ctx.save();
             ctx.beginPath();
-            ctx.arc(sectionWidth / 2, centerY, 60, 0, 2 * Math.PI);
+            ctx.arc(sectionWidth / 2, centerY, 80, 0, 2 * Math.PI);
             ctx.clip();
             
-            // 画像を描画
-            ctx.drawImage(img, sectionWidth / 2 - 60, centerY - 60, 120, 120);
+            // 画像を描画（サイズ拡大：120→160）
+            ctx.drawImage(img, sectionWidth / 2 - 80, centerY - 80, 160, 160);
             ctx.restore();
             resolve();
         };
@@ -139,7 +139,7 @@ function drawGuardianImage(ctx, imageSrc, sectionWidth, centerY) {
  * 守護者絵文字を描画
  */
 function drawGuardianEmoji(ctx, guardianData, sectionWidth, centerY) {
-    ctx.font = '80px serif';
+    ctx.font = '100px serif';  // 80px → 100px
     ctx.textAlign = 'center';
     ctx.fillStyle = 'white';
     ctx.fillText(guardianData.emoji || '🌟', sectionWidth / 2, centerY);
@@ -299,5 +299,6 @@ function shareTextOnly() {
         }
     }
 }
+
 
 
