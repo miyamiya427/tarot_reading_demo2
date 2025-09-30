@@ -161,7 +161,7 @@ const tieBreakOrder = ['ruby_fox', 'sapphire_hawk', 'silver_wolf', 'emerald_deer
  */
 function diagnose12Types(answers) {
     // Step 1: 回答数チェック
-    if (Object.keys(answers).length !== 30) {
+    if (Object.keys(answers).length !== 60) {
         throw new Error('全ての質問に回答してください');
     }
     
@@ -176,17 +176,17 @@ function diagnose12Types(answers) {
     };
     
     // 各回答をスコアに反映
-    for (let questionId = 1; questionId <= 30; questionId++) {
-        const answer = answers[questionId];
-        const questionScore = questionScoring[questionId];
-        
-        if (questionScore && questionScore[answer]) {
-            const types = questionScore[answer];
-            types.forEach(type => {
-                scores[type] += 1;
-            });
-        }
+for (let questionId = 1; questionId <= 60; questionId++) {
+    const answer = answers[questionId];
+    const questionScore = questionScoring[questionId];
+    
+    if (questionScore && questionScore[answer]) {
+        const types = questionScore[answer];
+        types.forEach(type => {
+            scores[type] += 1;
+        });
     }
+}
     
     // Step 3: スコアを降順でソート
     const sortedScores = Object.entries(scores).sort((a, b) => {
