@@ -98,7 +98,7 @@ function buildTarotPrompt(guardianData, selectedCards, genre) {
         };
         
         const typePattern = personalityPatterns[guardianData.type] || '';
-        personalityPrompt = `${guardianData.name}を守護者にもつあなたは、${typePattern} そんなあなただからこそ`;
+        personalityPrompt = `${typePattern} そんなあなただからこそ`;
     }
     
     // カード情報（カード名は表示しない）
@@ -167,7 +167,12 @@ ${genreText}
 
 9. 守護者タイプに応じた語りかけ
    - 診断済み：性格あるあるを必ず盛り込む
-   - 未診断：普遍的な人間心理で共感させる`;
+   - 未診断：普遍的な人間心理で共感させる
+
+10. 冒頭の書き出し方
+   - 守護者名は書かない（タイトルに既に表示されているため）
+   - いきなり性格の特徴や心情の言い当てから始める
+   - 例：「一匹狼を貫く強さがある一方で、本当は誰かに甘えたいと感じることもあるのでは？」`;
 }
 
 /**
