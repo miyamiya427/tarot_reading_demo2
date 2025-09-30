@@ -202,16 +202,16 @@ function diagnose12Types(answers) {
     const secondScore = sortedScores[1][1];
     
     // Step 4: 朝・夜タイプの判定
-    const scoreDifference = firstScore - secondScore;
-    
-    let finalType;
-    if (scoreDifference >= 5) {
-        // スコア差が大きい → 朝タイプ（積極的・外向的）
-        finalType = typeMapping[firstType + '_morning'];
-    } else {
-        // スコア差が小さい → 夜タイプ（内省的・内向的）
-        finalType = typeMapping[firstType + '_evening'];
-    }
+         const scoreDifference = firstScore - secondScore;
+
+         let finalType;
+         if (scoreDifference >= 10) {
+             // スコア差が大きい → 朝タイプ（積極的・外向的）
+             finalType = typeMapping[firstType + '_morning'];
+         } else {
+             // スコア差が小さい → 夜タイプ（内省的・内向的）
+             finalType = typeMapping[firstType + '_evening'];
+         }
     
     // Step 5: 結果オブジェクトの作成
     const guardian = guardianTypes12[finalType];
@@ -543,6 +543,276 @@ const diagnosisQuestions = [
             A: { text: "自分らしく自由に生きた証拠", scores: ['ruby_fox', 'rainbow_butterfly'] },
             B: { text: "愛する人たちとの絆と思い出", scores: ['silver_wolf', 'emerald_deer'] },
             C: { text: "安心して過ごせる環境と人間関係", scores: ['gold_bear', 'sapphire_hawk'] }
+        }
+    },
+    {
+        id: 31,
+        text: "プロジェクトや課題に取り組む時は？",
+        options: {
+            A: { text: "「面白そう！」と思ったらすぐ取りかかる", scores: ['ruby_fox', 'rainbow_butterfly'] },
+            B: { text: "仲間と相談しながら進める", scores: ['silver_wolf', 'emerald_deer'] },
+            C: { text: "計画を立ててから着実に進める", scores: ['gold_bear', 'sapphire_hawk'] }
+        }
+    },
+    {
+        id: 32,
+        text: "初対面の人との会話は？",
+        options: {
+            A: { text: "共通の話題を見つけて盛り上げる", scores: ['ruby_fox', 'silver_wolf'] },
+            B: { text: "相手のペースに合わせて話す", scores: ['emerald_deer', 'rainbow_butterfly'] },
+            C: { text: "必要なことだけ話す", scores: ['gold_bear', 'sapphire_hawk'] }
+        }
+    },
+    {
+        id: 33,
+        text: "困っている人を見かけたら？",
+        options: {
+            A: { text: "「大丈夫？」とすぐに声をかける", scores: ['ruby_fox', 'silver_wolf'] },
+            B: { text: "様子を見て、必要そうなら手伝う", scores: ['emerald_deer', 'gold_bear'] },
+            C: { text: "本人が助けを求めてきたら対応", scores: ['sapphire_hawk', 'rainbow_butterfly'] }
+        }
+    },
+    {
+        id: 34,
+        text: "自分の意見と周りの意見が違う時は？",
+        options: {
+            A: { text: "「こういう考え方もあるよ」と積極的に主張", scores: ['ruby_fox', 'sapphire_hawk'] },
+            B: { text: "両方の良いところを取り入れる", scores: ['silver_wolf', 'emerald_deer'] },
+            C: { text: "無理に合わせず、自分の考えを貫く", scores: ['gold_bear', 'rainbow_butterfly'] }
+        }
+    },
+    {
+        id: 35,
+        text: "休日に友達から突然の誘い、どうする？",
+        options: {
+            A: { text: "「いいね！行こう！」と即答", scores: ['ruby_fox', 'silver_wolf'] },
+            B: { text: "予定を確認してから返事する", scores: ['emerald_deer', 'sapphire_hawk'] },
+            C: { text: "基本的に断る、一人の時間が大事", scores: ['gold_bear', 'rainbow_butterfly'] }
+        }
+    },
+    {
+        id: 36,
+        text: "仕事や勉強でミスをした時は？",
+        options: {
+            A: { text: "すぐ切り替えて次に進む", scores: ['ruby_fox', 'rainbow_butterfly'] },
+            B: { text: "周りに謝って、関係修復を優先", scores: ['silver_wolf', 'emerald_deer'] },
+            C: { text: "原因を分析して同じミスをしないようにする", scores: ['gold_bear', 'sapphire_hawk'] }
+        }
+    },
+    {
+        id: 37,
+        text: "自己紹介で何を話す？",
+        options: {
+            A: { text: "趣味や最近ハマってることを熱く語る", scores: ['ruby_fox', 'rainbow_butterfly'] },
+            B: { text: "周りとの共通点を見つけやすい話題", scores: ['silver_wolf', 'emerald_deer'] },
+            C: { text: "必要最低限の情報のみ", scores: ['gold_bear', 'sapphire_hawk'] }
+        }
+    },
+    {
+        id: 38,
+        text: "予定がキャンセルになった時は？",
+        options: {
+            A: { text: "「チャンス！」と別のことを始める", scores: ['ruby_fox', 'sapphire_hawk'] },
+            B: { text: "他の友達を誘ってみる", scores: ['silver_wolf', 'emerald_deer'] },
+            C: { text: "ゆっくり休めると安心する", scores: ['gold_bear', 'rainbow_butterfly'] }
+        }
+    },
+    {
+        id: 39,
+        text: "リーダーを任されたら？",
+        options: {
+            A: { text: "「やってみよう！」と積極的に引き受ける", scores: ['ruby_fox', 'silver_wolf'] },
+            B: { text: "不安だけど、みんなのために頑張る", scores: ['emerald_deer', 'gold_bear'] },
+            C: { text: "できればサポート役がいい", scores: ['sapphire_hawk', 'rainbow_butterfly'] }
+        }
+    },
+    {
+        id: 40,
+        text: "知らない場所に行く時は？",
+        options: {
+            A: { text: "冒険気分でワクワクする", scores: ['ruby_fox', 'rainbow_butterfly'] },
+            B: { text: "一緒に行く人がいれば安心", scores: ['silver_wolf', 'emerald_deer'] },
+            C: { text: "事前にルートや情報を調べる", scores: ['gold_bear', 'sapphire_hawk'] }
+        }
+    },
+    {
+        id: 41,
+        text: "「幸せ」って何だと思う？",
+        options: {
+            A: { text: "自由に生きて、やりたいことをやること", scores: ['ruby_fox', 'rainbow_butterfly'] },
+            B: { text: "大切な人と一緒にいられること", scores: ['silver_wolf', 'emerald_deer'] },
+            C: { text: "安定した生活と心の平穏", scores: ['gold_bear', 'sapphire_hawk'] }
+        }
+    },
+    {
+        id: 42,
+        text: "感動した時の反応は？",
+        options: {
+            A: { text: "「すごい！」と声に出して表現する", scores: ['ruby_fox', 'silver_wolf'] },
+            B: { text: "じーんと心に染みて、涙が出そうになる", scores: ['emerald_deer', 'rainbow_butterfly'] },
+            C: { text: "静かに心の中で噛みしめる", scores: ['gold_bear', 'sapphire_hawk'] }
+        }
+    },
+    {
+        id: 43,
+        text: "人に褒められた時は？",
+        options: {
+            A: { text: "素直に「ありがとう！」と喜ぶ", scores: ['ruby_fox', 'silver_wolf'] },
+            B: { text: "照れながらも嬉しい", scores: ['emerald_deer', 'gold_bear'] },
+            C: { text: "謙遜するか、あまり表に出さない", scores: ['sapphire_hawk', 'rainbow_butterfly'] }
+        }
+    },
+    {
+        id: 44,
+        text: "落ち込んだ時、何で元気になる？",
+        options: {
+            A: { text: "好きなことをして気分転換", scores: ['ruby_fox', 'sapphire_hawk'] },
+            B: { text: "誰かと話して共感してもらう", scores: ['silver_wolf', 'emerald_deer'] },
+            C: { text: "一人で時間をかけて立ち直る", scores: ['gold_bear', 'rainbow_butterfly'] }
+        }
+    },
+    {
+        id: 45,
+        text: "「成長」って何だと思う？",
+        options: {
+            A: { text: "新しいことができるようになること", scores: ['ruby_fox', 'sapphire_hawk'] },
+            B: { text: "人との関わりで学ぶこと", scores: ['silver_wolf', 'emerald_deer'] },
+            C: { text: "継続して少しずつレベルアップすること", scores: ['gold_bear', 'rainbow_butterfly'] }
+        }
+    },
+    {
+        id: 46,
+        text: "大事な決断をする時、何を優先する？",
+        options: {
+            A: { text: "自分の気持ちとワクワク感", scores: ['ruby_fox', 'rainbow_butterfly'] },
+            B: { text: "周りの人への影響", scores: ['silver_wolf', 'emerald_deer'] },
+            C: { text: "現実的なメリット・デメリット", scores: ['gold_bear', 'sapphire_hawk'] }
+        }
+    },
+    {
+        id: 47,
+        text: "自分の感情をどう扱う？",
+        options: {
+            A: { text: "そのまま素直に表現する", scores: ['ruby_fox', 'silver_wolf'] },
+            B: { text: "相手の気持ちも考えながら伝える", scores: ['emerald_deer', 'rainbow_butterfly'] },
+            C: { text: "冷静になるまで抑える", scores: ['gold_bear', 'sapphire_hawk'] }
+        }
+    },
+    {
+        id: 48,
+        text: "「居心地がいい」と感じるのは？",
+        options: {
+            A: { text: "自由で縛られない環境", scores: ['ruby_fox', 'rainbow_butterfly'] },
+            B: { text: "温かくて安心できる人間関係", scores: ['silver_wolf', 'emerald_deer'] },
+            C: { text: "静かで落ち着いた空間", scores: ['gold_bear', 'sapphire_hawk'] }
+        }
+    },
+    {
+        id: 49,
+        text: "人生で後悔したくないことは？",
+        options: {
+            A: { text: "やりたいことをやらなかった", scores: ['ruby_fox', 'rainbow_butterfly'] },
+            B: { text: "大切な人を大事にしなかった", scores: ['silver_wolf', 'emerald_deer'] },
+            C: { text: "計画を立てずに失敗した", scores: ['gold_bear', 'sapphire_hawk'] }
+        }
+    },
+    {
+        id: 50,
+        text: "自分にとって「自由」とは？",
+        options: {
+            A: { text: "好きなことを好きなようにできること", scores: ['ruby_fox', 'rainbow_butterfly'] },
+            B: { text: "大切な人と一緒にいられること", scores: ['silver_wolf', 'emerald_deer'] },
+            C: { text: "心配事がなく安心できること", scores: ['gold_bear', 'sapphire_hawk'] }
+        }
+    },
+    {
+        id: 51,
+        text: "5年後、どんな自分でいたい？",
+        options: {
+            A: { text: "いろんな経験をして成長してる", scores: ['ruby_fox', 'sapphire_hawk'] },
+            B: { text: "大切な人たちと良い関係を築いてる", scores: ['silver_wolf', 'emerald_deer'] },
+            C: { text: "安定した生活基盤を作ってる", scores: ['gold_bear', 'rainbow_butterfly'] }
+        }
+    },
+    {
+        id: 52,
+        text: "時間の使い方で大事なのは？",
+        options: {
+            A: { text: "今を楽しむこと", scores: ['ruby_fox', 'rainbow_butterfly'] },
+            B: { text: "大切な人と過ごすこと", scores: ['silver_wolf', 'emerald_deer'] },
+            C: { text: "将来のために計画的に使うこと", scores: ['gold_bear', 'sapphire_hawk'] }
+        }
+    },
+    {
+        id: 53,
+        text: "老後はどう過ごしたい？",
+        options: {
+            A: { text: "まだまだ新しいことに挑戦してたい", scores: ['ruby_fox', 'sapphire_hawk'] },
+            B: { text: "家族や友人に囲まれて穏やかに", scores: ['silver_wolf', 'emerald_deer'] },
+            C: { text: "趣味を楽しみながらのんびりと", scores: ['gold_bear', 'rainbow_butterfly'] }
+        }
+    },
+    {
+        id: 54,
+        text: "お金の使い方は？",
+        options: {
+            A: { text: "経験や思い出に使いたい", scores: ['ruby_fox', 'rainbow_butterfly'] },
+            B: { text: "大切な人のために使いたい", scores: ['silver_wolf', 'emerald_deer'] },
+            C: { text: "将来のために貯めたい", scores: ['gold_bear', 'sapphire_hawk'] }
+        }
+    },
+    {
+        id: 55,
+        text: "「豊かさ」って何だと思う？",
+        options: {
+            A: { text: "選択肢があって自由なこと", scores: ['ruby_fox', 'rainbow_butterfly'] },
+            B: { text: "愛する人と一緒にいられること", scores: ['silver_wolf', 'emerald_deer'] },
+            C: { text: "心配なく暮らせること", scores: ['gold_bear', 'sapphire_hawk'] }
+        }
+    },
+    {
+        id: 56,
+        text: "理想の住まいは？",
+        options: {
+            A: { text: "交通便利で刺激的な街", scores: ['ruby_fox', 'sapphire_hawk'] },
+            B: { text: "友人や家族が近くにいる場所", scores: ['silver_wolf', 'emerald_deer'] },
+            C: { text: "静かで落ち着いた環境", scores: ['gold_bear', 'rainbow_butterfly'] }
+        }
+    },
+    {
+        id: 57,
+        text: "新しいスキルを学ぶなら？",
+        options: {
+            A: { text: "興味を持ったもの全部", scores: ['ruby_fox', 'rainbow_butterfly'] },
+            B: { text: "人の役に立つスキル", scores: ['silver_wolf', 'emerald_deer'] },
+            C: { text: "専門性を高められるもの", scores: ['gold_bear', 'sapphire_hawk'] }
+        }
+    },
+    {
+        id: 58,
+        text: "朝と夜、どっちが好き？",
+        options: {
+            A: { text: "朝！エネルギッシュにスタート", scores: ['ruby_fox', 'sapphire_hawk'] },
+            B: { text: "どちらも好き、人といる時間が大事", scores: ['silver_wolf', 'emerald_deer'] },
+            C: { text: "夜、静かに自分の時間を過ごす", scores: ['gold_bear', 'rainbow_butterfly'] }
+        }
+    },
+    {
+        id: 59,
+        text: "SNSとの付き合い方は？",
+        options: {
+            A: { text: "積極的に発信して交流する", scores: ['ruby_fox', 'silver_wolf'] },
+            B: { text: "見る専門、たまにコメント", scores: ['emerald_deer', 'gold_bear'] },
+            C: { text: "ほとんど見ない、マイペース", scores: ['sapphire_hawk', 'rainbow_butterfly'] }
+        }
+    },
+    {
+        id: 60,
+        text: "人生で一番大切にしたいものは？",
+        options: {
+            A: { text: "自分らしさと可能性", scores: ['ruby_fox', 'rainbow_butterfly'] },
+            B: { text: "人との絆と愛情", scores: ['silver_wolf', 'emerald_deer'] },
+            C: { text: "安定と平和な日々", scores: ['gold_bear', 'sapphire_hawk'] }
         }
     }
 ];
