@@ -205,7 +205,7 @@ for (let questionId = 1; questionId <= 60; questionId++) {
          const scoreDifference = firstScore - secondScore;
 
          let finalType;
-         if (scoreDifference >= 10) {
+         if (scoreDifference >= 8) {
              // スコア差が大きい → 朝タイプ（積極的・外向的）
              finalType = typeMapping[firstType + '_morning'];
          } else {
