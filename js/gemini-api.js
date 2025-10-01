@@ -375,23 +375,35 @@ function parsePremiumResponse(responseText) {
     let development = '';
     let advice = '';
     
-    // 新しいパターンに対応：セクション名の後に---がある形式
-    const sections = responseText.split('---').filter(s => s.trim());
+    // 新しいパターンに対応：「---\n状況の読み解き:\n---\n内容\n---」形式
+    const sections = responseText.split('---').map(s => s.trim()).filter(s => s);
+    
+    console.log('分割されたセクション数:', sections.length);
+    console.log('セクション内容:', sections);
     
     for (let i = 0; i < sections.length; i++) {
-        const section = sections[i].trim();
+        const section = sections[i];
         
-        // 「状況の読み解き:」を含むセクションを探す
-        if (section.includes('状況の読み解き') && i + 1 < sections.length) {
-            situation = sections[i + 1].trim();
+        // 「状況の読み解き:」を含むセクションの次が本文
+        if (section.includes('状況の読み解き')) {
+            if (i + 1 < sections.length) {
+                situation = sections[i + 1];
+                console.log('状況の読み解き:', situation.substring(0, 50));
+            }
         }
-        // 「今後の展開:」を含むセクションを探す
-        else if (section.includes('今後の展開') && i + 1 < sections.length) {
-            development = sections[i + 1].trim();
+        // 「今後の展開:」を含むセクションの次が本文
+        else if (section.includes('今後の展開')) {
+            if (i + 1 < sections.length) {
+                development = sections[i + 1];
+                console.log('今後の展開:', development.substring(0, 50));
+            }
         }
-        // 「アドバイス:」を含むセクションを探す
-        else if (section.includes('アドバイス') && i + 1 < sections.length) {
-            advice = sections[i + 1].trim();
+        // 「アドバイス:」を含むセクションの次が本文
+        else if (section.includes('アドバイス')) {
+            if (i + 1 < sections.length) {
+                advice = sections[i + 1];
+                console.log('アドバイス:', advice.substring(0, 50));
+            }
         }
     }
     
@@ -399,12 +411,6 @@ function parsePremiumResponse(responseText) {
     const formattedSituation = formatText(situation);
     const formattedDevelopment = formatText(development);
     const formattedAdvice = formatText(advice);
-    
-    console.log('パース結果:', {
-        situation: formattedSituation.substring(0, 50) + '...',
-        development: formattedDevelopment.substring(0, 50) + '...',
-        advice: formattedAdvice.substring(0, 50) + '...'
-    });
     
     return {
         situation: formattedSituation || '現在の状況を見つめ直す時期のようです。',
