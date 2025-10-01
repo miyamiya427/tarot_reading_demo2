@@ -460,7 +460,7 @@ function getCardInterpretation(card, isReversed) {
     return isReversed ? card.reversed : card.upright;
 }
 
-// 守護神とタロットカードを統合した読み解きを生成
+
 // 守護神とタロットカードを統合した読み解きを生成
 async function generateIntegratedReading() {
     // 保存された守護神情報を取得
@@ -474,35 +474,120 @@ async function generateIntegratedReading() {
     // 選択されたカードの基本情報
     const selectedCards = selectedCardIds.map(id => tarotCards[id]);
     
+    // ===== テストモード：開発中は false で無料版テスト =====
+    const isPremium = false; // 本番では課金状態に応じて true/false
+    // ===========================================
+    
     // Loading表示
-document.getElementById('personalized-title').textContent = '占い結果を生成中...';
-document.getElementById('personalized-fortune').textContent = 'AIが分析中です。しばらくお待ちください...';
+    const titleElement = document.getElementById('personalized-title');
+    const contentElement = document.getElementById('personalized-fortune');
+    
+    if (guardianData?.type === 'no_diagnosis' || guardianData?.name === '未診断') {
+        titleElement.textContent = 'あなたへのメッセージ';
+    } else {
+        titleElement.textContent = `${guardianData?.name || '未診断'}を守護者にもつあなたへのメッセージ`;
+    }
+    contentElement.innerHTML = 'AI鑑定中です。しばらくお待ちください...';
     
     try {
-        // Gemini APIで占い結果を生成
-        console.log('AI生成開始...', { guardianData, selectedCards, currentGenre });
-        const result = await generateAITarotReading(guardianData, selectedCards, currentGenre);
+        // Gemini APIで占い結果を生成（isPremiumを渡す）
+        console.log('AI生成開始...', { guardianData, selectedCards, currentGenre, isPremium });
+        const result = await generateAITarotReading(guardianData, selectedCards, currentGenre, isPremium);
         console.log('AI生成完了:', result);
         
-        // タイトル設定
-if (guardianData?.type === 'no_diagnosis' || guardianData?.name === '未診断') {
-    document.getElementById('personalized-title').textContent = 'あなたへのメッセージ';
-} else {
-    document.getElementById('personalized-title').textContent = `${guardianData?.name || '未診断'}を守護者にもつあなたへのメッセージ`;
-}
-
-// 結果を表示
-document.getElementById('personalized-fortune').innerHTML = result.personalizedFortune;
+        // 結果を表示
+        if (isPremium) {
+            // 有料版：3項目表示
+            displayPremiumResult(result);
+        } else {
+            // 無料版：2項目表示
+            displayFreeResult(result);
+        }
         
     } catch (error) {
         console.error('AI生成エラー:', error);
         
-        // エラー時はシンプルなメッセージのみ表示
-        const simpleErrorMessage = 'エラーのため占い結果を生成できませんでした。<br><br>申し訳ございませんが、もう一度最初からお試しください。';
-        
-        document.getElementById('personalized-title').textContent = 'エラーが発生しました';
-        document.getElementById('personalized-fortune').innerHTML = simpleErrorMessage;
+        // エラー時はシンプルなメッセージ
+        titleElement.textContent = 'エラーが発生しました';
+        contentElement.innerHTML = 'エラーのため占い結果を生成できませんでした。<br><br>申し訳ございませんが、もう一度最初からお試しください。';
     }
+
+/**
+ * 無料版の結果を表示
+ */
+function displayFreeResult(result) {
+    const contentElement = document.getElementById('personalized-fortune');
+    
+    const html = `
+        <div style="margin-bottom: 25px;">
+            <h4 style="color: #4a6fa5; font-size: 15px; font-weight: bold; margin-bottom: 12px; border-left: 4px solid #dacc89; padding-left: 10px;">
+                ＜運勢と展開＞
+            </h4>
+            <div style="font-size: 14px; line-height: 1.8; color: #2c3e50;">
+                ${result.fortuneAndDevelopment}
+            </div>
+        </div>
+        
+        <div style="margin-bottom: 25px;">
+            <h4 style="color: #4a6fa5; font-size: 15px; font-weight: bold; margin-bottom: 12px; border-left: 4px solid #dacc89; padding-left: 10px;">
+                ＜アドバイス＞
+            </h4>
+            <div style="font-size: 14px; line-height: 1.8; color: #2c3e50;">
+                ${result.advice}
+            </div>
+        </div>
+        
+        <div style="text-align: center; margin-top: 30px; padding: 20px; background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%); border-radius: 15px; border: 2px dashed #dacc89;">
+            <p style="font-size: 13px; color: #6c757d; margin-bottom: 15px; line-height: 1.6;">
+                もっと詳しい鑑定を見たい方は<br>プレミアム版をご利用ください
+            </p>
+            <button style="background: #dacc89; color: white; border: none; padding: 12px 30px; border-radius: 25px; font-size: 14px; font-weight: bold; cursor: pointer;">
+                プレミアム版を見る（準備中）
+            </button>
+        </div>
+    `;
+    
+    contentElement.innerHTML = html;
+}
+
+/**
+ * 有料版の結果を表示
+ */
+function displayPremiumResult(result) {
+    const contentElement = document.getElementById('personalized-fortune');
+    
+    const html = `
+        <div style="margin-bottom: 25px;">
+            <h4 style="color: #4a6fa5; font-size: 15px; font-weight: bold; margin-bottom: 12px; border-left: 4px solid #dacc89; padding-left: 10px;">
+                ＜状況の読み解き＞
+            </h4>
+            <div style="font-size: 14px; line-height: 1.8; color: #2c3e50;">
+                ${result.situation}
+            </div>
+        </div>
+        
+        <div style="margin-bottom: 25px;">
+            <h4 style="color: #4a6fa5; font-size: 15px; font-weight: bold; margin-bottom: 12px; border-left: 4px solid #dacc89; padding-left: 10px;">
+                ＜今後の展開＞
+            </h4>
+            <div style="font-size: 14px; line-height: 1.8; color: #2c3e50;">
+                ${result.development}
+            </div>
+        </div>
+        
+        <div style="margin-bottom: 25px;">
+            <h4 style="color: #4a6fa5; font-size: 15px; font-weight: bold; margin-bottom: 12px; border-left: 4px solid #dacc89; padding-left: 10px;">
+                ＜アドバイス＞
+            </h4>
+            <div style="font-size: 14px; line-height: 1.8; color: #2c3e50;">
+                ${result.advice}
+            </div>
+        </div>
+    `;
+    
+    contentElement.innerHTML = html;
+}
+
 }
 
 // 守護神からのメッセージを生成
