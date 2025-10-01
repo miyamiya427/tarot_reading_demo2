@@ -375,22 +375,23 @@ function parsePremiumResponse(responseText) {
     let development = '';
     let advice = '';
     
-    // パターン1: セクションごとに抽出
-    const situationMatch = responseText.match(/状況の読み解き[：:]\s*\n---([\s\S]*?)(?=---)/);
-    const developmentMatch = responseText.match(/今後の展開[：:]\s*\n---([\s\S]*?)(?=---)/);
-    const adviceMatch = responseText.match(/アドバイス[：:]\s*\n---([\s\S]*?)(?=\n---|$)/);
+    // 新しいパターンに対応：セクション名の後に---がある形式
+    const sections = responseText.split('---').filter(s => s.trim());
     
-    if (situationMatch) situation = situationMatch[1].trim();
-    if (developmentMatch) development = developmentMatch[1].trim();
-    if (adviceMatch) advice = adviceMatch[1].trim();
-    
-    // フォールバック
-    if (!situation || !development || !advice) {
-        const parts = responseText.split('---').filter(p => p.trim());
-        if (parts.length >= 3) {
-            situation = parts[0].replace(/状況の読み解き[：:]/g, '').trim();
-            development = parts[1].replace(/今後の展開[：:]/g, '').trim();
-            advice = parts[2].replace(/アドバイス[：:]/g, '').trim();
+    for (let i = 0; i < sections.length; i++) {
+        const section = sections[i].trim();
+        
+        // 「状況の読み解き:」を含むセクションを探す
+        if (section.includes('状況の読み解き') && i + 1 < sections.length) {
+            situation = sections[i + 1].trim();
+        }
+        // 「今後の展開:」を含むセクションを探す
+        else if (section.includes('今後の展開') && i + 1 < sections.length) {
+            development = sections[i + 1].trim();
+        }
+        // 「アドバイス:」を含むセクションを探す
+        else if (section.includes('アドバイス') && i + 1 < sections.length) {
+            advice = sections[i + 1].trim();
         }
     }
     
@@ -398,6 +399,12 @@ function parsePremiumResponse(responseText) {
     const formattedSituation = formatText(situation);
     const formattedDevelopment = formatText(development);
     const formattedAdvice = formatText(advice);
+    
+    console.log('パース結果:', {
+        situation: formattedSituation.substring(0, 50) + '...',
+        development: formattedDevelopment.substring(0, 50) + '...',
+        advice: formattedAdvice.substring(0, 50) + '...'
+    });
     
     return {
         situation: formattedSituation || '現在の状況を見つめ直す時期のようです。',
