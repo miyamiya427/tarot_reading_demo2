@@ -69,7 +69,7 @@ async function generateAITarotReading(guardianData, selectedCards, genre, isPrem
  * @returns {string} - 構築されたプロンプト
  */
  
-function buildPremiumTarotPrompt(guardianData, selectedCards, genre) {
+
     /**
  * 有料版：詳細な占い結果プロンプト（450-600文字）
  */
