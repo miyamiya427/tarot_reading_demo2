@@ -52,8 +52,8 @@ async function generateAITarotReading(guardianData, selectedCards, genre, isPrem
         console.log('Gemini生成テキスト:', generatedText);
         console.log('API Response Full:', data);
 
-        // 結果をパース
-        return parseGeminiResponse(generatedText);
+        // 結果をパース（isPremiumを渡す）
+        return parseGeminiResponse(generatedText, isPremium);
         
     } catch (error) {
         console.error('Gemini API Error:', error);
