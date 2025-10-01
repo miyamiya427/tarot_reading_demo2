@@ -11,10 +11,12 @@ const GEMINI_API_URL = 'https://generativelanguage.googleapis.com/v1beta/models/
  * @param {string} genre - 占いジャンル
  * @returns {Promise<Object>} - 占い結果オブジェクト
  */
-async function generateAITarotReading(guardianData, selectedCards, genre) {
+async function generateAITarotReading(guardianData, selectedCards, genre, isPremium = false) {
     try {
-        // プロンプトを構築
-        const prompt = buildTarotPrompt(guardianData, selectedCards, genre);
+        // プロンプトを構築（無料版 or 有料版）
+        const prompt = isPremium 
+            ? buildPremiumTarotPrompt(guardianData, selectedCards, genre)
+            : buildFreeTarotPrompt(guardianData, selectedCards, genre);
         
         // API呼び出し
         const response = await fetch(`${GEMINI_API_URL}?key=${GEMINI_API_KEY}`, {
@@ -67,7 +69,11 @@ async function generateAITarotReading(guardianData, selectedCards, genre) {
  * @returns {string} - 構築されたプロンプト
  */
  
-function buildTarotPrompt(guardianData, selectedCards, genre) {
+function buildPremiumTarotPrompt(guardianData, selectedCards, genre) {
+    /**
+ * 有料版：詳細な占い結果プロンプト（450-600文字）
+ */
+function buildPremiumTarotPrompt(guardianData, selectedCards, genre) {
     // ジャンル別の位置説明
     const positionTexts = getPositionTexts(genre);
     
@@ -123,57 +129,135 @@ ${genreText}
 
 以下の形式で回答してください：
 ---
-個別鑑定結果: 
+状況の読み解き:
+---
+今後の展開:
+---
+アドバイス:
 ---
 
 【重要な指示】
 
-1. 冒頭で心情を言い当てる（コールドリーディング）
+1. 状況の読み解き（150-200文字）
+   - カード1枚目の内容
+   - 冒頭で心情を言い当てる（コールドリーディング）
    ${personalityPrompt}、カードはこう語っています。
-   - 「最近〜って感じてませんか？」
-   - 「心の奥で〜思ってるんじゃない？」
    - 性格タイプ特有の悩みを具体的に指摘
+   - 現在の状況を具体的なシチュエーションで描写
 
-2. 具体的なシチュエーションを描写
+2. 今後の展開（150-200文字）
+   - カード2枚目の内容
    ${genreSpecificPrompt}
-   - 抽象的：「変化が訪れる」→ 具体的：「職場で新しい役割を任される」「気になる人から連絡が来る」
-   - 抽象的：「努力が実る」→ 具体的：「あなたが気づかないところで、ちゃんと見てくれてる人がいる」
+   - 具体的なシチュエーション（職場・恋愛・人間関係など）
+   - タイミングを明示（「今週中に」「来週あたり」など）
+   - 日常の小さなサインを提示
 
-3. タイミングを明示
-   - 「今週中に」「来週あたり」「月末までに」「3日以内に」
-   - 「ふとした瞬間に」「夜寝る前に」「朝起きた時に」
+3. アドバイス（150-200文字）
+   - カード3枚目の内容
+   - 背中を押す具体的な行動提案
+   - 守護者タイプに合わせた最適なアプローチ
+   - ポジティブで希望が持てる締めくくり
 
-4. 日常の小さなサインを提示
-   - 「『あれ？』って思う瞬間があるはず」
-   - 「偶然見たSNSの投稿に答えがある」
-   - 「いつもと違う道を通ってみて」
-
-5. 背中を押す具体的な行動提案
-   - 「まずは〜から始めてみて」
-   - 「無理しなくていい、〜でOK」
-   - 「勇気出して〜してみない？」
-
-6. 文体は親しみやすい敬語（丁寧すぎない、優しい語り口）
+4. 文体は親しみやすい敬語（丁寧すぎない、優しい語り口）
    - 「〜のでは？」「〜ではないでしょうか」「〜なんです」
    - 「〜してみてください」「〜かもしれません」「〜なようです」
    - ただし堅苦しくならないよう、時々「〜ですよね」「〜なんですよね」も使う
-   - 例：「感じてませんか？」→「感じていませんか？」
-   - 例：「思ってるんじゃない？」→「思っているのでは？」
-   - 例：「大丈夫だよ」→「大丈夫ですよ」
 
-7. カード名は絶対に出力しない
+5. カード名は絶対に出力しない
 
-8. 文字数: 300-400文字（少し長めでOK）
+6. 文字数
+   - 状況の読み解き：150-200文字
+   - 今後の展開：150-200文字
+   - アドバイス：150-200文字
+   - 合計450-600文字
 
-9. 守護者タイプに応じた語りかけ
-   - 診断済み：性格あるあるを必ず盛り込む
-   - 未診断：普遍的な人間心理で共感させる
-
-10. 冒頭の書き出し方
+7. 冒頭の書き出し方
    - 守護者名は書かない（タイトルに既に表示されているため）
-   - いきなり性格の特徴や心情の言い当てから始める
-   - 例：「一匹狼を貫く強さがある一方で、本当は誰かに甘えたいと感じることもあるのでは？」`;
+   - いきなり性格の特徴や心情の言い当てから始める`;
 }
+
+/**
+ * 無料版：ライトな占い結果プロンプト（250-300文字）
+ */
+function buildFreeTarotPrompt(guardianData, selectedCards, genre) {
+    const positionTexts = getPositionTexts(genre);
+    
+    // 守護者情報
+    let personalityHint = '';
+    if (guardianData && guardianData.type !== 'no_diagnosis') {
+        const personalityPatterns = {
+            'dawn_ruby_fox': '新しいことに飛びつきやすい',
+            'dusk_ruby_fox': '人の本質を見抜く',
+            'ascending_hawk': '高い目標を掲げる',
+            'soaring_hawk': '俯瞰で物事を見る',
+            'pack_wolf': 'チームを大事にする',
+            'lone_wolf': '一人が好き',
+            'young_deer': '成長意欲が強い',
+            'deep_deer': '人の気持ちに敏感',
+            'guardian_bear': '責任感が強い',
+            'resting_bear': 'マイペース',
+            'dancing_butterfly': '自由を求める',
+            'dreaming_butterfly': '想像の世界が好き'
+        };
+        personalityHint = personalityPatterns[guardianData.type] || '';
+    }
+    
+    // カード情報（1枚目と2枚目のみ使用）
+    const card1 = selectedCards[0];
+    const card2 = selectedCards[1];
+    const card3 = selectedCards[2];
+    
+    const cardInfo = `
+1枚目「${positionTexts[0]}」: ${card1.meaning}（${card1.upright}）
+2枚目「${positionTexts[1]}」: ${card2.meaning}（${card2.upright}）
+3枚目「${positionTexts[2]}」: ${card3.meaning}（${card3.upright}）
+`;
+    
+    const genreText = getGenreText(genre);
+    
+    return `あなたはプロのタロット占い師です。簡潔でわかりやすい鑑定をしてください。
+
+【相談者の性格ヒント】
+${personalityHint ? `性格: ${personalityHint}な傾向` : '性格タイプ未診断'}
+
+【選択されたカード】
+${cardInfo}
+
+【占いテーマ】
+${genreText}
+
+以下の形式で回答してください：
+---
+運勢と展開:
+---
+アドバイス:
+---
+
+【重要な指示】
+
+1. 運勢と展開（150-200文字）
+   - カード1枚目と2枚目の内容を統合
+   - 性格の特徴を軽く触れつつ、現在の状況と今後の展開を要点のみ
+   - 「〜のでは？」「〜かもしれません」など親しみやすい敬語
+   - 具体的なシチュエーションを1-2個含める
+
+2. アドバイス（80-100文字）
+   - カード3枚目の内容
+   - 具体的な行動提案を1-2個
+   - 背中を押すポジティブなメッセージ
+   - 「〜してみてください」「〜すると良いですよ」
+
+3. 文体
+   - 親しみやすい敬語（堅苦しくない）
+   - サクッと読める、要点を絞った表現
+   - カード名は絶対に出さない
+
+4. 文字数厳守
+   - 運勢と展開：150-200文字
+   - アドバイス：80-100文字
+   - 合計250-300文字以内`;
+}
+
 
 /**
  * ジャンル別の具体的プロンプト
@@ -228,60 +312,110 @@ function getGenreText(genre) {
 }
 
 /**
- * Gemini APIのレスポンスを解析
- * @param {string} responseText - APIからのレスポンステキスト
- * @returns {Object} - パースされた結果オブジェクト
+ * Gemini APIのレスポンスを解析（無料版・有料版対応）
  */
-function parseGeminiResponse(responseText) {
+function parseGeminiResponse(responseText, isPremium = false) {
     try {
         console.log('解析対象テキスト:', responseText);
         
-        // 複数のパターンで検索
-        let personalizedFortune = '';
-        
-        // パターン1: 「個別鑑定結果:」で検索 - 複数行対応
-const match1 = responseText.match(/個別鑑定結果[：:]\s*\n---([\s\S]*?)(?=\n---|$)/);
-if (match1) {
-    personalizedFortune = match1[1].trim();
-} else {
-    // フォールバック: ---の後の内容を全て取得
-    const parts = responseText.split('---');
-    if (parts.length >= 3) {
-        personalizedFortune = parts[2].trim();
-    }
-}
-        
-        // パターン2: 見つからない場合は全文を使用
-if (!personalizedFortune) {
-    // ---で区切られている場合
-    const parts = responseText.split('---');
-    if (parts.length >= 3) {
-        personalizedFortune = parts[2].replace(/個別鑑定結果[：:]/g, '').trim();
-    } else {
-        // 最後の手段：全文の最初の部分を使用
-        personalizedFortune = responseText.trim();
-    }
-}
-        
-        // 読みやすくするために改行を追加
-const formattedFortune = personalizedFortune
-    .replace(/。  /g, '。<br><br>')      // 文末の後に改行
-    .replace(/。([あ-ん])/g, '。<br>$1')  // ひらがなの前で改行
-    .replace(/ね。/g, 'ね。<br><br>')     // 「ね。」の後に改行
-    .replace(/よ。/g, 'よ。<br><br>')     // 「よ。」の後に改行
-    .replace(/です。/g, 'です。<br><br>') // 「です。」の後に改行
-    || '今日もあなたらしく過ごしてくださいね。';
-
-return {
-    personalizedFortune: formattedFortune
-};
+        if (isPremium) {
+            // 有料版：3項目
+            return parsePremiumResponse(responseText);
+        } else {
+            // 無料版：2項目
+            return parseFreeResponse(responseText);
+        }
         
     } catch (error) {
         console.error('Response parsing error:', error);
         return {
-            personalizedFortune: '今日もあなたらしく過ごしてくださいね。'
+            situation: '',
+            development: '',
+            advice: '今日もあなたらしく過ごしてくださいね。'
         };
     }
+}
+
+/**
+ * 無料版レスポンスのパース
+ */
+function parseFreeResponse(responseText) {
+    let fortuneAndDevelopment = '';
+    let advice = '';
+    
+    // パターン1: 「運勢と展開:」で検索
+    const match1 = responseText.match(/運勢と展開[：:]\s*\n---([\s\S]*?)---\s*アドバイス[：:]\s*\n---([\s\S]*?)(?=\n---|$)/);
+    if (match1) {
+        fortuneAndDevelopment = match1[1].trim();
+        advice = match1[2].trim();
+    } else {
+        // フォールバック: ---で分割
+        const parts = responseText.split('---').filter(p => p.trim());
+        if (parts.length >= 2) {
+            fortuneAndDevelopment = parts[0].replace(/運勢と展開[：:]/g, '').trim();
+            advice = parts[1].replace(/アドバイス[：:]/g, '').trim();
+        }
+    }
+    
+    // 改行整形
+    const formattedFortune = formatText(fortuneAndDevelopment);
+    const formattedAdvice = formatText(advice);
+    
+    return {
+        fortuneAndDevelopment: formattedFortune || '穏やかな一日になりそうです。',
+        advice: formattedAdvice || '自分らしく過ごしてくださいね。'
+    };
+}
+
+/**
+ * 有料版レスポンスのパース
+ */
+function parsePremiumResponse(responseText) {
+    let situation = '';
+    let development = '';
+    let advice = '';
+    
+    // パターン1: セクションごとに抽出
+    const situationMatch = responseText.match(/状況の読み解き[：:]\s*\n---([\s\S]*?)(?=---)/);
+    const developmentMatch = responseText.match(/今後の展開[：:]\s*\n---([\s\S]*?)(?=---)/);
+    const adviceMatch = responseText.match(/アドバイス[：:]\s*\n---([\s\S]*?)(?=\n---|$)/);
+    
+    if (situationMatch) situation = situationMatch[1].trim();
+    if (developmentMatch) development = developmentMatch[1].trim();
+    if (adviceMatch) advice = adviceMatch[1].trim();
+    
+    // フォールバック
+    if (!situation || !development || !advice) {
+        const parts = responseText.split('---').filter(p => p.trim());
+        if (parts.length >= 3) {
+            situation = parts[0].replace(/状況の読み解き[：:]/g, '').trim();
+            development = parts[1].replace(/今後の展開[：:]/g, '').trim();
+            advice = parts[2].replace(/アドバイス[：:]/g, '').trim();
+        }
+    }
+    
+    // 改行整形
+    const formattedSituation = formatText(situation);
+    const formattedDevelopment = formatText(development);
+    const formattedAdvice = formatText(advice);
+    
+    return {
+        situation: formattedSituation || '現在の状況を見つめ直す時期のようです。',
+        development: formattedDevelopment || '良い変化が訪れそうです。',
+        advice: formattedAdvice || '自分を信じて進んでください。'
+    };
+}
+
+/**
+ * テキストを読みやすく整形
+ */
+function formatText(text) {
+    return text
+        .replace(/。  /g, '。<br><br>')
+        .replace(/。([あ-ん])/g, '。<br>$1')
+        .replace(/ね。/g, 'ね。<br><br>')
+        .replace(/よ。/g, 'よ。<br><br>')
+        .replace(/です。/g, 'です。<br><br>');
 }
 
 
