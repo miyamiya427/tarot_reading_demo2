@@ -590,6 +590,82 @@ function displayPremiumResult(result) {
 
 }
 
+/**
+ * 無料版の結果を表示
+ */
+function displayFreeResult(result) {
+    const contentElement = document.getElementById('personalized-fortune');
+    
+    const html = `
+        <div style="margin-bottom: 25px;">
+            <h4 style="color: #4a6fa5; font-size: 15px; font-weight: bold; margin-bottom: 12px; border-left: 4px solid #dacc89; padding-left: 10px;">
+                ＜運勢と展開＞
+            </h4>
+            <div style="font-size: 14px; line-height: 1.8; color: #2c3e50;">
+                ${result.fortuneAndDevelopment}
+            </div>
+        </div>
+        
+        <div style="margin-bottom: 25px;">
+            <h4 style="color: #4a6fa5; font-size: 15px; font-weight: bold; margin-bottom: 12px; border-left: 4px solid #dacc89; padding-left: 10px;">
+                ＜アドバイス＞
+            </h4>
+            <div style="font-size: 14px; line-height: 1.8; color: #2c3e50;">
+                ${result.advice}
+            </div>
+        </div>
+        
+        <div style="text-align: center; margin-top: 30px; padding: 20px; background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%); border-radius: 15px; border: 2px dashed #dacc89;">
+            <p style="font-size: 13px; color: #6c757d; margin-bottom: 15px; line-height: 1.6;">
+                もっと詳しい鑑定を見たい方は<br>プレミアム版をご利用ください
+            </p>
+            <button style="background: #dacc89; color: white; border: none; padding: 12px 30px; border-radius: 25px; font-size: 14px; font-weight: bold; cursor: pointer;">
+                プレミアム版を見る（準備中）
+            </button>
+        </div>
+    `;
+    
+    contentElement.innerHTML = html;
+}
+
+/**
+ * 有料版の結果を表示
+ */
+function displayPremiumResult(result) {
+    const contentElement = document.getElementById('personalized-fortune');
+    
+    const html = `
+        <div style="margin-bottom: 25px;">
+            <h4 style="color: #4a6fa5; font-size: 15px; font-weight: bold; margin-bottom: 12px; border-left: 4px solid #dacc89; padding-left: 10px;">
+                ＜状況の読み解き＞
+            </h4>
+            <div style="font-size: 14px; line-height: 1.8; color: #2c3e50;">
+                ${result.situation}
+            </div>
+        </div>
+        
+        <div style="margin-bottom: 25px;">
+            <h4 style="color: #4a6fa5; font-size: 15px; font-weight: bold; margin-bottom: 12px; border-left: 4px solid #dacc89; padding-left: 10px;">
+                ＜今後の展開＞
+            </h4>
+            <div style="font-size: 14px; line-height: 1.8; color: #2c3e50;">
+                ${result.development}
+            </div>
+        </div>
+        
+        <div style="margin-bottom: 25px;">
+            <h4 style="color: #4a6fa5; font-size: 15px; font-weight: bold; margin-bottom: 12px; border-left: 4px solid #dacc89; padding-left: 10px;">
+                ＜アドバイス＞
+            </h4>
+            <div style="font-size: 14px; line-height: 1.8; color: #2c3e50;">
+                ${result.advice}
+            </div>
+        </div>
+    `;
+    
+    contentElement.innerHTML = html;
+}
+
 // 守護神からのメッセージを生成
 function generateGuardianMessage(guardianData, cards) {
     if (!guardianData) {
