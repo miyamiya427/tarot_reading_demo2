@@ -7,9 +7,9 @@
 
 body {
     font-family: 'Zen Maru Gothic', 'Hiragino Sans', 'Yu Gothic', sans-serif;
-    background: #7894ab;
+    background: #c2dada;
     min-height: 100vh;
-    color: white;
+    color: #c2dada;
     overflow-x: hidden;
     position: relative;
 }

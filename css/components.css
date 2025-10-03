@@ -5,10 +5,10 @@
     height: 50px;
     line-height: 50px;
     padding: 0 2rem;
-    border-top: 3px solid #dacc89;
-    border-bottom: 3px solid #dacc89;
-    background-color: #e8ecee;
-    color: #7894ab;
+    border-top: 3px solid #caae67;
+    border-bottom: 3px solid #caae67;
+    background-color: #f3f3ed;
+    color: #c2dada;
     font-size: 18px;
     font-weight: bold;
     text-align: center;
@@ -21,7 +21,7 @@
     top: 0;
     width: 0px;
     height: 0px;
-    border-color: transparent #7894ab;
+    border-color: transparent #c2dada;
     border-style: solid;
 }
 
@@ -52,22 +52,22 @@
 }
 
 .btn:hover {
-    background: #dacc89;
+    background: #caae67;
     color: white;
     transform: translateY(-2px);
     box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
 }
 
 .btn-secondary {
-    background: #e8ecee;
-    border: 2px solid #e8ecee;
-    color: #7894ab;
+    background: #f3f3ed;
+    border: 2px solid #f3f3ed;
+    color: #c2dada;
     margin: 10px auto;
 }
 
 .btn-secondary:hover {
-    background: #dacc89;
-    border-color: #dacc89;
+    background: #caae67;
+    border-color: #caae67;
     color: white;
 }
 
