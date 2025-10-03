@@ -164,7 +164,7 @@ function selectCard(cardIndex) {
     // 選択されたカードを強調表示
     const selectedCardElement = document.querySelector(`[data-card-index="${cardIndex}"]`);
     if (selectedCardElement) {
-        selectedCardElement.style.borderColor = '#caae67';
+        selectedCardElement.style.borderColor = '#dacc89';
         selectedCardElement.style.borderWidth = '3px';
         selectedCardElement.style.transform = 'scale(1.1)';
         selectedCardElement.style.zIndex = '20';

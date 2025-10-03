@@ -58,8 +58,8 @@ async function generateShareImage(guardianData, genre, resultText) {
 function drawBackground(ctx, width, height) {
     // グラデーション背景
     const gradient = ctx.createLinearGradient(0, 0, width, height);
-    gradient.addColorStop(0, '#7894ab');
-    gradient.addColorStop(1, '#5a7fb5');
+    gradient.addColorStop(0, '#c2dada');
+    gradient.addColorStop(1, '#b0d0d0');
     
     ctx.fillStyle = gradient;
     ctx.fillRect(0, 0, width, height);
@@ -155,7 +155,7 @@ function drawTextSection(ctx, guardianData, genre, resultText) {
     // ジャンルタイトル
     ctx.font = 'bold 24px sans-serif';
     ctx.textAlign = 'left';
-    ctx.fillStyle = '#dacc89';
+    border: 2px dashed #dacc89;
     ctx.fillText(`${genre}を占ったよ！`, startX, 60);
     
     // 占い結果テキストを要約・整形
