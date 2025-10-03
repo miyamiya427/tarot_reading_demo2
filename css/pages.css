@@ -53,13 +53,13 @@
 
 .option-label:hover {
     background: #e3f2fd;
-    border-color: #c2dada;
+    border-color: #dacc89;
 }
 
 .option-label.selected {
     background: #c2dada;
     color: white;
-    border-color: #c2dada;
+    border-color: #dacc89;
 }
 
 .option-label input[type="radio"] {
@@ -73,7 +73,7 @@
 }
 
 .result-header h2 {
-    color: #c2dada;
+    color: #dacc89;
     font-size: 20px;
     font-weight: bold;
 }
@@ -107,7 +107,7 @@
 .guardian-name {
     font-size: 24px;
     font-weight: bold;
-    color: #c2dada;
+    color: #dacc89;
     margin-bottom: 0px;
 }
 
@@ -174,7 +174,7 @@
 .card-name {
     font-size: 12px;
     font-weight: bold;
-    color: #c2dada;
+    color: #dacc89;
     margin-bottom: 5px;
 }
 
@@ -194,7 +194,7 @@
     margin: 20px 0;
 }
 .personality-based-reading h3 {
-    color: #c2dada;
+    color: #dacc89;
     font-size: 16px;
     margin-bottom: 15px;
 }
@@ -216,7 +216,7 @@
 }
 
 .guardian-integration h3, .daily-interpretation h3 {
-    color: #c2dada;
+    color: #dacc89;
     font-size: 16px;
     margin-bottom: 15px;
 }

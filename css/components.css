@@ -5,10 +5,10 @@
     height: 50px;
     line-height: 50px;
     padding: 0 2rem;
-    border-top: 3px solid #caae67;
-    border-bottom: 3px solid #caae67;
+    border-top: 3px solid #dacc89;
+    border-bottom: 3px solid #dacc89;
     background-color: #f3f3ed;
-    color: #c2dada;
+    color: #dacc89;
     font-size: 18px;
     font-weight: bold;
     text-align: center;
@@ -52,7 +52,7 @@
 }
 
 .btn:hover {
-    background: #caae67;
+    background: #dacc89;
     color: white;
     transform: translateY(-2px);
     box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
@@ -61,13 +61,13 @@
 .btn-secondary {
     background: #f3f3ed;
     border: 2px solid #f3f3ed;
-    color: #c2dada;
+    color: #dacc89;
     margin: 10px auto;
 }
 
 .btn-secondary:hover {
-    background: #caae67;
-    border-color: #caae67;
+    background: #dacc89;
+    border-color: #dacc89;
     color: white;
 }
 
