@@ -8,7 +8,7 @@
     border-top: 3px solid #dacc89;
     border-bottom: 3px solid #dacc89;
     background-color: #f3f3ed;
-    color: #c2dada;
+    color: #dacc89;
     font-size: 18px;
     font-weight: bold;
     text-align: center;
@@ -36,9 +36,9 @@
 }
 
 .btn {
-    background: #e8ecee;
-    color: #7894ab;
-    border: none;
+    background: #f3f3ed;
+    color: #dacc89;
+    border: 2px solid #dacc89;
     padding: 15px 60px;
     border-radius: 25px;
     font-size: 16px;
@@ -53,22 +53,23 @@
 
 .btn:hover {
     background: #dacc89;
-    color: white;
+    color: #f3f3ed;
+    border-color: #dacc89;
     transform: translateY(-2px);
     box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
 }
 
 .btn-secondary {
     background: #f3f3ed;
-    border: 2px solid #f3f3ed;
-    color: #c2dada;
+    border: 2px solid #dacc89;
+    color: #dacc89;
     margin: 10px auto;
 }
 
 .btn-secondary:hover {
     background: #dacc89;
     border-color: #dacc89;
-    color: white;
+    color: #f3f3ed;
 }
 
 .animal-icons {
