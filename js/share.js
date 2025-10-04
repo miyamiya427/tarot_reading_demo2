@@ -153,10 +153,10 @@ function drawTextSection(ctx, guardianData, genre, resultText) {
     const maxWidth = 510;
     
     // ジャンルタイトル
-    ctx.font = 'bold 24px sans-serif';
-    ctx.textAlign = 'left';
-    border: 2px dashed #dacc89;
-    ctx.fillText(`${genre}を占ったよ！`, startX, 60);
+     ctx.font = 'bold 24px sans-serif';
+     ctx.textAlign = 'left';
+     ctx.fillStyle = '#dacc89';
+     ctx.fillText(`${genre}を占ったよ！`, startX, 60);
     
     // 占い結果テキストを要約・整形
     const summaryText = summarizeResultText(resultText);
