@@ -154,22 +154,22 @@ function drawTextSection(ctx, guardianData, genre, resultText) {
     let currentY = 60;
     
     // ジャンルタイトル
-    ctx.font = 'bold 24px sans-serif';
-    ctx.textAlign = 'left';
-    ctx.fillStyle = 'white';
-    ctx.fillText(`${genre}を占ったよ！`, startX, currentY);
-    currentY += 40;
+ctx.font = 'bold 24px sans-serif';
+ctx.textAlign = 'left';
+// 背景を描画
+const titleWidth = ctx.measureText(`${genre}を占ったよ！`).width + 30;
+ctx.fillStyle = '#dacc89';
+ctx.fillRect(startX - 15, currentY - 24, titleWidth, 36);
+// テキストを描画
+ctx.fillStyle = 'white';
+ctx.fillText(`${genre}を占ったよ！`, startX, currentY);
+currentY += 40;
     
     // 占い結果を取得
     const result = getShareResult();
     
     // 「運勢と展開」セクション
 ctx.font = 'bold 14px sans-serif';
-// 背景を描画
-const fortuneHeaderWidth = ctx.measureText('＜運勢と展開＞').width + 20;
-ctx.fillStyle = '#dacc89';
-ctx.fillRect(startX - 10, currentY - 18, fortuneHeaderWidth, 24);
-// テキストを描画
 ctx.fillStyle = 'white';
 ctx.fillText('＜運勢と展開＞', startX, currentY);
 currentY += 25;
@@ -187,11 +187,6 @@ currentY += 25;
     
     // 「アドバイス」セクション
 ctx.font = 'bold 14px sans-serif';
-// 背景を描画
-const adviceHeaderWidth = ctx.measureText('＜アドバイス＞').width + 20;
-ctx.fillStyle = '#dacc89';
-ctx.fillRect(startX - 10, currentY - 18, adviceHeaderWidth, 24);
-// テキストを描画
 ctx.fillStyle = 'white';
 ctx.fillText('＜アドバイス＞', startX, currentY);
 currentY += 25;
