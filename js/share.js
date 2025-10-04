@@ -199,13 +199,7 @@ currentY += 25;
         ctx.fillText(adviceLines[i], startX, currentY);
         currentY += 20;
     }
-    
-    // 続きを読むメッセージ
-    if (fortuneLines.length > maxFortuneLines || adviceLines.length > maxAdviceLines) {
-        currentY += 15;
-        ctx.font = '12px sans-serif';
-        ctx.fillStyle = 'rgba(255, 255, 255, 0.7)';
-        ctx.fillText('※続きはアプリでご確認ください', startX, currentY);
+    // 続きを読むメッセージは削除x.fillText('※続きはアプリでご確認ください', startX, currentY);
     }
 }
 
