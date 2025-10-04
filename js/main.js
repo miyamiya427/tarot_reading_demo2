@@ -120,6 +120,32 @@ function checkExistingGuardian() {
 }
 
 // 結果をシェア
-function shareResult() {
-    shareResultWithImage();
+// 結果をシェア
+async function shareResult() {
+    try {
+        // 現在の占い結果データを取得
+        const guardianData = JSON.parse(localStorage.getItem('guardianResult') || '{}');
+        const resultText = document.getElementById('personalized-fortune')?.innerHTML || '';
+        const genreTitle = document.getElementById('result-title')?.textContent || '';
+        
+        // シェアテキストを作成
+        const shareText = `私の守護者は「${guardianData.name || '???'}」！\n${genreTitle}を占ってもらいました✨\n\n森の守護者とタロット占い`;
+        
+        if (navigator.share) {
+            await navigator.share({
+                title: '占い結果',
+                text: shareText,
+            });
+        } else {
+            // シェア機能非対応の場合はクリップボードにコピー
+            if (navigator.clipboard) {
+                await navigator.clipboard.writeText(shareText);
+                alert('シェア用テキストをクリップボードにコピーしました！');
+            } else {
+                alert('シェア機能に対応していません');
+            }
+        }
+    } catch (error) {
+        console.error('シェアエラー:', error);
+    }
 }
