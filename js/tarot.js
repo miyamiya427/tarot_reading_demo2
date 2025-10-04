@@ -398,7 +398,23 @@ function displayCards() {
     width: 100px;
 `;
     nextButton.onclick = () => confirmCardSelection();
-    cardContainer.appendChild(nextButton);
+
+// ホバー効果を追加
+nextButton.addEventListener('mouseenter', function() {
+    if (this.style.opacity === '1') {
+        this.style.background = '#dacc89';
+        this.style.color = '#f3f3ed';
+    }
+});
+
+nextButton.addEventListener('mouseleave', function() {
+    if (this.style.opacity === '1') {
+        this.style.background = '#f3f3ed';
+        this.style.color = '#dacc89';
+    }
+});
+
+cardContainer.appendChild(nextButton);
 }
 
 function showTarotResult() {
