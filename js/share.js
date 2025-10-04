@@ -151,20 +151,57 @@ function drawGuardianEmoji(ctx, guardianData, sectionWidth, centerY) {
 function drawTextSection(ctx, guardianData, genre, resultText) {
     const startX = 270;
     const maxWidth = 510;
+    let currentY = 60;
     
     // ジャンルタイトル
-     ctx.font = 'bold 24px sans-serif';
-     ctx.textAlign = 'left';
-     ctx.fillStyle = '#dacc89';
-     ctx.fillText(`${genre}を占ったよ！`, startX, 60);
-    
-    // 占い結果テキストを要約・整形
-    const summaryText = summarizeResultText(resultText);
-    
-    // テキストを複数行で描画（中央配置）
-    ctx.font = '16px sans-serif';
+    ctx.font = 'bold 24px sans-serif';
+    ctx.textAlign = 'left';
     ctx.fillStyle = 'white';
-    drawMultilineText(ctx, summaryText, startX, 150, maxWidth, 22);
+    ctx.fillText(`${genre}を占ったよ！`, startX, currentY);
+    currentY += 40;
+    
+    // 占い結果を取得
+    const result = getShareResult();
+    
+    // 「運勢と展開」セクション
+    ctx.font = 'bold 14px sans-serif';
+    ctx.fillStyle = '#dacc89';
+    ctx.fillText('＜運勢と展開＞', startX, currentY);
+    currentY += 25;
+    
+    ctx.font = '13px sans-serif';
+    ctx.fillStyle = 'white';
+    const fortuneLines = wrapText(ctx, result.fortuneAndDevelopment, maxWidth);
+    const maxFortuneLines = 6; // 最大6行
+    for (let i = 0; i < Math.min(fortuneLines.length, maxFortuneLines); i++) {
+        ctx.fillText(fortuneLines[i], startX, currentY);
+        currentY += 20;
+    }
+    
+    currentY += 10;
+    
+    // 「アドバイス」セクション
+    ctx.font = 'bold 14px sans-serif';
+    ctx.fillStyle = '#dacc89';
+    ctx.fillText('＜アドバイス＞', startX, currentY);
+    currentY += 25;
+    
+    ctx.font = '13px sans-serif';
+    ctx.fillStyle = 'white';
+    const adviceLines = wrapText(ctx, result.advice, maxWidth);
+    const maxAdviceLines = 4; // 最大4行
+    for (let i = 0; i < Math.min(adviceLines.length, maxAdviceLines); i++) {
+        ctx.fillText(adviceLines[i], startX, currentY);
+        currentY += 20;
+    }
+    
+    // 続きを読むメッセージ
+    if (fortuneLines.length > maxFortuneLines || adviceLines.length > maxAdviceLines) {
+        currentY += 15;
+        ctx.font = '12px sans-serif';
+        ctx.fillStyle = 'rgba(255, 255, 255, 0.7)';
+        ctx.fillText('※続きはアプリでご確認ください', startX, currentY);
+    }
 }
 
 /**
@@ -212,6 +249,73 @@ function drawMultilineText(ctx, text, x, y, maxWidth, lineHeight) {
     if (line !== '') {
         ctx.fillText(line, x, currentY);
     }
+}
+
+/**
+ * テキストを指定幅で折り返し
+ */
+function wrapText(ctx, text, maxWidth) {
+    const words = text.split('');
+    const lines = [];
+    let currentLine = '';
+    
+    for (let i = 0; i < words.length; i++) {
+        const testLine = currentLine + words[i];
+        const metrics = ctx.measureText(testLine);
+        
+        if (metrics.width > maxWidth && currentLine !== '') {
+            lines.push(currentLine);
+            currentLine = words[i];
+        } else {
+            currentLine = testLine;
+        }
+    }
+    
+    if (currentLine !== '') {
+        lines.push(currentLine);
+    }
+    
+    return lines;
+}
+
+/**
+ * シェア用の占い結果を取得
+ */
+function getShareResult() {
+    const fortuneElement = document.getElementById('personalized-fortune');
+    if (!fortuneElement) {
+        return {
+            fortuneAndDevelopment: '占い結果が見つかりません',
+            advice: 'アプリでご確認ください'
+        };
+    }
+    
+    const html = fortuneElement.innerHTML;
+    
+    // セクションごとに分割
+    const sections = html.split(/<h4[^>]*>/);
+    
+    let fortuneAndDevelopment = '';
+    let advice = '';
+    
+    for (let section of sections) {
+        if (section.includes('運勢と展開')) {
+            const content = section.split('</h4>')[1];
+            if (content) {
+                fortuneAndDevelopment = content.replace(/<[^>]*>/g, '').trim();
+            }
+        } else if (section.includes('アドバイス')) {
+            const content = section.split('</h4>')[1];
+            if (content) {
+                advice = content.replace(/<[^>]*>/g, '').replace(/プレミアム版.*$/s, '').trim();
+            }
+        }
+    }
+    
+    return {
+        fortuneAndDevelopment: fortuneAndDevelopment || '占い結果をご確認ください',
+        advice: advice || 'アプリでご確認ください'
+    };
 }
 
 /**
