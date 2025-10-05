@@ -186,10 +186,10 @@ currentY += 25;
     currentY += 10;
     
     // 「アドバイス」セクション
-ctx.font = 'bold 14px sans-serif';
-ctx.fillStyle = 'white';
-ctx.fillText('＜アドバイス＞', startX, currentY);
-currentY += 25;
+    ctx.font = 'bold 14px sans-serif';
+    ctx.fillStyle = 'white';
+    ctx.fillText('＜アドバイス＞', startX, currentY);
+    currentY += 25;
     
     ctx.font = '13px sans-serif';
     ctx.fillStyle = 'white';
@@ -199,56 +199,8 @@ currentY += 25;
         ctx.fillText(adviceLines[i], startX, currentY);
         currentY += 20;
     }
-    // 続きを読むメッセージは削除x.fillText('※続きはアプリでご確認ください', startX, currentY);
-    }
 }
 
-/**
- * 占い結果テキストを要約
- */
-function summarizeResultText(text) {
-    // HTMLタグを除去
-    const cleanText = text.replace(/<[^>]*>/g, '');
-    
-    // 最初の2-3文を抜粋
-    const sentences = cleanText.split('。');
-    const summary = sentences.slice(0, 3).join('。') + '。';
-    
-    // 長すぎる場合は切り詰め
-    return summary.length > 150 ? summary.substring(0, 147) + '...' : summary;
-}
-
-/**
- * 複数行テキストを描画
- */
-function drawMultilineText(ctx, text, x, y, maxWidth, lineHeight) {
-    const words = text.split('');
-    let line = '';
-    let currentY = y;
-    
-    for (let i = 0; i < words.length; i++) {
-        const testLine = line + words[i];
-        const metrics = ctx.measureText(testLine);
-        
-        if (metrics.width > maxWidth && line !== '') {
-            ctx.fillText(line, x, currentY);
-            line = words[i];
-            currentY += lineHeight;
-            
-            // 最大行数制限
-            if (currentY > y + (lineHeight * 10)) {
-                ctx.fillText(line + '...', x, currentY);
-                break;
-            }
-        } else {
-            line = testLine;
-        }
-    }
-    
-    if (line !== '') {
-        ctx.fillText(line, x, currentY);
-    }
-}
 
 /**
  * テキストを指定幅で折り返し
