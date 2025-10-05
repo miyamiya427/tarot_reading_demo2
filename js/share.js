@@ -73,8 +73,8 @@ function drawBackground(ctx, width, height) {
  * 守護者セクションを描画（左側）
  */
 async function drawGuardianSection(ctx, guardianData) {
-    const sectionWidth = 250;
-    const sectionHeight = 400;
+    const sectionWidth = 500;  // 250 → 500
+    const sectionHeight = 800;  // 400 → 800
     
     // 守護者エリア背景
     ctx.fillStyle = 'rgba(255, 255, 255, 0.2)';
@@ -96,18 +96,18 @@ async function drawGuardianSection(ctx, guardianData) {
     
     // 守護者名（画像の下に配置）
     if (guardianData.name) {
-        ctx.font = 'bold 18px sans-serif';
-        ctx.textAlign = 'center';
-        ctx.fillStyle = 'white';
-        ctx.fillText(`守護者：${guardianData.name}`, sectionWidth / 2, centerY + 80);
-        
-        // ふりがな
-        if (guardianData.furigana) {
-            ctx.font = '12px sans-serif';
-            ctx.fillStyle = 'rgba(255, 255, 255, 0.8)';
-            ctx.fillText(`(${guardianData.furigana})`, sectionWidth / 2, centerY + 100);
-        }
+    ctx.font = 'bold 36px sans-serif';  // 18 → 36
+    ctx.textAlign = 'center';
+    ctx.fillStyle = 'white';
+    ctx.fillText(`守護者：${guardianData.name}`, sectionWidth / 2, centerY + 160);  // 80 → 160
+    
+    // ふりがな
+    if (guardianData.furigana) {
+        ctx.font = '24px sans-serif';  // 12 → 24
+        ctx.fillStyle = 'rgba(255, 255, 255, 0.8)';
+        ctx.fillText(`(${guardianData.furigana})`, sectionWidth / 2, centerY + 200);  // 100 → 200
     }
+}
 }
 
 /**
@@ -120,11 +120,11 @@ function drawGuardianImage(ctx, imageSrc, sectionWidth, centerY) {
             // 画像を円形にクリップ（サイズ拡大：60→80）
             ctx.save();
             ctx.beginPath();
-            ctx.arc(sectionWidth / 2, centerY, 80, 0, 2 * Math.PI);
+            ctx.arc(sectionWidth / 2, centerY, 160, 0, 2 * Math.PI);  // 80 → 160
             ctx.clip();
-            
-            // 画像を描画（サイズ拡大：120→160）
-            ctx.drawImage(img, sectionWidth / 2 - 80, centerY - 80, 160, 160);
+
+            // 画像を描画
+            ctx.drawImage(img, sectionWidth / 2 - 160, centerY - 160, 320, 320);  // すべて2倍
             ctx.restore();
             resolve();
         };
@@ -139,66 +139,66 @@ function drawGuardianImage(ctx, imageSrc, sectionWidth, centerY) {
  * 守護者絵文字を描画
  */
 function drawGuardianEmoji(ctx, guardianData, sectionWidth, centerY) {
-    ctx.font = '100px serif';  // 80px → 100px
-    ctx.textAlign = 'center';
-    ctx.fillStyle = 'white';
-    ctx.fillText(guardianData.emoji || '🌟', sectionWidth / 2, centerY);
+    ctx.font = '200px serif';  // 100 → 200
+ctx.textAlign = 'center';
+ctx.fillStyle = 'white';
+ctx.fillText(guardianData.emoji || '🌟', sectionWidth / 2, centerY);
 }
 
 /**
  * テキストセクションを描画（右側）
  */
 function drawTextSection(ctx, guardianData, genre, resultText) {
-    const startX = 270;
-    const maxWidth = 510;
-    let currentY = 60;
+    const startX = 540;  // 270 → 540
+    const maxWidth = 1020;  // 510 → 1020
+    let currentY = 120;  // 60 → 120
     
     // ジャンルタイトル
-ctx.font = 'bold 24px sans-serif';
+ctx.font = 'bold 48px sans-serif';  // 24 → 48
 ctx.textAlign = 'left';
 // 背景を描画
-const titleWidth = ctx.measureText(`${genre}を占ったよ！`).width + 30;
+const titleWidth = ctx.measureText(`${genre}を占ったよ！`).width + 60;  // 30 → 60
 ctx.fillStyle = '#dacc89';
-ctx.fillRect(startX - 15, currentY - 24, titleWidth, 36);
+ctx.fillRect(startX - 30, currentY - 48, titleWidth, 72);  // すべて2倍
 // テキストを描画
 ctx.fillStyle = 'white';
 ctx.fillText(`${genre}を占ったよ！`, startX, currentY);
-currentY += 40;
+currentY += 80;  // 40 → 80
     
     // 占い結果を取得
     const result = getShareResult();
     
     // 「運勢と展開」セクション
-ctx.font = 'bold 14px sans-serif';
+ctx.font = 'bold 28px sans-serif';  // 14 → 28
 ctx.fillStyle = 'white';
 ctx.fillText('＜運勢と展開＞', startX, currentY);
-currentY += 25;
-    
-    ctx.font = '13px sans-serif';
-    ctx.fillStyle = 'white';
-    const fortuneLines = wrapText(ctx, result.fortuneAndDevelopment, maxWidth);
-    const maxFortuneLines = 6; // 最大6行
-    for (let i = 0; i < Math.min(fortuneLines.length, maxFortuneLines); i++) {
-        ctx.fillText(fortuneLines[i], startX, currentY);
-        currentY += 20;
-    }
-    
-    currentY += 10;
-    
-    // 「アドバイス」セクション
-    ctx.font = 'bold 14px sans-serif';
-    ctx.fillStyle = 'white';
-    ctx.fillText('＜アドバイス＞', startX, currentY);
-    currentY += 25;
-    
-    ctx.font = '13px sans-serif';
-    ctx.fillStyle = 'white';
-    const adviceLines = wrapText(ctx, result.advice, maxWidth);
-    const maxAdviceLines = 4; // 最大4行
-    for (let i = 0; i < Math.min(adviceLines.length, maxAdviceLines); i++) {
-        ctx.fillText(adviceLines[i], startX, currentY);
-        currentY += 20;
-    }
+currentY += 50;  // 25 → 50
+
+ctx.font = '26px sans-serif';  // 13 → 26
+ctx.fillStyle = 'white';
+const fortuneLines = wrapText(ctx, result.fortuneAndDevelopment, maxWidth);
+const maxFortuneLines = 6; // 最大6行
+for (let i = 0; i < Math.min(fortuneLines.length, maxFortuneLines); i++) {
+    ctx.fillText(fortuneLines[i], startX, currentY);
+    currentY += 40;  // 20 → 40
+}
+
+currentY += 20;  // 10 → 20
+
+// 「アドバイス」セクション
+ctx.font = 'bold 28px sans-serif';  // 14 → 28
+ctx.fillStyle = 'white';
+ctx.fillText('＜アドバイス＞', startX, currentY);
+currentY += 50;  // 25 → 50
+
+ctx.font = '26px sans-serif';  // 13 → 26
+ctx.fillStyle = 'white';
+const adviceLines = wrapText(ctx, result.advice, maxWidth);
+const maxAdviceLines = 4; // 最大4行
+for (let i = 0; i < Math.min(adviceLines.length, maxAdviceLines); i++) {
+    ctx.fillText(adviceLines[i], startX, currentY);
+    currentY += 40;  // 20 → 40
+}
 }
 
 
@@ -283,10 +283,10 @@ function getShareResult() {
  * ロゴ・クレジットを描画
  */
 function drawLogo(ctx, width, height) {
-    ctx.font = '14px sans-serif';
+    ctx.font = '28px sans-serif';  // 14 → 28
     ctx.textAlign = 'right';
     ctx.fillStyle = 'rgba(255, 255, 255, 0.7)';
-    ctx.fillText('森の守護者とタロット占い', width - 20, height - 20);
+    ctx.fillText('森の守護者とタロット占い', width - 40, height - 40);  // 20 → 40
 }
 
 /**
