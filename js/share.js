@@ -253,12 +253,22 @@ function getShareResult() {
         if (section.includes('運勢と展開')) {
             const content = section.split('</h4>')[1];
             if (content) {
-                fortuneAndDevelopment = content.replace(/<[^>]*>/g, '').trim();
+                // HTMLタグを除去し、「もっと詳しい～」以降も削除
+                fortuneAndDevelopment = content
+                    .replace(/<[^>]*>/g, '')
+                    .replace(/もっと詳しい.*$/s, '')
+                    .replace(/プレミアム版.*$/s, '')
+                    .trim();
             }
         } else if (section.includes('アドバイス')) {
             const content = section.split('</h4>')[1];
             if (content) {
-                advice = content.replace(/<[^>]*>/g, '').replace(/プレミアム版.*$/s, '').trim();
+                // HTMLタグを除去し、「もっと詳しい～」以降も削除
+                advice = content
+                    .replace(/<[^>]*>/g, '')
+                    .replace(/もっと詳しい.*$/s, '')
+                    .replace(/プレミアム版.*$/s, '')
+                    .trim();
             }
         }
     }
