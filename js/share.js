@@ -30,9 +30,9 @@ async function generateShareImage(guardianData, genre, resultText) {
     const canvas = document.createElement('canvas');
     const ctx = canvas.getContext('2d');
     
-    // キャンバスサイズ設定（X向け横長）
-    canvas.width = 800;
-    canvas.height = 400;
+    // キャンバスサイズ設定（X向け横長・高解像度）
+canvas.width = 1600;  // 2倍に
+canvas.height = 800;  // 2倍に
     
     // 背景を描画
     drawBackground(ctx, canvas.width, canvas.height);
@@ -293,7 +293,10 @@ function drawLogo(ctx, width, height) {
  * 生成した画像をシェア
  */
 async function shareImage(imageBlob, guardianData, genre) {
-    const shareText = `私の守護者は「${guardianData.name || '???'}」！\n${genre}を占ってもらいました✨\n\n森の守護者とタロット占い`;
+    const shareText = `「森の守護者とタロット占い」で＜${genre}＞を占ってみたよ！
+性格タイプ診断もできるからみんなもやってみて！
+
+#森の守護者とタロット占い #森の守護者診断 #${guardianData.name || '???'} #${genre} #タロット占い`;
     
     if (navigator.share && navigator.canShare) {
         // Web Share API対応の場合
@@ -346,8 +349,12 @@ function fallbackShare(imageBlob, shareText) {
  */
 function shareTextOnly() {
     const guardianData = JSON.parse(localStorage.getItem('guardianResult') || '{}');
-    const shareText = `私の守護者は「${guardianData.name || '???'}」でした！\n\n森の守護者とタロット占いで診断してみてね✨`;
-    
+    const genreTitle = document.getElementById('result-title')?.textContent || '今日の運勢';
+    const shareText = `「森の守護者とタロット占い」で＜${genreTitle}＞を占ってみたよ！
+性格タイプ診断もできるからみんなもやってみて！
+
+#森の守護者とタロット占い #森の守護者診断 #${guardianData.name || '???'} #${genreTitle} #タロット占い`;
+
     if (navigator.share) {
         navigator.share({
             title: '森の守護者診断結果',
