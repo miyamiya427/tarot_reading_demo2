@@ -9,8 +9,8 @@
     background: rgba(255, 255, 255, 0.95);
     border-radius: 20px;
     padding: 25px;
-    margin: 20px 0 0 0;
-    padding-bottom: 25px;
+    margin: 20px 0;
+    padding-bottom: 80px;
     color: #333;
     box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
 }
