@@ -40,11 +40,11 @@
     align-items: center;
     cursor: pointer;
     font-size: 13px;
-    color: #495057;
+    color: #6c757d;
     padding: 12px 15px;
     border-radius: 8px;
-    background: white;
-    border: 2px solid #e9ecef;
+    background: #f3f3ed;
+    border: 2px solid #dacc89;
     transition: all 0.2s ease;
     width: 100%;
     justify-content: center;
@@ -52,12 +52,13 @@
 }
 
 .option-label:hover {
-    background: #e3f2fd;
+    background: #dacc89;
     border-color: #dacc89;
+    color: white;
 }
 
 .option-label.selected {
-    background: #c2dada;
+    background: #dacc89;
     color: white;
     border-color: #dacc89;
 }
@@ -248,3 +249,18 @@
 
 }
 
+/* ページ9, 10, 11の戻るボタンを下部に配置 */
+#page9 > .btn-secondary,
+#page10 > .btn-secondary,
+#page11 > .btn-secondary {
+    position: relative;
+    margin-top: 20px;
+    margin-bottom: 30px;
+}
+
+/* diagnosis-containerの後に配置されるように */
+#page9 .diagnosis-container,
+#page10 .diagnosis-container,
+#page11 .diagnosis-container {
+    margin-bottom: 0;
+}
