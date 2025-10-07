@@ -249,10 +249,3 @@
 
 }
 
-/* 上部の戻るボタンを非表示（暫定対処） */
-#page9 .btn-secondary:first-of-type,
-#page10 .btn-secondary:first-of-type,
-#page11 .btn-secondary:first-of-type,
-#page12 .btn-secondary:first-of-type {
-    display: none;
-}
