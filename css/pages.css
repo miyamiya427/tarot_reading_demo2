@@ -9,8 +9,8 @@
     background: rgba(255, 255, 255, 0.95);
     border-radius: 20px;
     padding: 25px;
-    margin: 20px 0;
-    padding-bottom: 80px;
+    margin: 20px 0 0 0;
+    padding-bottom: 25px;
     color: #333;
     box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
 }
@@ -249,3 +249,10 @@
 
 }
 
+/* 上部の戻るボタンを非表示（暫定対処） */
+#page9 .btn-secondary:first-of-type,
+#page10 .btn-secondary:first-of-type,
+#page11 .btn-secondary:first-of-type,
+#page12 .btn-secondary:first-of-type {
+    display: none;
+}
