@@ -9,10 +9,12 @@
     background: rgba(255, 255, 255, 0.95);
     border-radius: 20px;
     padding: 25px;
-    margin: 20px 0;
+    margin: 20px auto;
     padding-bottom: 80px;
     color: #333;
     box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+    width: 100%;
+    max-width: 100%;
 }
 
 .question-item {
@@ -236,10 +238,7 @@
         width: 100vw;
     }
     
-    .diagnosis-container {
-        margin: 10px 0;
-        padding: 20px 15px;
-    }
+
     
     .animal-icon {
         width: 50px;
