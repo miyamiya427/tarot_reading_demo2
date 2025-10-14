@@ -16,7 +16,7 @@ body {
 
 .container {
     width: 100%;
-    max-width: 375px;
+    max-width: 480px;
     margin: 0 auto;
     position: relative;
     padding: 20px;
