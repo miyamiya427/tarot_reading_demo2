@@ -536,7 +536,7 @@ function displayFreeResult(result) {
     
     const html = `
         <div style="margin-bottom: 25px;">
-            <h4 style="color: #4a6fa5; font-size: 15px; font-weight: bold; margin-bottom: 12px; border-left: 4px solid #dacc89; padding-left: 10px;">
+            <h4 style="color: #dacc89; font-size: 15px; font-weight: bold; margin-bottom: 12px; border-left: 4px solid #dacc89; padding-left: 10px;">
                 ＜運勢と展開＞
             </h4>
             <div style="font-size: 14px; line-height: 1.8; color: #2c3e50;">
@@ -545,7 +545,7 @@ function displayFreeResult(result) {
         </div>
         
         <div style="margin-bottom: 25px;">
-            <h4 style="color: #4a6fa5; font-size: 15px; font-weight: bold; margin-bottom: 12px; border-left: 4px solid #dacc89; padding-left: 10px;">
+            <h4 style="color: #dacc89; font-size: 15px; font-weight: bold; margin-bottom: 12px; border-left: 4px solid #dacc89; padding-left: 10px;">
                 ＜アドバイス＞
             </h4>
             <div style="font-size: 14px; line-height: 1.8; color: #2c3e50;">
@@ -574,7 +574,7 @@ function displayPremiumResult(result) {
     
     const html = `
         <div style="margin-bottom: 25px;">
-            <h4 style="color: #4a6fa5; font-size: 15px; font-weight: bold; margin-bottom: 12px; border-left: 4px solid #dacc89; padding-left: 10px;">
+            <h4 style="color: #dacc89; font-size: 15px; font-weight: bold; margin-bottom: 12px; border-left: 4px solid #dacc89; padding-left: 10px;">
                 ＜状況の読み解き＞
             </h4>
             <div style="font-size: 14px; line-height: 1.8; color: #2c3e50;">
@@ -583,7 +583,7 @@ function displayPremiumResult(result) {
         </div>
         
         <div style="margin-bottom: 25px;">
-            <h4 style="color: #4a6fa5; font-size: 15px; font-weight: bold; margin-bottom: 12px; border-left: 4px solid #dacc89; padding-left: 10px;">
+            <h4 style="color: #dacc89; font-size: 15px; font-weight: bold; margin-bottom: 12px; border-left: 4px solid #dacc89; padding-left: 10px;">
                 ＜今後の展開＞
             </h4>
             <div style="font-size: 14px; line-height: 1.8; color: #2c3e50;">
@@ -592,7 +592,7 @@ function displayPremiumResult(result) {
         </div>
         
         <div style="margin-bottom: 25px;">
-            <h4 style="color: #4a6fa5; font-size: 15px; font-weight: bold; margin-bottom: 12px; border-left: 4px solid #dacc89; padding-left: 10px;">
+            <h4 style="color: #dacc89; font-size: 15px; font-weight: bold; margin-bottom: 12px; border-left: 4px solid #dacc89; padding-left: 10px;">
                 ＜アドバイス＞
             </h4>
             <div style="font-size: 14px; line-height: 1.8; color: #2c3e50;">
