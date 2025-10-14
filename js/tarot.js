@@ -455,8 +455,11 @@ function displaySelectedCards() {
         
         if (cardElement && card) {
             cardElement.querySelector('.card-emoji').textContent = ''; // 絵文字削除
-            cardElement.querySelector('.card-name').textContent = card.name + (isReversed ? ' (逆位置)' : '');
-            cardElement.querySelector('.card-position').textContent = cardPositions[index];
+            // 上段：占った内容
+            cardElement.querySelector('.card-name').textContent = cardPositions[index];
+            // 下段：カード名 + 改行 + 正位置/逆位置
+            const orientation = isReversed ? '逆位置' : '正位置';
+            cardElement.querySelector('.card-position').textContent = card.name + '\n' + orientation;
         }
     });
 }
