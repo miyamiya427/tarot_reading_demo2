@@ -39,13 +39,13 @@
     background: #f3f3ed;
     color: #dacc89;
     border: 2px solid #dacc89;
-    padding: 15px 60px;
+    padding: 12px 50px;
     border-radius: 25px;
     font-size: 16px;
     font-weight: bold;
     cursor: pointer;
     display: block;
-    margin: 30px auto;
+    margin: 20px auto;
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
     transition: all 0.3s ease;
     min-width: 200px;
