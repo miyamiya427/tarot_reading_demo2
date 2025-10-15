@@ -129,6 +129,18 @@ function openModal(type) {
     const overlay = document.getElementById('modal-overlay');
     const body = document.getElementById('modal-body');
     
+    // 強制的に横書きを適用
+    const modalContent = overlay.querySelector('.modal-content');
+    if (modalContent) {
+        modalContent.style.writingMode = 'horizontal-tb';
+        modalContent.style.direction = 'ltr';
+        modalContent.style.textAlign = 'left';
+    }
+    if (body) {
+        body.style.writingMode = 'horizontal-tb';
+        body.style.direction = 'ltr';
+    }
+    
     let content = '';
     
     if (type === 'news') {
