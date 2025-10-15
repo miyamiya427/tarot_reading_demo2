@@ -38,8 +38,23 @@
 </div>
         
         <button class="btn" onclick="showPage(2)">はじめる</button>
+        
+        <div style="text-align: center; margin-top: 30px; display: flex; justify-content: center; gap: 20px; flex-wrap: wrap; font-size: 13px; color: #6f756e;">
+            <a href="#" onclick="openModal('news'); return false;" style="color: #7894ab; text-decoration: none; border-bottom: 1px solid #7894ab;">📢 お知らせ</a>
+            <a href="#" onclick="openModal('types'); return false;" style="color: #7894ab; text-decoration: none; border-bottom: 1px solid #7894ab;">🦊 性格タイプ一覧</a>
+            <a href="#" onclick="openModal('about'); return false;" style="color: #7894ab; text-decoration: none; border-bottom: 1px solid #7894ab;">🔮 タロット占いとは</a>
+        </div>
+        
     </div>
 </div>
+
+<!-- モーダル -->
+        <div id="modal-overlay" class="modal-overlay" onclick="closeModal()">
+            <div class="modal-content" onclick="event.stopPropagation()">
+                <button class="modal-close" onclick="closeModal()">×</button>
+                <div id="modal-body"></div>
+            </div>
+        </div>
 
         <!-- ページ2: メニュー画面 -->
         <div class="page" id="page2">
