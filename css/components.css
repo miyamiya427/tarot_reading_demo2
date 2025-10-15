@@ -102,7 +102,6 @@
     height: 100%;
     background: rgba(0, 0, 0, 0.7);
     z-index: 9999;
-    overflow-y: auto;
 }
 
 .modal-overlay.active {
@@ -110,13 +109,6 @@
     justify-content: center;
     align-items: center;
 }
-
-
-#modal-body {
-    writing-mode: horizontal-tb;
-    direction: ltr;
-}
-
 
 .modal-content {
     background: white;
@@ -127,19 +119,7 @@
     overflow-y: auto;
     padding: 30px 25px;
     position: relative;
-    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
-    writing-mode: horizontal-tb;
-    text-align: left;
 }
-```
-
----
-
-④**次に、`#modal-body`のスタイルも確認します。**
-
-**検索する文字列（1行で）：**
-```
-#modal-body h2 {
 
 .modal-close {
     position: absolute;
@@ -148,13 +128,7 @@
     background: none;
     border: none;
     font-size: 30px;
-    color: #6c757d;
     cursor: pointer;
-    line-height: 1;
-}
-
-.modal-close:hover {
-    color: #dacc89;
 }
 
 #modal-body h2 {
@@ -165,7 +139,6 @@
 }
 
 #modal-body p {
-    color: #2c3e50;
     font-size: 14px;
     line-height: 1.8;
     margin-bottom: 15px;
