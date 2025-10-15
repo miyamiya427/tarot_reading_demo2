@@ -123,3 +123,89 @@ function checkExistingGuardian() {
 function shareResult() {
     shareResultWithImage();
 }
+
+// モーダル機能
+function openModal(type) {
+    const overlay = document.getElementById('modal-overlay');
+    const body = document.getElementById('modal-body');
+    
+    let content = '';
+    
+    if (type === 'news') {
+        content = `
+            <h2>📢 お知らせ</h2>
+            <div class="news-item">
+                <div class="news-date">2025年1月15日</div>
+                <p>プレミアム版リリース予定！より詳しい鑑定結果をお届けします。</p>
+            </div>
+            <div class="news-item">
+                <div class="news-date">2025年1月10日</div>
+                <p>恋愛運（復縁）ジャンルを追加しました。</p>
+            </div>
+            <div class="news-item">
+                <div class="news-date">2025年1月5日</div>
+                <p>アプリをリリースしました！</p>
+            </div>
+        `;
+    } else if (type === 'types') {
+        content = `
+            <h2>🦊 性格タイプ一覧</h2>
+            <p style="text-align: center; font-size: 13px; color: #6c757d; margin-bottom: 20px;">
+                性格診断を受けると、あなたがどのタイプか分かります！
+            </p>
+            <div class="type-grid">
+                <div class="type-item">
+                    <h3>🦊 暁紅の狐 / 宵紅の狐</h3>
+                    <p>エネルギッシュな革新者 / 神秘的な賢者</p>
+                </div>
+                <div class="type-item">
+                    <h3>🦅 昇天の鷹 / 翔月の鷹</h3>
+                    <p>野心的なリーダー / 哲学的な思索者</p>
+                </div>
+                <div class="type-item">
+                    <h3>🐺 群銀の狼 / 孤月の狼</h3>
+                    <p>チームビルダー / 一匹狼の強者</p>
+                </div>
+                <div class="type-item">
+                    <h3>🦌 若翠の鹿 / 深翠の鹿</h3>
+                    <p>希望の使者 / 心の癒し手</p>
+                </div>
+                <div class="type-item">
+                    <h3>🐻 守金の熊 / 憩金の熊</h3>
+                    <p>頼れる守護者 / 安らぎの提供者</p>
+                </div>
+                <div class="type-item">
+                    <h3>🦋 舞虹の蝶 / 夢虹の蝶</h3>
+                    <p>華やかな芸術家 / 幻想的な創造者</p>
+                </div>
+            </div>
+        `;
+    } else if (type === 'about') {
+        content = `
+            <h2>🔮 タロット占いとは</h2>
+            <p>
+                タロット占いは、78枚のカードから直感で選んだカードの意味を読み解くことで、今のあなたの状況や未来へのアドバイスを得る占術です。
+            </p>
+            <p>
+                <strong>📍 直感が大切</strong><br>
+                カードを選ぶ際は、考えすぎず「なんとなく気になる」という直感を信じてください。その直感こそが、あなたの無意識からのメッセージです。
+            </p>
+            <p>
+                <strong>📍 スリーカードスプレッド</strong><br>
+                このアプリでは3枚のカードを使います。それぞれ「現状」「展開」「アドバイス」を表し、過去・現在・未来を読み解きます。
+            </p>
+            <p>
+                <strong>📍 AIリーディング</strong><br>
+                選ばれたカードを、あなたの性格タイプに合わせてAIが読み解きます。一般的な解釈だけでなく、あなたに最適なメッセージをお届けします。
+            </p>
+        `;
+    }
+    
+    body.innerHTML = content;
+    overlay.classList.add('active');
+}
+
+function closeModal() {
+    const overlay = document.getElementById('modal-overlay');
+    overlay.classList.remove('active');
+}
