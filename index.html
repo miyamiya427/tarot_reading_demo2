@@ -16,21 +16,21 @@
 
         <!-- ページ1: 新デザインホーム画面 -->
         <div class="page active" id="page1">
-    <div style="text-align: center; margin: 40px 0 80px 0;">
-      <h2 class="ribbon2" style="margin-bottom: 30px; letter-spacing: 2px;">
+    <div style="text-align: center; margin: 20px 0 30px 0;">
+      <h2 class="ribbon2" style="margin-bottom: 15px; letter-spacing: 2px;">
     TAROT READING
 </h2>
         
-      <h1 style="margin-bottom: 20px; line-height: 1.2; font-family: 'Zen Maru Gothic', sans-serif; color: #6f756e;">
+      <h1 style="margin-bottom: 15px; line-height: 1.2; font-family: 'Zen Maru Gothic', sans-serif; color: #6f756e;">
     <span style="font-size: 20px;">森</span><span style="font-size: 14px;">の</span><span style="font-size: 20px;">守護者</span><span style="font-size: 14px;">と</span><br>
     <span style="font-size: 28px;">３枚のカード</span>
 </h1>
         
-        <div style="margin: 30px 0; text-align: center;">
-    <img src="images/title-cards.png" style="width: 240px; height: auto;" alt="タロットカード">
+        <div style="margin: 15px 0; text-align: center;">
+    <img src="images/title-cards.png" style="width: 200px; height: auto;" alt="タロットカード">
 </div>
         
-        <div style="font-size: 14px; margin-bottom: 40px; line-height: 1.6; color: #6f756e;">
+        <div style="font-size: 13px; margin-bottom: 20px; line-height: 1.5; color: #6f756e;">
     あなたの守護者タイプを診断後、<br>
     タロットで今のあなたの状況を占います。<br>
     あなたのタイプに合わせた<br>
@@ -38,8 +38,30 @@
 </div>
         
         <button class="btn" onclick="showPage(2)">はじめる</button>
+```
+
+---
+
+④**次に、追加したリンク部分も修正します。**
+
+**検索する文字列（1行で）：**
+```
+<div style="text-align: center; margin-top: 30px; display: flex;
         
-        <div style="text-align: center; margin-top: 30px; display: flex; justify-content: center; gap: 20px; flex-wrap: wrap; font-size: 13px; color: #6f756e;">
+        <div style="text-align: center; margin-top: 15px; display: flex; justify-content: center; gap: 20px; flex-wrap: wrap; font-size: 12px; color: #6f756e;">
+```
+
+---
+
+⑤**最後に、ボタンのスタイルも少し調整します。**
+
+**ファイル：`css/components.css`**
+
+**検索する文字列（1行で）：**
+```
+.btn {
+    background: #f3f3ed;
+    
             <a href="#" onclick="openModal('news'); return false;" style="color: #7894ab; text-decoration: none; border-bottom: 1px solid #7894ab;">📢 お知らせ</a>
             <a href="#" onclick="openModal('types'); return false;" style="color: #7894ab; text-decoration: none; border-bottom: 1px solid #7894ab;">🦊 性格タイプ一覧</a>
             <a href="#" onclick="openModal('about'); return false;" style="color: #7894ab; text-decoration: none; border-bottom: 1px solid #7894ab;">🔮 タロット占いとは</a>
