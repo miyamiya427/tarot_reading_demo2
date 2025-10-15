@@ -318,6 +318,15 @@
                 </div>
             </div>
         </div>
+        
+        <!-- モーダル -->
+<div id="modal-overlay" class="modal-overlay" onclick="closeModal()">
+    <div class="modal-content" onclick="event.stopPropagation()">
+        <button class="modal-close" onclick="closeModal()">×</button>
+        <div id="modal-body"></div>
+    </div>
+</div>
+        
 <!-- CSS読み込み -->
 <link rel="stylesheet" href="css/base.css">
 <link rel="stylesheet" href="css/components.css">  
