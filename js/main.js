@@ -163,11 +163,11 @@ function checkExistingGuardian() {
         const guardianButton = document.querySelector('button[onclick="showPage(3)"]');
         guardianButton.textContent = '守護神を再診断する';
         
-        // 動物絵文字を非表示にする
-        const animalIcons = document.querySelector('.animal-icons');
-        if (animalIcons) {
-            animalIcons.style.display = 'none';
-        }
+        // rotating-guardianを非表示にする
+const rotatingGuardian = document.getElementById('rotating-guardian');
+if (rotatingGuardian) {
+    rotatingGuardian.style.display = 'none';
+}
     }
 }
 
