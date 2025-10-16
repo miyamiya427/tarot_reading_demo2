@@ -14,19 +14,35 @@ function startRotatingGuardian() {
         'dancing_butterfly', 'dreaming_butterfly'
     ];
     
+    let currentType = guardianTypes[Math.floor(Math.random() * guardianTypes.length)];
+    
     function changeGuardianImage() {
-        const randomType = guardianTypes[Math.floor(Math.random() * guardianTypes.length)];
-        const imageUrl = guardianImages[randomType];
         const img = document.getElementById('guardian-image');
-        if (img && imageUrl) {
+        if (!img) return;
+        
+        let newType;
+        do {
+            newType = guardianTypes[Math.floor(Math.random() * guardianTypes.length)];
+        } while (newType === currentType && guardianTypes.length > 1);
+        currentType = newType;
+        
+        const imageUrl = guardianImages[currentType];
+        if (!imageUrl) return;
+        
+        img.style.opacity = '0';
+        
+        setTimeout(() => {
             img.src = imageUrl;
-        }
+            img.style.opacity = '1';
+        }, 500);
     }
     
-    // 初回表示
-    changeGuardianImage();
+    const img = document.getElementById('guardian-image');
+    const imageUrl = guardianImages[currentType];
+    if (img && imageUrl) {
+        img.src = imageUrl;
+    }
     
-    // 3秒ごとに画像を変更
     rotatingGuardianInterval = setInterval(changeGuardianImage, 3000);
 }
 
