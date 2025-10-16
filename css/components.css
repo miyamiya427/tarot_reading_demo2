@@ -119,6 +119,9 @@
     overflow-y: auto;
     padding: 30px 25px;
     position: relative;
+    writing-mode: horizontal-tb;
+    direction: ltr;
+    text-align: left;
 }
 
 .modal-close {
