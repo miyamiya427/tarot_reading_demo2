@@ -814,7 +814,337 @@ const diagnosisQuestions = [
             B: { text: "人との絆と愛情", scores: ['silver_wolf', 'emerald_deer'] },
             C: { text: "安定と平和な日々", scores: ['gold_bear', 'sapphire_hawk'] }
         }
+    },
+    
+    {
+    id: 61,
+    text: "好きな人ができたとき、あなたは？",
+    options: {
+        A: { text: "すぐに気づかれるくらいアプローチしちゃう", scores: ['ruby_fox', 'silver_wolf'] },
+        B: { text: "相手の反応を見ながら、ゆっくり距離を詰める", scores: ['emerald_deer', 'gold_bear'] },
+        C: { text: "自分の気持ちをひっそり温めておく", scores: ['sapphire_hawk', 'rainbow_butterfly'] }
     }
+},
+
+// 質問62
+{
+    id: 62,
+    text: "付き合ってからのデート、どんなのが理想？",
+    options: {
+        A: { text: "毎回新しい場所で新しい経験を共有したい", scores: ['ruby_fox', 'sapphire_hawk'] },
+        B: { text: "いつもの場所でのんびり過ごすのが好き", scores: ['emerald_deer', 'gold_bear'] },
+        C: { text: "互いの世界観を楽しめる自由な時間", scores: ['rainbow_butterfly', 'silver_wolf'] }
+    }
+},
+
+// 質問63
+{
+    id: 63,
+    text: "相手と価値観が違うことが判明した時は？",
+    options: {
+        A: { text: "相手を変えようと説得する", scores: ['ruby_fox', 'sapphire_hawk'] },
+        B: { text: "相手の考えを理解しようと歩み寄る", scores: ['silver_wolf', 'emerald_deer'] },
+        C: { text: "その違いを受け入れて、個性として尊重する", scores: ['gold_bear', 'rainbow_butterfly'] }
+    }
+},
+
+// 質問64
+{
+    id: 64,
+    text: "浮気や裏切りを感じたとき、あなたは？",
+    options: {
+        A: { text: "すぐに相手に直談判する", scores: ['ruby_fox', 'silver_wolf'] },
+        B: { text: "ショックで落ち込み、一人で考え込む", scores: ['emerald_deer', 'rainbow_butterfly'] },
+        C: { text: "冷静に状況を判断してから行動する", scores: ['sapphire_hawk', 'gold_bear'] }
+    }
+},
+
+// 質問65
+{
+    id: 65,
+    text: "好きな人との距離が遠くなったと感じたら？",
+    options: {
+        A: { text: "とにかく相手に気を引かせようとする", scores: ['ruby_fox', 'rainbow_butterfly'] },
+        B: { text: "相手に気づいてもらえるまで待つ", scores: ['emerald_deer', 'gold_bear'] },
+        C: { text: "相手の気持ちを確認して、話し合う", scores: ['silver_wolf', 'sapphire_hawk'] }
+    }
+},
+
+// 質問66
+{
+    id: 66,
+    text: "恋愛で最も大事にしたいのは？",
+    options: {
+        A: { text: "刺激と興奮、一緒にいて楽しいこと", scores: ['ruby_fox', 'rainbow_butterfly'] },
+        B: { text: "信頼と安定、長く一緒にいたいと思える関係", scores: ['gold_bear', 'silver_wolf'] },
+        C: { text: "成長と向上、相手とともに高まること", scores: ['sapphire_hawk', 'emerald_deer'] }
+    }
+},
+
+// 質問67
+{
+    id: 67,
+    text: "相手の欠点を発見したとき、あなたは？",
+    options: {
+        A: { text: "すぐに指摘して改善させようとする", scores: ['sapphire_hawk', 'silver_wolf'] },
+        B: { text: "その欠点も含めて愛そうとする", scores: ['emerald_deer', 'gold_bear'] },
+        C: { text: "その欠点こそが相手の個性だと受け入れる", scores: ['rainbow_butterfly', 'ruby_fox'] }
+    }
+},
+
+// 質問68
+{
+    id: 68,
+    text: "長く付き合ってマンネリを感じたら？",
+    options: {
+        A: { text: "新しいデートプランをどんどん提案する", scores: ['ruby_fox', 'sapphire_hawk'] },
+        B: { text: "相手と話し合って、関係を見直す", scores: ['silver_wolf', 'emerald_deer'] },
+        C: { text: "そのマンネリの中に安心感を感じる", scores: ['gold_bear', 'rainbow_butterfly'] }
+    }
+},
+
+// 質問69
+{
+    id: 69,
+    text: "別れが頭をよぎったとき、あなたは？",
+    options: {
+        A: { text: "その場で相手に伝える", scores: ['ruby_fox', 'silver_wolf'] },
+        B: { text: "一人で何度も考えて悩む", scores: ['rainbow_butterfly', 'emerald_deer'] },
+        C: { text: "冷静に状況を分析してから決断する", scores: ['sapphire_hawk', 'gold_bear'] }
+    }
+},
+
+// 質問70
+{
+    id: 70,
+    text: "理想の結婚相手のタイプは？",
+    options: {
+        A: { text: "一緒にいて楽しく、新しい世界を見せてくれる人", scores: ['ruby_fox', 'rainbow_butterfly'] },
+        B: { text: "安定感があり、一緒にいて安心できる人", scores: ['gold_bear', 'emerald_deer'] },
+        C: { text: "一緒に目標に向かって頑張れる人", scores: ['sapphire_hawk', 'silver_wolf'] }
+    }
+},
+
+// 質問71
+{
+    id: 71,
+    text: "相手の友人や家族との関係は大事？",
+    options: {
+        A: { text: "相手との関係が良ければそれでいい", scores: ['ruby_fox', 'rainbow_butterfly'] },
+        B: { text: "相手の周囲との関係も大切にしたい", scores: ['silver_wolf', 'emerald_deer'] },
+        C: { text: "必要最小限の付き合いで十分", scores: ['gold_bear', 'sapphire_hawk'] }
+    }
+},
+
+// 質問72
+{
+    id: 72,
+    text: "相手が仕事で失敗したとき、あなたは？",
+    options: {
+        A: { text: "すぐに励ましに行く", scores: ['silver_wolf', 'emerald_deer'] },
+        B: { text: "相手が落ち着くまで見守る", scores: ['gold_bear', 'rainbow_butterfly'] },
+        C: { text: "原因を分析して、アドバイスする", scores: ['sapphire_hawk', 'ruby_fox'] }
+    }
+},
+
+// 質問73
+{
+    id: 73,
+    text: "恋愛で妥協できない点は？",
+    options: {
+        A: { text: "相手の行動力と決断力", scores: ['ruby_fox', 'sapphire_hawk'] },
+        B: { text: "相手の思いやりと誠実さ", scores: ['silver_wolf', 'emerald_deer'] },
+        C: { text: "相手の独立性と自由さ", scores: ['rainbow_butterfly', 'gold_bear'] }
+    }
+},
+
+// 質問74
+{
+    id: 74,
+    text: "付き合う前に相手を試すような行動をする？",
+    options: {
+        A: { text: "する、相手の反応を見たい", scores: ['ruby_fox', 'rainbow_butterfly'] },
+        B: { text: "しない、誠実に向き合いたい", scores: ['silver_wolf', 'emerald_deer'] },
+        C: { text: "必要に応じてする", scores: ['sapphire_hawk', 'gold_bear'] }
+    }
+},
+
+// 質問75
+{
+    id: 75,
+    text: "恋愛で最も怖いことは？",
+    options: {
+        A: { text: "相手に依存されることや、窮屈に感じること", scores: ['ruby_fox', 'rainbow_butterfly'] },
+        B: { text: "相手に裏切られることや、孤独になること", scores: ['silver_wolf', 'emerald_deer'] },
+        C: { text: "失敗や、間違った判断をすること", scores: ['sapphire_hawk', 'gold_bear'] }
+    }
+},
+
+// === 仕事観（質問76～90） ===
+// 質問76
+{
+    id: 76,
+    text: "仕事を選ぶ時に一番大事なのは？",
+    options: {
+        A: { text: "やりがいと成長できるか", scores: ['sapphire_hawk', 'emerald_deer'] },
+        B: { text: "安定性と福利厚生", scores: ['gold_bear', 'silver_wolf'] },
+        C: { text: "自由度と裁量", scores: ['ruby_fox', 'rainbow_butterfly'] }
+    }
+},
+
+// 質問77
+{
+    id: 77,
+    text: "仕事でストレスを感じたら？",
+    options: {
+        A: { text: "気分転換に外出や新しいことをする", scores: ['ruby_fox', 'sapphire_hawk'] },
+        B: { text: "信頼できる人に相談する", scores: ['silver_wolf', 'emerald_deer'] },
+        C: { text: "一人になって考え込む", scores: ['gold_bear', 'rainbow_butterfly'] }
+    }
+},
+
+// 質問78
+{
+    id: 78,
+    text: "理想の職場環境は？",
+    options: {
+        A: { text: "チームワークが良く、一体感がある", scores: ['silver_wolf', 'emerald_deer'] },
+        B: { text: "個人の役割が明確で、自由度がある", scores: ['ruby_fox', 'rainbow_butterfly'] },
+        C: { text: "安定していて、ルールが明確", scores: ['gold_bear', 'sapphire_hawk'] }
+    }
+},
+
+// 質問79
+{
+    id: 79,
+    text: "上司のタイプでモチベーションが変わる？",
+    options: {
+        A: { text: "非常に変わる、上司次第で全てが決まる", scores: ['silver_wolf', 'emerald_deer'] },
+        B: { text: "ある程度は変わるが、自分でコントロール可能", scores: ['sapphire_hawk', 'ruby_fox'] },
+        C: { text: "あまり変わらない、仕事は仕事", scores: ['gold_bear', 'rainbow_butterfly'] }
+    }
+},
+
+// 質問80
+{
+    id: 80,
+    text: "失敗したときの対処法は？",
+    options: {
+        A: { text: "すぐに改善策を実行する", scores: ['ruby_fox', 'sapphire_hawk'] },
+        B: { text: "周りに相談して、一緒に解決する", scores: ['silver_wolf', 'emerald_deer'] },
+        C: { text: "原因を分析して、次に活かす", scores: ['gold_bear', 'rainbow_butterfly'] }
+    }
+},
+
+// 質問81
+{
+    id: 81,
+    text: "キャリアアップで重視するのは？",
+    options: {
+        A: { text: "給料や地位の上昇", scores: ['sapphire_hawk', 'gold_bear'] },
+        B: { text: "やりがいと成長", scores: ['ruby_fox', 'emerald_deer'] },
+        C: { text: "自由度と時間的余裕", scores: ['rainbow_butterfly', 'silver_wolf'] }
+    }
+},
+
+// 質問82
+{
+    id: 82,
+    text: "仕事で誰かに相談するとき、あなたは？",
+    options: {
+        A: { text: "困ったことがあると、すぐに誰かに声をかける", scores: ['silver_wolf', 'emerald_deer'] },
+        B: { text: "自分で考えてから、必要に応じて相談する", scores: ['sapphire_hawk', 'ruby_fox'] },
+        C: { text: "自分で解決できるまで、相談しない", scores: ['gold_bear', 'rainbow_butterfly'] }
+    }
+},
+
+// 質問83
+{
+    id: 83,
+    text: "同僚との関係で大事にしたいのは？",
+    options: {
+        A: { text: "深い友情と信頼", scores: ['silver_wolf', 'emerald_deer'] },
+        B: { text: "プロフェッショナルな距離", scores: ['gold_bear', 'sapphire_hawk'] },
+        C: { text: "適度な距離で、相手のペースを尊重", scores: ['ruby_fox', 'rainbow_butterfly'] }
+    }
+},
+
+// 質問84
+{
+    id: 84,
+    text: "忙しい時期をどう乗り切る？",
+    options: {
+        A: { text: "チーム全体で支え合う", scores: ['silver_wolf', 'emerald_deer'] },
+        B: { text: "一人で集中してこなす", scores: ['ruby_fox', 'rainbow_butterfly'] },
+        C: { text: "計画的に優先順位をつけて対応", scores: ['sapphire_hawk', 'gold_bear'] }
+    }
+},
+
+// 質問85
+{
+    id: 85,
+    text: "新しいプロジェクトが始まったとき、あなたは？",
+    options: {
+        A: { text: "新しい可能性にワクワクする", scores: ['ruby_fox', 'rainbow_butterfly'] },
+        B: { text: "チーム全体の目標を意識する", scores: ['silver_wolf', 'emerald_deer'] },
+        C: { text: "リスクを評価して慎重に進める", scores: ['sapphire_hawk', 'gold_bear'] }
+    }
+},
+
+// 質問86
+{
+    id: 86,
+    text: "仕事で最も避けたいのは？",
+    options: {
+        A: { text: "つまらなくて単調な業務", scores: ['ruby_fox', 'rainbow_butterfly'] },
+        B: { text: "一人で孤立することや、チーム外されること", scores: ['silver_wolf', 'emerald_deer'] },
+        C: { text: "失敗や、責任を問われること", scores: ['sapphire_hawk', 'gold_bear'] }
+    }
+},
+
+// 質問87
+{
+    id: 87,
+    text: "リーダーシップを任されたら？",
+    options: {
+        A: { text: "チーム全体を引っ張る、まとめ役になる", scores: ['silver_wolf', 'sapphire_hawk'] },
+        B: { text: "各自の役割を尊重しつつ、サポートする", scores: ['emerald_deer', 'gold_bear'] },
+        C: { text: "できれば個の裁量で進めたい", scores: ['ruby_fox', 'rainbow_butterfly'] }
+    }
+},
+
+// 質問88
+{
+    id: 88,
+    text: "年上の上司や先輩とうまくやるには？",
+    options: {
+        A: { text: "相手の考えや価値観を理解しようとする", scores: ['silver_wolf', 'emerald_deer'] },
+        B: { text: "自分の意見は主張しつつ、相手を尊重", scores: ['ruby_fox', 'sapphire_hawk'] },
+        C: { text: "仕事のルールに従って、淡々と進める", scores: ['gold_bear', 'rainbow_butterfly'] }
+    }
+},
+
+// 質問89
+{
+    id: 89,
+    text: "成功に必要な最も大事な要素は？",
+    options: {
+        A: { text: "行動力と決断力", scores: ['ruby_fox', 'sapphire_hawk'] },
+        B: { text: "人間関係と信頼", scores: ['silver_wolf', 'emerald_deer'] },
+        C: { text: "計画性と継続力", scores: ['gold_bear', 'rainbow_butterfly'] }
+    }
+},
+
+// 質問90
+{
+    id: 90,
+    text: "仕事の最終的な目標は？",
+    options: {
+        A: { text: "自分の可能性を最大限発揮すること", scores: ['ruby_fox', 'rainbow_butterfly'] },
+        B: { text: "社会や周りの人に貢献すること", scores: ['silver_wolf', 'emerald_deer'] },
+        C: { text: "安定した生活と着実な成長", scores: ['gold_bear', 'sapphire_hawk'] }
+    }
+}
 ];
 
 // 配点設定の整理（実装時に使用）
