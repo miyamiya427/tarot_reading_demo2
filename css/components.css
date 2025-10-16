@@ -87,13 +87,12 @@
 }
 
 #rotating-guardian img {
-    animation: fadeInOut 3s infinite;
+    opacity: 1;
+    transition: opacity 1s ease-in-out;
 }
 ```
 
 ---
-
-## 修正3：JavaScript（ランダム画像切り替え）
 
 **ファイル：`js/main.js`**
 
