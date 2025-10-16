@@ -55,14 +55,25 @@
                 <div class="ribbon2">START</div>
             </div>
 
-            <div class="animal-icons">
-                <div class="animal-icon">🦊</div>
-                <div class="animal-icon">🦅</div>
-                <div class="animal-icon">🐺</div>
-                <div class="animal-icon">🦌</div>
-                <div class="animal-icon">🐻</div>
-                <div class="animal-icon">🦋</div>
+            <div class="animal-icons" id="rotating-guardian">
+                <img id="guardian-image" src="" alt="守護者" style="width: 120px; height: 120px; border-radius: 50%; object-fit: cover;">
             </div>
+```
+
+---
+
+## 修正2：CSS（フェードアニメーション）
+
+**ファイル：`css/components.css`**
+
+**①検索する文字列：**
+```
+.animal-icons {
+    display: flex;
+    justify-content: space-around;
+    margin: 20px 0;
+    flex-wrap: wrap;
+}
 
             <!-- 既存の守護神表示エリア -->
             <div id="existing-guardian" style="display: none; text-align: center; margin: 20px 0; padding: 20px; background: rgba(255, 255, 255, 0.9); border-radius: 15px; color: #dacc89;">
