@@ -72,6 +72,12 @@
     color: #f3f3ed;
 }
 
+#rotating-guardian {
+    display: flex;
+    justify-content: center;
+    margin: 20px 0;
+}
+
 @keyframes fadeInOut {
     0% { opacity: 0; }
     10% { opacity: 1; }
