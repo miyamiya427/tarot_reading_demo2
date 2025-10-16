@@ -161,9 +161,19 @@ const tieBreakOrder = ['ruby_fox', 'sapphire_hawk', 'silver_wolf', 'emerald_deer
  */
 function diagnose12Types(answers) {
     // Step 1: 回答数チェック
-    if (Object.keys(answers).length !== 60) {
+    if (Object.keys(answers).length !== 90) {
         throw new Error('全ての質問に回答してください');
     }
+```
+
+---
+
+### **修正②：ループ前のスペース削除とループ値を90に変更**
+
+**検索文字列：**
+```
+// 各回答をスコアに反映
+    for (let questionId = 1; questionId <= 90; questionId++) {
     
     // Step 2: 基本6タイプのスコア計算
     const scores = {
@@ -176,7 +186,7 @@ function diagnose12Types(answers) {
     };
     
     // 各回答をスコアに反映
-for (let questionId = 1; questionId <= 60; questionId++) {
+for (let questionId = 1; questionId <= 90; questionId++) {
     const answer = answers[questionId];
     const questionScore = questionScoring[questionId];
     
