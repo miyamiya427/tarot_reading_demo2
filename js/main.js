@@ -1,10 +1,46 @@
 // メイン制御
 let currentGenre = '';
 
+// 守護者画像のランダム表示
+let rotatingGuardianInterval;
+
+function startRotatingGuardian() {
+    const guardianTypes = [
+        'dawn_ruby_fox', 'dusk_ruby_fox',
+        'ascending_hawk', 'soaring_hawk',
+        'pack_wolf', 'lone_wolf',
+        'young_deer', 'deep_deer',
+        'guardian_bear', 'resting_bear',
+        'dancing_butterfly', 'dreaming_butterfly'
+    ];
+    
+    function changeGuardianImage() {
+        const randomType = guardianTypes[Math.floor(Math.random() * guardianTypes.length)];
+        const imageUrl = guardianImages[randomType];
+        const img = document.getElementById('guardian-image');
+        if (img && imageUrl) {
+            img.src = imageUrl;
+        }
+    }
+    
+    // 初回表示
+    changeGuardianImage();
+    
+    // 3秒ごとに画像を変更
+    rotatingGuardianInterval = setInterval(changeGuardianImage, 3000);
+}
+
+function stopRotatingGuardian() {
+    if (rotatingGuardianInterval) {
+        clearInterval(rotatingGuardianInterval);
+    }
+}
+
 // 初期化
 document.addEventListener('DOMContentLoaded', function() {
     console.log('森の守護者とタロット占いアプリが読み込まれました');
     checkExistingGuardian();
+    startRotatingGuardian();
 });
 
 // ページ切り替え
