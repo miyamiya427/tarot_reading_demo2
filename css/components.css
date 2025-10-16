@@ -74,10 +74,36 @@
 
 .animal-icons {
     display: flex;
-    justify-content: space-around;
+    justify-content: center;
     margin: 20px 0;
     flex-wrap: wrap;
 }
+
+@keyframes fadeInOut {
+    0% { opacity: 0; }
+    10% { opacity: 1; }
+    90% { opacity: 1; }
+    100% { opacity: 0; }
+}
+
+#rotating-guardian img {
+    animation: fadeInOut 3s infinite;
+}
+```
+
+---
+
+## 修正3：JavaScript（ランダム画像切り替え）
+
+**ファイル：`js/main.js`**
+
+**①検索する文字列：**
+```
+// 初期化
+document.addEventListener('DOMContentLoaded', function() {
+    console.log('森の守護者とタロット占いアプリが読み込まれました');
+    checkExistingGuardian();
+});
 
 .animal-icon {
     width: 60px;
