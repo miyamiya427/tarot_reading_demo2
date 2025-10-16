@@ -36,31 +36,9 @@
     アドバイスをお届けします。
 </div>
         
-        <button class="btn" onclick="showPage(2)">はじめる</button>
-```
+       <button class="btn" onclick="showPage(2)">はじめる</button>
 
----
-
-④**次に、追加したリンク部分も修正します。**
-
-**検索する文字列（1行で）：**
-```
-<div style="text-align: center; margin-top: 30px; display: flex;
-        
-        <div style="text-align: center; margin-top: 15px; display: flex; justify-content: center; gap: 20px; flex-wrap: wrap; font-size: 12px; color: #6f756e; writing-mode: horizontal-tb; direction: ltr;">
-```
-
----
-
-⑤**最後に、ボタンのスタイルも少し調整します。**
-
-**ファイル：`css/components.css`**
-
-**検索する文字列（1行で）：**
-```
-.btn {
-    background: #f3f3ed;
-    
+        <div style="writing-mode: horizontal-tb !important; direction: ltr !important; text-align: center; margin-top: 15px; display: flex; justify-content: center; gap: 20px; flex-wrap: wrap; font-size: 12px;">
             <a href="#" onclick="openModal('news'); return false;" style="color: #7894ab; text-decoration: none; border-bottom: 1px solid #7894ab;">📢 お知らせ</a>
             <a href="#" onclick="openModal('types'); return false;" style="color: #7894ab; text-decoration: none; border-bottom: 1px solid #7894ab;">🦊 性格タイプ一覧</a>
             <a href="#" onclick="openModal('about'); return false;" style="color: #7894ab; text-decoration: none; border-bottom: 1px solid #7894ab;">🔮 タロット占いとは</a>
