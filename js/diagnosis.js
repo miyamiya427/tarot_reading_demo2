@@ -134,7 +134,7 @@ function showResult(displayData) {
 `;
     document.getElementById('result-traits').textContent = displayData.traits.join('・');
     document.getElementById('result-description').textContent = displayData.description;
-    document.getElementById('result-interpretation').textContent = displayData.advice;
+   
     
     // 診断結果データを送信
     sendDiagnosisDataToSheet(displayData);
