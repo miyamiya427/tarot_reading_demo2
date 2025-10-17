@@ -81,7 +81,7 @@ function completeDiagnosis() {
     const basicForm = document.getElementById('questions-container');
     const basicRadios = basicForm.querySelectorAll('input[type="radio"]:checked');
     
-    if (basicRadios.length < 60) {
+    if (basicRadios.length < 90) {
     alert('全ての質問にお答えください。');
     return;
 }
