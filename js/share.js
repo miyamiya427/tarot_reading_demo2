@@ -31,17 +31,21 @@ async function generateShareImage(guardianData, genre, resultText) {
     const ctx = canvas.getContext('2d');
     
     // キャンバスサイズ設定（X向け横長・高解像度）
-canvas.width = 1600;  // 2倍に
-canvas.height = 800;  // 2倍に
+    canvas.width = 1600;
+    canvas.height = 800;
     
     // 背景を描画
     drawBackground(ctx, canvas.width, canvas.height);
     
-    // 左側：守護者画像エリア
-    await drawGuardianSection(ctx, guardianData);
-    
-    // 右側：テキスト情報
-    drawTextSection(ctx, guardianData, genre, resultText);
+    // genreが空なら性格診断用、あれば占い結果用
+    if (!genre || genre === '') {
+        // 性格診断結果用のデザイン
+        await drawGuardianDiagnosisImage(ctx, canvas.width, canvas.height, guardianData);
+    } else {
+        // 占い結果用のデザイン
+        await drawGuardianSection(ctx, guardianData);
+        drawTextSection(ctx, guardianData, genre, resultText);
+    }
     
     // ロゴ・クレジット
     drawLogo(ctx, canvas.width, canvas.height);
@@ -51,6 +55,7 @@ canvas.height = 800;  // 2倍に
         canvas.toBlob(resolve, 'image/png', 0.9);
     });
 }
+
 
 /**
  * 背景を描画
@@ -277,6 +282,103 @@ function getShareResult() {
         fortuneAndDevelopment: fortuneAndDevelopment || '占い結果をご確認ください',
         advice: advice || 'アプリでご確認ください'
     };
+}
+
+/**
+ * 性格診断結果用の画像を描画
+ */
+async function drawGuardianDiagnosisImage(ctx, width, height, guardianData) {
+    const centerX = width / 2;
+    
+    // 左側：守護者画像
+    const leftSectionWidth = 500;
+    const centerY = height / 2;
+    
+    // 守護者エリア背景
+    ctx.fillStyle = 'rgba(255, 255, 255, 0.2)';
+    ctx.fillRect(0, 0, leftSectionWidth, height);
+    
+    // 守護者画像または絵文字を描画
+    if (guardianData.type && typeof guardianImages !== 'undefined' && guardianImages[guardianData.type]) {
+        try {
+            await drawGuardianImage(ctx, guardianImages[guardianData.type], leftSectionWidth, centerY - 60);
+        } catch (error) {
+            drawGuardianEmoji(ctx, guardianData, leftSectionWidth, centerY - 30);
+        }
+    } else {
+        drawGuardianEmoji(ctx, guardianData, leftSectionWidth, centerY - 30);
+    }
+    
+    // 守護者名（画像の下）
+    if (guardianData.name) {
+        ctx.font = 'bold 36px sans-serif';
+        ctx.textAlign = 'center';
+        ctx.fillStyle = 'white';
+        ctx.fillText(`守護者：${guardianData.name}`, leftSectionWidth / 2, centerY + 160);
+        
+        if (guardianData.furigana) {
+            ctx.font = '24px sans-serif';
+            ctx.fillStyle = 'rgba(255, 255, 255, 0.8)';
+            ctx.fillText(`(${guardianData.furigana})`, leftSectionWidth / 2, centerY + 200);
+        }
+    }
+    
+    // 右側：テキスト情報
+    const startX = 540;
+    const maxWidth = 1020;
+    let currentY = 100;
+    
+    // タイトル
+    ctx.font = 'bold 48px sans-serif';
+    ctx.textAlign = 'left';
+    const titleText = `${guardianData.name}だったよ！`;
+    const titleWidth = ctx.measureText(titleText).width + 60;
+    ctx.fillStyle = '#dacc89';
+    ctx.fillRect(startX - 30, currentY - 48, titleWidth, 72);
+    ctx.fillStyle = 'white';
+    ctx.fillText(titleText, startX, currentY);
+    currentY += 100;
+    
+    // キャッチフレーズ
+    ctx.font = 'bold 32px sans-serif';
+    ctx.fillStyle = 'white';
+    ctx.fillText(`《 ${guardianData.catchphrase} 》`, startX, currentY);
+    currentY += 70;
+    
+    // 特徴（箇条書き）
+    ctx.font = 'bold 28px sans-serif';
+    ctx.fillText('＜このタイプの特徴＞', startX, currentY);
+    currentY += 50;
+    
+    ctx.font = '26px sans-serif';
+    const traits = guardianData.traits || [];
+    traits.forEach((trait, index) => {
+        ctx.fillText(`・${trait}`, startX, currentY);
+        currentY += 45;
+    });
+    
+    currentY += 30;
+    
+    // 説明文（一部のみ）
+    const description = guardianData.description || '';
+    const shortDesc = description.substring(0, 100) + '...';
+    const descLines = wrapText(ctx, shortDesc, maxWidth);
+    descLines.slice(0, 3).forEach(line => {
+        ctx.fillText(line, startX, currentY);
+        currentY += 40;
+    });
+    
+    currentY += 40;
+    
+    // URL案内
+    ctx.font = 'bold 28px sans-serif';
+    ctx.fillStyle = 'white';
+    ctx.fillText('もっと詳しく見たい人はコチラ▼', startX, currentY);
+    currentY += 50;
+    
+    ctx.font = '24px sans-serif';
+    ctx.fillStyle = '#dacc89';
+    ctx.fillText('https://miyamiya427.github.io/tarot_reading_demo2/', startX, currentY);
 }
 
 /**
