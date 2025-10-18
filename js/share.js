@@ -395,10 +395,22 @@ function drawLogo(ctx, width, height) {
  * 生成した画像をシェア
  */
 async function shareImage(imageBlob, guardianData, genre) {
-    const shareText = `「森の守護者とタロット占い」で＜${genre}＞を占ってみたよ！
+    // 性格診断か占い結果かでテキストを変える
+    let shareText;
+    if (!genre || genre === '') {
+        // 性格診断の場合
+        shareText = `「森の守護者とタロット占い」で性格診断してみたよ！
+私は＜${guardianData.name}＞だったよ！
+あなたも診断してみてね✨
+
+#森の守護者とタロット占い #森の守護者診断 #${guardianData.name || '???'} #性格診断 #タロット占い`;
+    } else {
+        // 占い結果の場合
+        shareText = `「森の守護者とタロット占い」で＜${genre}＞を占ってみたよ！
 性格タイプ診断もできるからみんなもやってみて！
 
 #森の守護者とタロット占い #森の守護者診断 #${guardianData.name || '???'} #${genre} #タロット占い`;
+    }
     
     if (navigator.share && navigator.canShare) {
         // Web Share API対応の場合
