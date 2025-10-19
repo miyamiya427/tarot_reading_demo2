@@ -30,6 +30,11 @@ async function generateShareImage(guardianData, genre, resultText) {
     const canvas = document.createElement('canvas');
     const ctx = canvas.getContext('2d');
     
+    // デバッグ用：genreの値を確認
+    console.log('genre の値:', genre);
+    console.log('genre のタイプ:', typeof genre);
+    console.log('genre が空か:', !genre || genre === '');
+    
     // キャンバスサイズ設定（X向け横長・高解像度）
     canvas.width = 1600;
     canvas.height = 800;
@@ -38,7 +43,7 @@ async function generateShareImage(guardianData, genre, resultText) {
     drawBackground(ctx, canvas.width, canvas.height);
     
     // genreが空なら性格診断用、あれば占い結果用
-    if (!genre || genre === '') {
+    if (!genre || genre === '' || genre.trim() === '') {
         // 性格診断結果用のデザイン
         await drawGuardianDiagnosisImage(ctx, canvas.width, canvas.height, guardianData);
     } else {
