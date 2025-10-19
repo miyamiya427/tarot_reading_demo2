@@ -7,8 +7,27 @@ async function shareResultWithImage() {
     try {
         // 現在の占い結果データを取得
         const guardianData = JSON.parse(localStorage.getItem('guardianResult') || '{}');
-        const resultText = document.getElementById('personalized-fortune')?.innerHTML || '';
-        const genreTitle = document.getElementById('result-title')?.textContent || '';
+        
+        // 現在表示されているページを判定
+        const page8 = document.getElementById('page8');
+        const page12 = document.getElementById('page12');
+        
+        let genreTitle = '';
+        let resultText = '';
+        
+        // ページ8（性格診断結果）が表示されている場合
+        if (page8 && page8.classList.contains('active')) {
+            genreTitle = '';  // 性格診断なのでgenreは空
+            resultText = '';
+        }
+        // ページ12（占い結果）が表示されている場合
+        else if (page12 && page12.classList.contains('active')) {
+            genreTitle = document.getElementById('result-title')?.textContent || '';
+            resultText = document.getElementById('personalized-fortune')?.innerHTML || '';
+        }
+        
+        console.log('現在のページ:', page8?.classList.contains('active') ? 'ページ8（性格診断）' : 'ページ12（占い結果）');
+        console.log('genreTitle:', genreTitle);
         
         // 画像生成
         const imageBlob = await generateShareImage(guardianData, genreTitle, resultText);
