@@ -367,27 +367,23 @@ async function drawGuardianDiagnosisImage(ctx, width, height, guardianData) {
     ctx.font = 'bold 32px sans-serif';
     ctx.fillStyle = 'white';
     ctx.fillText(`《 ${guardianData.catchphrase} 》`, startX, currentY);
-    currentY += 70;
+    currentY += 80;
     
-    // 特徴（箇条書き）
-    ctx.font = 'bold 28px sans-serif';
-    ctx.fillText('＜このタイプの特徴＞', startX, currentY);
-    currentY += 50;
-    
+    // 説明文（要約版）
     ctx.font = '26px sans-serif';
-    const traits = guardianData.traits || [];
-    traits.forEach((trait, index) => {
-        ctx.fillText(`・${trait}`, startX, currentY);
-        currentY += 45;
-    });
-    
-    currentY += 30;
-    
-    // 説明文（一部のみ）
     const description = guardianData.description || '';
-    const shortDesc = description.substring(0, 100) + '...';
+    // 最初の150文字程度を取得（句点で区切る）
+    let shortDesc = description.substring(0, 200);
+    const lastPeriod = shortDesc.lastIndexOf('。');
+    if (lastPeriod > 100) {
+        shortDesc = shortDesc.substring(0, lastPeriod + 1);
+    } else {
+        shortDesc = description.substring(0, 150) + '...';
+    }
+    
     const descLines = wrapText(ctx, shortDesc, maxWidth);
-    descLines.slice(0, 3).forEach(line => {
+    // 最大7行表示
+    descLines.slice(0, 7).forEach(line => {
         ctx.fillText(line, startX, currentY);
         currentY += 40;
     });
