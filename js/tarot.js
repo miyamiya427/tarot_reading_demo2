@@ -560,8 +560,8 @@ function displayFreeResult(result) {
             <p style="font-size: 13px; color: #6c757d; margin-bottom: 15px; line-height: 1.6;">
                 もっと詳しい鑑定を見たい方は<br>プレミアム版をご利用ください
             </p>
-           <button style="background: #dacc89; color: white; border: none; padding: 10px 20px; border-radius: 25px; font-size: 13px; font-weight: bold; cursor: pointer; white-space: nowrap; display: block; margin: 0 auto;">
-    プレミアム版を見る（準備中）
+           <button onclick="showPage(13)" style="background: #dacc89; color: white; border: none; padding: 10px 20px; border-radius: 25px; font-size: 13px; font-weight: bold; cursor: pointer; white-space: nowrap; display: block; margin: 0 auto;">
+    プレミアム版を見る
 </button>
         </div>
     `;
