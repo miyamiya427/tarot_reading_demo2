@@ -81,13 +81,13 @@
     font-weight: bold;
 }
 
-/* カード選択画面のタイトル */
-#card-selection-title {
+/* カード選択画面のハイライト部分 */
+.highlight-text {
     background-color: #dacc89;
     color: white;
-    padding: 15px 20px;
-    border-radius: 10px;
-    line-height: 1.6;
+    padding: 5px 12px;
+    border-radius: 8px;
+    display: inline-block;
 }
 
 .guardian-display {
