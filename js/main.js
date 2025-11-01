@@ -273,3 +273,26 @@ function closeModal() {
     const overlay = document.getElementById('modal-overlay');
     overlay.classList.remove('active');
 }
+
+// お問い合わせフォームの送信処理
+document.addEventListener('DOMContentLoaded', function() {
+    const contactForm = document.getElementById('contact-form');
+    if (contactForm) {
+        contactForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+
+            const name = document.getElementById('contact-name').value;
+            const email = document.getElementById('contact-email').value;
+            const type = document.getElementById('contact-type').value;
+            const message = document.getElementById('contact-message').value;
+
+            // 実際の実装では、ここでサーバーにデータを送信します
+            console.log('お問い合わせ送信:', { name, email, type, message });
+
+            alert('お問い合わせを受け付けました。\n\n※現在は準備中のため、実際の送信は行われていません。\n実装時にはサーバーへの送信処理を追加してください。');
+
+            // フォームをリセット
+            contactForm.reset();
+        });
+    }
+});
