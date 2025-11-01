@@ -30,3 +30,43 @@ body {
 .page.active {
     display: block;
 }
+
+/* フッター */
+.footer {
+    width: 100%;
+    max-width: 480px;
+    margin: 40px auto 0 auto;
+    padding: 25px 20px;
+    text-align: center;
+    background: rgba(255, 255, 255, 0.9);
+    border-radius: 15px 15px 0 0;
+    box-sizing: border-box;
+}
+
+.footer-links {
+    margin-bottom: 15px;
+    font-size: 12px;
+    line-height: 1.8;
+}
+
+.footer-links a {
+    color: #7894ab;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.footer-links a:hover {
+    color: #dacc89;
+    text-decoration: underline;
+}
+
+.footer-separator {
+    margin: 0 8px;
+    color: #c2dada;
+}
+
+.footer-copyright {
+    font-size: 11px;
+    color: #6c757d;
+    margin-top: 10px;
+}
